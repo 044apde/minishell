@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   term.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 16:57:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/11 23:02:07 by shikim           ###   ########.fr       */
+/*   Created: 2023/07/11 22:53:10 by shikim            #+#    #+#             */
+/*   Updated: 2023/07/11 23:01:45 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	main(void)
+void	set_terminal(void)
 {
-	char	*input;
-	int		pid;
+	struct termios	term;
 
-	set_signal();
-	set_terminal();
-	set_pid(&pid);
-	while (TRUE)
-	{
-		input = read_input(pid);
-		free(input);
-	}
-	return (0);
+	tcgetattr(1, &term);
+	term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(1, 0, &term);
+	return ;
 }

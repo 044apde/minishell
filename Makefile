@@ -4,7 +4,7 @@ CC			= cc
 LDFLAGS		= -L${HOME}/.brew/opt/readline/lib -lreadline
 CPPFLAGS	= -I${HOME}/.brew/opt/readline/include
 
-SOURCE	= main.c src/read_input.c src/sig_handler.c
+SOURCE	= main.c src/read_input.c src/sig_handler.c src/term.c src/utils1.c
 HEADER	= minishell.h
 
 LIBRARY = libft/libft.a

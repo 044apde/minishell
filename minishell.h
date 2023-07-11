@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/11 19:50:13 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/11 23:01:37 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,19 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <termios.h>
 # include "libft/libft.h"
 
 // read_input
 char	*read_input(int pid);
 
 // sig_handler
-void	sig_handler(int	sig);
+void	set_signal(void);
+
+// term
+void	set_terminal(void);
+
+// utils
+void	set_pid(int	*pid);
 
 #endif
