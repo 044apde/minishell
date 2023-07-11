@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:10:14 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/11 19:46:24 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/11 20:19:49 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	kill_signal(char *input)
 void	sig_handler(int	sig)
 {
 	// rl_on_new_line();
-	// rl_replace_line();
+	rl_replace_line("HI", 0);
 	return ;
 }
