@@ -1,0 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_input.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/11 17:31:48 by shikim            #+#    #+#             */
+/*   Updated: 2023/07/11 18:20:35 by shikim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
+
+void	add_input_to_history(char *input)
+{
+	add_history(input);
+	return ;
+}
+
+char	*read_input(int pid)
+{
+	char	*input;
+
+	input = readline("minishell # ");
+	add_input_to_history(input);
+	return (input);
+}
