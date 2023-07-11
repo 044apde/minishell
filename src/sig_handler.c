@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:10:14 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/11 18:21:35 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/11 19:46:24 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	kill_signal(char *input)
 
 void	sig_handler(int	sig)
 {
-	printf("sig in: %d\n", sig);
+	// rl_on_new_line();
+	// rl_replace_line();
 	return ;
 }
