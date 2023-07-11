@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:31:48 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/11 19:50:45 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/11 20:35:41 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*read_input(int pid)
 {
 	char	*input;
 
+	pid++;
 	input = readline("minishell # ");
 	add_input_to_history(input);
 	return (input);

@@ -1,8 +1,8 @@
 TARGET		= minishell
 
 CC			= cc
-LDFLAGS		= -L/Users/shikim/.brew/opt/readline/lib -lreadline
-CPPFLAGS	= -I/Users/shikim/.brew/opt/readline/include
+LDFLAGS		= -L${HOME}/.brew/opt/readline/lib -lreadline
+CPPFLAGS	= -I${HOME}/.brew/opt/readline/include
 
 SOURCE	= main.c src/read_input.c src/sig_handler.c
 HEADER	= minishell.h
@@ -16,7 +16,6 @@ $(TARGET)	:	$(SOURCE) $(LIBRARY)
 
 $(LIBRARY):
 	$(MAKE) -C libft
-	$(MAKE) -C ft_printf
 
 clean		:
 	rm -rf $(TARGET)
