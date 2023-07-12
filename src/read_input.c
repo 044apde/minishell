@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:31:48 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/12 15:34:55 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/12 17:59:06 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*read_input(int pid)
 
 	pid++;
 	input = readline("minishell# ");
+	if (input == NULL)
+		term_handler();
 	add_input_to_history(input);
 	return (input);
 }

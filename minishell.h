@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/12 13:29:10 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/12 17:59:15 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	init_minishell(int *pid);
 char	*read_input(int pid);
 
 // sig_handler
-void	set_signal(void);
+void	set_signal(int *pid);
+void	term_handler(void);
 
 // term
 void	set_terminal(void);

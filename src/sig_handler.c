@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:10:14 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/12 15:36:16 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/12 21:46:31 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,18 @@ void	int_handler(int sig)
 	return ;
 }
 
-void	set_signal(void)
+void	term_handler(void)
+{
+	write(1, "\033[1A", ft_strlen("\033[1A"));
+	write(1, "\033[11C", ft_strlen("\033[11C"));
+	write(1, "exit\n", 5);
+	exit(0);
+	return ;
+}
+
+void	set_signal(int *pid)
 {
 	signal(SIGINT, int_handler);
+	signal(SIGQUIT, SIG_IGN);
+	return ;
 }
