@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   Init_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 16:57:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/12 13:29:34 by shikim           ###   ########.fr       */
+/*   Created: 2023/07/12 13:27:17 by shikim            #+#    #+#             */
+/*   Updated: 2023/07/12 13:29:40 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	main(void)
+void	init_minishell(int *pid)
 {
-	char	*input;
-	int		pid;
-
-	init_minishell(&pid);
-	while (TRUE)
-	{
-		input = read_input(pid);
-		free(input);
-	}
-	return (0);
+	set_signal();
+	set_terminal();
+	set_pid(pid);
+	return ;
 }

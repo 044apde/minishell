@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/11 23:01:37 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/12 13:29:10 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <signal.h>
 # include <termios.h>
 # include "libft/libft.h"
+
+// init_minishell
+void	init_minishell(int *pid);
 
 // read_input
 char	*read_input(int pid);
