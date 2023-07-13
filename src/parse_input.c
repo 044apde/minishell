@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Init_minishell.c                                   :+:      :+:    :+:   */
+/*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/12 13:27:17 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/13 20:02:48 by shikim           ###   ########.fr       */
+/*   Created: 2023/07/13 17:41:11 by shikim            #+#    #+#             */
+/*   Updated: 2023/07/13 20:38:34 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	init_minishell(int *pid)
+void	parse_input(char *input)
 {
-	set_signal(pid);
-	set_terminal();
-	set_pid(pid);
+	char	**arr;
+	char	*dangling;
+
+	arr = split(input);
 	return ;
 }

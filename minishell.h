@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/12 17:59:15 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/13 20:37:21 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 # include <signal.h>
 # include <termios.h>
 # include "libft/libft.h"
+
+// parse
+void	parse_input(char *input);
+
+// split
+char	**split(char *s);
 
 // init_minishell
 void	init_minishell(int *pid);
