@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/13 20:37:21 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/14 21:40:02 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	parse_input(char *input);
 
 // split
 char	**split(char *s);
+void	ctrl_string(int *count, int *is_sep);
+void	ctrl_redir_out(int *count, int *is_sep, char c, char next_c);
+void	ctrl_redir_in(int *count, int *is_sep, char c, char next_c);
 
 // init_minishell
 void	init_minishell(int *pid);
