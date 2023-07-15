@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:41:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/13 20:38:34 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/15 17:17:16 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,10 @@ void	parse_input(char *input)
 	char	*dangling;
 
 	arr = split(input);
+	while (*arr != NULL)
+	{
+		printf("%s\n", *arr);
+		arr++;
+	}
 	return ;
 }
