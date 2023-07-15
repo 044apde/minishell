@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:41:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/15 17:18:35 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/15 17:20:03 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ void	parse_input(char *input)
 		printf("%s\n", *arr);
 		arr++;
 	}
-	while (TRUE);
 	return ;
 }
