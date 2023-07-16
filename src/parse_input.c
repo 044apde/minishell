@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:41:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/15 17:25:52 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/16 14:33:20 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@ void	parse_input(char *input)
 	arr = split(input);
 	if (arr == NULL)
 		return ;
-	while (arr[i] != NULL)
-	{
-		printf("%s\n", arr[i]);
-		i++;
-	}
-	i = 0;
+	show_token(arr);
 	while (arr[i] != NULL)
 	{
 		free(arr[i]);

@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:01:58 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/15 17:16:35 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/16 14:30:19 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,29 +39,26 @@ int	count_word(char *s)
 
 void	make_word(char **arr, char *s, int count)
 {
-	int	st;
-	int	e;
-	int	i;
+	int		st;
+	int		e;
+	int		i;
 
 	st = 0;
 	e = -1;
 	i = 0;
 	while (s[++e] != '\0')
 	{
-		if (s[e] == '|')
-		{
+		if (s[e] == '|' && ++st)
 			arr[i++] = ft_strdup("|");
-			st = e + 1;
-		}
-		else if (s[e] == '<')
-			((make_redir_in(arr, s, e, i) == TRUE) && i++ && (st = e + 1));
-		else if (s[e] == '>')
-			((make_redir_out(arr, s, e, i) == TRUE) && i++ && (st = e + 1));
+		else if (s[e] == '<' && ++st)
+			(make_redir_in(arr, s, e, i) == TRUE && (++i));
+		else if (s[e] == '>' && ++st)
+			(make_redir_out(arr, s, e, i) == TRUE && (++i));
 		else if (s[e + 1] == '|' || s[e + 1] == '<' \
 					|| s[e + 1] == '>' || s[e + 1] == '\0')
 		{
 			arr[i++] = ft_substr(s, st, e - st + 1);
-			st = e;
+			st = e + 1;
 		}
 	}
 }
@@ -77,5 +74,6 @@ char	**split(char *s)
 		exit(1);
 	arr[count] = NULL;
 	make_word(arr, s, count);
+	trim_word(arr);
 	return (arr);
 }

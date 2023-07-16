@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:31:48 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/12 22:10:53 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/16 13:30:29 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*read_input(int pid)
 	char	*input;
 
 	pid++;
-	input = readline("minishell# ");
+	input = readline("\033[0;32mohmybash#\033[0m ");
 	if (input == NULL)
 		term_handler();
 	add_input_to_history(input);

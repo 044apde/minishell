@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 14:09:09 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/15 17:23:50 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/16 14:31:35 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,34 @@ int	make_redir_out(char **arr, char *s, int st, int i)
 		redir_out = 1;
 		return (FALSE);
 	}
+}
+
+void	trim_word(char **arr)
+{
+	int		i;
+	char	*dangling;
+
+	i = -1;
+	while (arr[++i] != NULL)
+	{
+		dangling = arr[i];
+		arr[i] = ft_strtrim(arr[i], " ");
+		free(dangling);
+	}
+	return ;
+}
+
+void	show_token(char **arr)
+{
+	int	i;
+
+	i = 0;
+	printf("\033[0;34m================ THE TOKEN ================\n");
+	while (arr[i] != NULL)
+	{
+		printf("[%s] ", arr[i]);
+		++i;
+	}
+	printf("\n================ END TOKEN ================\033[0;0m\n");
+	return ;
 }
