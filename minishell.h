@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/12 17:59:15 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/16 14:10:25 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@
 # include <signal.h>
 # include <termios.h>
 # include "libft/libft.h"
+
+// parse
+void	parse_input(char *input);
+
+// split
+char	**split(char *s);
+void	ctrl_string(int *count, int *is_sep);
+void	ctrl_redir_out(int *count, int *is_sep, char c, char next_c);
+void	ctrl_redir_in(int *count, int *is_sep, char c, char next_c);
+void	show_token(char **arr);
+void	trim_word(char **arr);
+int		make_redir_in(char **arr, char *s, int st, int i);
+int		make_redir_out(char **arr, char *s, int st, int i);
 
 // init_minishell
 void	init_minishell(int *pid);

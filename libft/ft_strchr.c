@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:43:57 by shikim            #+#    #+#             */
-/*   Updated: 2023/04/04 17:55:22 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/13 20:00:49 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ char	*ft_strchr(const char *s, int c)
 			return ((char *)s);
 		s++;
 	}
-	return (0);
+	return (NULL);
 }

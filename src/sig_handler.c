@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:10:14 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/12 22:12:40 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/16 13:32:05 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	int_handler(int sig)
 void	term_handler(void)
 {
 	write(1, "\033[1A", ft_strlen("\033[1A"));
-	write(1, "\033[11C", ft_strlen("\033[11C"));
+	write(1, "\033[10C", ft_strlen("\033[10C"));
+	write(1, "\033[0;35m", ft_strlen("\033[0;35m"));
 	write(1, "exit\n", 5);
 	exit(0);
 	return ;
