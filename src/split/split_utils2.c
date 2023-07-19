@@ -6,42 +6,42 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 14:09:09 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/16 14:31:35 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/19 20:15:26 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	make_redir_in(char **arr, char *s, int st, int i)
+void	make_redir_in(t_token *head, char *s, int st)
 {
 	static int	redir_in;
 
+	printf("now: %c next: %c\n", s[st], s[st + 1]);
 	if (s[st + 1] != '<')
 	{
 		if (redir_in == 1)
 		{
 			redir_in = 0;
-			arr[i] = ft_strdup("<<");
-			return (TRUE);
+			insert_node(head, "<<");
+			return ;
 		}
 		redir_in = 0;
-		arr[i] = ft_strdup("<");
-		return (TRUE);
+		insert_node(head, "<");
 	}
 	else
 	{
 		if (redir_in == 1)
 		{
 			redir_in = 0;
-			arr[i] = ft_strdup("<<");
-			return (TRUE);
+			insert_node(head, "<<");
+			return ;
 		}
 		redir_in = 1;
-		return (FALSE);
+		return ;
 	}
 }
 
-int	make_redir_out(char **arr, char *s, int st, int i)
+void	make_redir_out(t_token *head, char *s, int st)
 {
 	static int	redir_out;
 
@@ -50,23 +50,22 @@ int	make_redir_out(char **arr, char *s, int st, int i)
 		if (redir_out == 1)
 		{
 			redir_out = 0;
-			arr[i] = ft_strdup(">>");
-			return (TRUE);
+			insert_node(head, ">>");
+			return ;
 		}
 		redir_out = 0;
-		arr[i] = ft_strdup(">");
-		return (TRUE);
+		insert_node(head, ">");
 	}
 	else
 	{
 		if (redir_out == 1)
 		{
 			redir_out = 0;
-			arr[i] = ft_strdup(">>");
-			return (TRUE);
+			insert_node(head, ">>");
+			return ;
 		}
 		redir_out = 1;
-		return (FALSE);
+		return ;
 	}
 }
 
@@ -82,20 +81,5 @@ void	trim_word(char **arr)
 		arr[i] = ft_strtrim(arr[i], " ");
 		free(dangling);
 	}
-	return ;
-}
-
-void	show_token(char **arr)
-{
-	int	i;
-
-	i = 0;
-	printf("\033[0;34m================ THE TOKEN ================\n");
-	while (arr[i] != NULL)
-	{
-		printf("[%s] ", arr[i]);
-		++i;
-	}
-	printf("\n================ END TOKEN ================\033[0;0m\n");
 	return ;
 }
