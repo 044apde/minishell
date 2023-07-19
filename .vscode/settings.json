@@ -4,6 +4,8 @@
 		"termios.h": "c",
 		"signal.h": "c",
 		"avl.h": "c",
-		"chrono": "c"
+		"chrono": "c",
+		"__locale": "c",
+		"ios": "c"
 	}
 }

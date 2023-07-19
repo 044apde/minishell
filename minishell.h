@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/16 14:10:25 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/19 20:10:21 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,24 @@
 # include <termios.h>
 # include "libft/libft.h"
 
+typedef struct s_token
+{
+	char			*token;
+	int				type;
+	struct s_token	*next;
+}	t_token;
+
 // parse
 void	parse_input(char *input);
 
 // split
 char	**split(char *s);
-void	ctrl_string(int *count, int *is_sep);
-void	ctrl_redir_out(int *count, int *is_sep, char c, char next_c);
-void	ctrl_redir_in(int *count, int *is_sep, char c, char next_c);
-void	show_token(char **arr);
 void	trim_word(char **arr);
-int		make_redir_in(char **arr, char *s, int st, int i);
-int		make_redir_out(char **arr, char *s, int st, int i);
+t_token	*insert_node(t_token *head, char *s);
+t_token	*create_token(char *s);
+void	make_redir_in(t_token *head, char *s, int st);
+void	make_redir_out(t_token *head, char *s, int st);
+void	show_token(t_token *head);
 
 // init_minishell
 void	init_minishell(int *pid);
@@ -52,5 +58,6 @@ void	set_terminal(void);
 
 // utils
 void	set_pid(int	*pid);
+void	exit_program(void);
 
 #endif
