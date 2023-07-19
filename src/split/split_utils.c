@@ -6,63 +6,54 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:39:31 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/15 14:27:14 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/19 20:57:13 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ctrl_string(int *count, int *is_sep)
+t_token	*create_token(char *s)
 {
-	if (*is_sep == FALSE)
+	t_token	*new;
+
+	new = (t_token *)malloc(sizeof(t_token));
+	if (new == NULL)
+		exit_program();
+	new->token = s;
+	new->type = 0;
+	new->next = NULL;
+	return (new);
+}
+
+t_token	*insert_node(t_token *head, char *s)
+{
+	t_token	*node;
+	t_token	*new;
+
+	if (head == NULL)
 	{
-		*count = *count + 1;
-		*is_sep = TRUE;
+		head = create_token(NULL);
+		return (head);
 	}
+	node = head;
+	while (node->next != NULL)
+		node = node->next;
+	new = create_token(s);
+	node->next = new;
+	return (head);
+}
+
+void	show_token(t_token *head)
+{
+	t_token	*node;
+
+	node = head->next;
+	printf("\033[0;34m===============================================\n");
+	while (node != NULL)
+	{
+		printf("[%s] ", node->token);
+		node = node->next;
+	}
+	printf("\n===============================================\033[0;0m\n");
 	return ;
-}
-
-void	ctrl_redir_out(int *count, int *is_sep, char c, char next_c)
-{
-	static int	redir_out;
-
-	ctrl_string(count, is_sep);
-	if (c == '>' && next_c != '>')
-	{
-		redir_out = 0;
-		*count += 1;
-	}
-	else if (c == '>' && next_c == '>')
-	{
-		if (redir_out == 1)
-		{
-			write(1, "2", 1);
-			redir_out = 0;
-			*count += 1;
-		}
-		else
-			redir_out = 1;
-	}
-}
-
-void	ctrl_redir_in(int *count, int *is_sep, char c, char next_c)
-{
-	static int	redir_in;
-
-	ctrl_string(count, is_sep);
-	if (c == '<' && next_c != '<')
-	{
-		redir_in = 0;
-		*count += 1;
-	}
-	else if (c == '<' && next_c == '<')
-	{
-		if (redir_in == 1)
-		{
-			redir_in = 0;
-			*count += 1;
-		}
-		else
-			redir_in = 1;
-	}
 }
