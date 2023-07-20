@@ -20,6 +20,8 @@ t_env_list	*create_env_node(char *key, char *value)
 	node->key = key;
 	node->value = value;
 	node->next = NULL;
+
+	
 	return (node);
 }
 
