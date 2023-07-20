@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 14:09:09 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/20 14:38:38 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:06:17 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ void	make_redir_in(t_token *head, char *s, int st)
 		if (redir_in == 1)
 		{
 			redir_in = 0;
-			insert_node(head, "<<");
+			insert_node(head, ft_strdup("<<"));
 			return ;
 		}
 		redir_in = 0;
-		insert_node(head, "<");
+		insert_node(head, ft_strdup("<"));
 	}
 	else
 	{
 		if (redir_in == 1)
 		{
 			redir_in = 0;
-			insert_node(head, "<<");
+			insert_node(head, ft_strdup("<<"));
 			return ;
 		}
 		redir_in = 1;
@@ -49,18 +49,18 @@ void	make_redir_out(t_token *head, char *s, int st)
 		if (redir_out == 1)
 		{
 			redir_out = 0;
-			insert_node(head, ">>");
+			insert_node(head, ft_strdup(">>"));
 			return ;
 		}
 		redir_out = 0;
-		insert_node(head, ">");
+		insert_node(head, ft_strdup(">"));
 	}
 	else
 	{
 		if (redir_out == 1)
 		{
 			redir_out = 0;
-			insert_node(head, ">>");
+			insert_node(head, ft_strdup(">>"));
 			return ;
 		}
 		redir_out = 1;
