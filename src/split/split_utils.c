@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:39:31 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/19 20:57:13 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/20 13:46:12 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ t_token	*insert_node(t_token *head, char *s)
 	return (head);
 }
 
+void	insert_string_node(t_token *head, char *s, int *st, int e)
+{
+	insert_node(head, ft_substr(s, *st, e - *st + 1));
+	*st = e + 1;
+	return ;
+}
+
 void	show_token(t_token *head)
 {
 	t_token	*node;
@@ -56,4 +63,11 @@ void	show_token(t_token *head)
 	}
 	printf("\n===============================================\033[0;0m\n");
 	return ;
+}
+
+int	is_sep(char c)
+{
+	if (c == '|' || c == '<' || c == '>' || c == '\0' || c == ' ')
+		return (TRUE);
+	return (FALSE);
 }

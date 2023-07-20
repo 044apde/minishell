@@ -6,6 +6,7 @@
 		"avl.h": "c",
 		"chrono": "c",
 		"__locale": "c",
-		"ios": "c"
+		"ios": "c",
+		"readline.h": "c"
 	}
 }
