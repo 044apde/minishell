@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:41:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/20 15:45:32 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 04:11:35 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	parse_input(char *input)
 
 	head = split(input);
 	// To do: check token
+	// substitution
 	// check syntax
+	// treeing
 	return ;
 }
