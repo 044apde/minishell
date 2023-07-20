@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 14:09:09 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/19 20:15:26 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:06:17 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,23 @@ void	make_redir_in(t_token *head, char *s, int st)
 {
 	static int	redir_in;
 
-	printf("now: %c next: %c\n", s[st], s[st + 1]);
 	if (s[st + 1] != '<')
 	{
 		if (redir_in == 1)
 		{
 			redir_in = 0;
-			insert_node(head, "<<");
+			insert_node(head, ft_strdup("<<"));
 			return ;
 		}
 		redir_in = 0;
-		insert_node(head, "<");
+		insert_node(head, ft_strdup("<"));
 	}
 	else
 	{
 		if (redir_in == 1)
 		{
 			redir_in = 0;
-			insert_node(head, "<<");
+			insert_node(head, ft_strdup("<<"));
 			return ;
 		}
 		redir_in = 1;
@@ -50,18 +49,18 @@ void	make_redir_out(t_token *head, char *s, int st)
 		if (redir_out == 1)
 		{
 			redir_out = 0;
-			insert_node(head, ">>");
+			insert_node(head, ft_strdup(">>"));
 			return ;
 		}
 		redir_out = 0;
-		insert_node(head, ">");
+		insert_node(head, ft_strdup(">"));
 	}
 	else
 	{
 		if (redir_out == 1)
 		{
 			redir_out = 0;
-			insert_node(head, ">>");
+			insert_node(head, ft_strdup(">>"));
 			return ;
 		}
 		redir_out = 1;
@@ -69,17 +68,56 @@ void	make_redir_out(t_token *head, char *s, int st)
 	}
 }
 
-void	trim_word(char **arr)
+int	check_quote1(char c)
 {
-	int		i;
-	char	*dangling;
+	static int	double_flag = 0;
 
-	i = -1;
-	while (arr[++i] != NULL)
+	if (c == '"')
 	{
-		dangling = arr[i];
-		arr[i] = ft_strtrim(arr[i], " ");
-		free(dangling);
+		if (double_flag == 0)
+		{
+			double_flag = 1;
+			return (TRUE);
+		}
+		else if (double_flag == 1)
+		{
+			double_flag = 0;
+			return (DONE);
+		}
 	}
-	return ;
+	else
+	{
+		if (double_flag == 1)
+			return (TRUE);
+		return (FALSE);
+	}
+	return (FALSE);
+}
+
+int	check_quote2(char c)
+{
+	static int	single_flag = 0;
+
+	if (c == '\'')
+	{
+		if (single_flag == 0)
+		{
+			single_flag = 1;
+			return (TRUE);
+		}
+		else if (single_flag == 1)
+		{
+			single_flag = 0;
+			return (DONE);
+		}
+	}
+	else
+	{
+		if (single_flag == 1)
+		{
+			return (TRUE);
+		}
+		return (FALSE);
+	}
+	return (FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 22:59:07 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/19 18:44:47 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:40:32 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	set_pid(int	*pid)
 	return ;
 }
 
-void	exit_program(void)
+void	exit_program(char *s)
 {
-	printf("Error: failed to malloc\n");
+	printf("\033[0;31mError: %s\033[0;0m\n", s);
 	exit(1);
 }

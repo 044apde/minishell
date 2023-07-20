@@ -6,15 +6,16 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/19 20:10:21 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:44:25 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define TRUE 1
 # define FALSE 0
+# define TRUE 1
+# define DONE 2
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -31,17 +32,29 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_split
+{
+	struct s_token	*head;
+	int				status;
+}	t_split;
+
 // parse
 void	parse_input(char *input);
 
 // split
-char	**split(char *s);
+int		is_sep(char c);
+int		check_quote1(char c);
+int		check_quote2(char c);
+int		check_quote(char c);
 void	trim_word(char **arr);
-t_token	*insert_node(t_token *head, char *s);
-t_token	*create_token(char *s);
+void	free_list(t_token *head);
+void	show_token(t_token *head);
 void	make_redir_in(t_token *head, char *s, int st);
 void	make_redir_out(t_token *head, char *s, int st);
-void	show_token(t_token *head);
+void	insert_string_node(t_token *head, char *s, int *st, int e);
+t_token	*split(char *s);
+t_token	*insert_node(t_token *head, char *s);
+t_token	*create_token(char *s);
 
 // init_minishell
 void	init_minishell(int *pid);
@@ -58,6 +71,6 @@ void	set_terminal(void);
 
 // utils
 void	set_pid(int	*pid);
-void	exit_program(void);
+void	exit_program(char *s);
 
 #endif

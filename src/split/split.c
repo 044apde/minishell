@@ -6,46 +6,49 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:01:58 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/19 20:58:05 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:43:59 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_token	*make_token(char *s)
+t_split	*make_token(char *s, t_split *split)
 {
-	t_token	*head;
 	int		e;
 	int		st;
 
-	head = insert_node(NULL, NULL);
 	e = -1;
 	st = 0;
 	while (s[++e] != '\0')
 	{
-		if (s[e] == ' ' && ++st)
+		split->status = check_quote(s[e]);
+		if (split->status == TRUE)
+			continue ;
+		else if (split->status == DONE)
+			insert_string_node(split->head, s, &st, e);
+		else if (s[e] == ' ' && ++st)
 			continue ;
 		else if (s[e] == '|' && ++st)
-			insert_node(head, ft_strdup("|"));
+			insert_node(split->head, ft_strdup("|"));
 		else if (s[e] == '<')
-			make_redir_in(head, s, st++);
+			make_redir_in(split->head, s, st++);
 		else if (s[e] == '>')
-			make_redir_out(head, s, st++);
-		else if (s[e + 1] == '|' || s[e + 1] == '<' || s[e + 1] == '>' \
-					|| s[e + 1] == '\0' || s[e + 1] == ' ')
-		{
-			insert_node(head, ft_substr(s, st, e - st + 1));
-			st = e + 1;
-		}
+			make_redir_out(split->head, s, st++);
+		else if (is_sep(s[e + 1]) == TRUE)
+			insert_string_node(split->head, s, &st, e);
 	}
-	return (head);
+	return (split);
 }
 
-char	**split(char *s)
+t_token	*split(char *s)
 {
-	t_token	*head;
+	t_split	*split;
 
-	head = make_token(s);
-	show_token(head);
-	return (NULL);
+	split = (t_split *)malloc(sizeof(t_split));
+	split->head = insert_node(NULL, NULL);
+	split = make_token(s, split);
+	if (split->status == TRUE)
+		exit_program("check quotation");
+	show_token(split->head);
+	return (split->head);
 }
