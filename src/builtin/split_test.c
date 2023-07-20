@@ -22,6 +22,10 @@ t_env_list	*create_env_node(char *key, char *value)
 	node->next = NULL;
 
 
+
+
+
+
 	return (node);
 }
 
@@ -33,7 +37,7 @@ void	add_env_node(t_env_list **env_list, t_env_list *node)
 		return ;
 	}
 
-	
+
 	node->next = *env_list;
 	*env_list = node;
 }
