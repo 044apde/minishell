@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/20 15:52:20 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/20 19:20:22 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_split
 
 typedef struct s_env_list
 {
-	char 				**env;
 	char				*key;
 	char				*value;
 	struct s_env_list	*next;
