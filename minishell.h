@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/20 14:27:41 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:36:16 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ typedef struct s_token
 	int				type;
 	struct s_token	*next;
 }	t_token;
+
+typedef struct s_split
+{
+	struct s_token	*head;
+	int				status;
+}	t_split;
 
 // parse
 void	parse_input(char *input);
@@ -65,6 +71,6 @@ void	set_terminal(void);
 
 // utils
 void	set_pid(int	*pid);
-void	exit_program(void);
+void	exit_program(char *s);
 
 #endif
