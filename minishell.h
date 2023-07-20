@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/20 15:36:16 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:44:25 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int		is_sep(char c);
 int		check_quote1(char c);
 int		check_quote2(char c);
 int		check_quote(char c);
-char	**split(char *s);
 void	trim_word(char **arr);
 void	free_list(t_token *head);
 void	show_token(t_token *head);
 void	make_redir_in(t_token *head, char *s, int st);
 void	make_redir_out(t_token *head, char *s, int st);
 void	insert_string_node(t_token *head, char *s, int *st, int e);
+t_token	*split(char *s);
 t_token	*insert_node(t_token *head, char *s);
 t_token	*create_token(char *s);
 

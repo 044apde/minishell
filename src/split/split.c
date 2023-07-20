@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:01:58 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/20 15:41:31 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:43:59 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_split	*make_token(char *s, t_split *split)
 	return (split);
 }
 
-char	**split(char *s)
+t_token	*split(char *s)
 {
 	t_split	*split;
 
@@ -50,8 +50,5 @@ char	**split(char *s)
 	if (split->status == TRUE)
 		exit_program("check quotation");
 	show_token(split->head);
-	free_list(split->head);
-	while (TRUE)
-		;
-	return (NULL);
+	return (split->head);
 }
