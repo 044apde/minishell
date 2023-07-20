@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:01:58 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/20 15:37:10 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:41:31 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,7 @@ char	**split(char *s)
 		exit_program("check quotation");
 	show_token(split->head);
 	free_list(split->head);
+	while (TRUE)
+		;
 	return (NULL);
 }

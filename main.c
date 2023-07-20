@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:57:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/16 14:34:20 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:42:17 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	main(void)
 		input = read_input(pid);
 		parse_input(input);
 		free(input);
+		while (TRUE)
+		;
 	}
 	return (0);
 }
