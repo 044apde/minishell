@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:39:31 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/20 13:46:12 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:36:26 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*create_token(char *s)
 
 	new = (t_token *)malloc(sizeof(t_token));
 	if (new == NULL)
-		exit_program();
+		exit_program("failed to malloc");
 	new->token = s;
 	new->type = 0;
 	new->next = NULL;
