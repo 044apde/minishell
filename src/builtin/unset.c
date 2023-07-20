@@ -6,11 +6,11 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 22:52:14 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/20 22:15:04 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:33:30 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int	ft_unset(char **envp, t_env_list *env_list, char **argv)
 {
@@ -20,10 +20,8 @@ int	ft_unset(char **envp, t_env_list *env_list, char **argv)
 	t_env_list	*prev;
 
 	env_list = NULL;
-
 	if (argv[1] == NULL)
 		return (0);
-
 	i = 1;
 	while (argv[i])
 	{
@@ -31,20 +29,17 @@ int	ft_unset(char **envp, t_env_list *env_list, char **argv)
 		prev = env_list;
 		while (tmp)
 		{
-			if (ft_strcmp(tmp->key, argv[i]) == 0)
+			if (ft_strncmp(tmp->key, argv[i], ft_strlen(tmp->key)) == 0)
 			{
 				free(tmp->key);
-				
 				if (tmp->value)
 					free(tmp->value);
-
 				if (prev != tmp)
 					prev->next = tmp->next;
 				else
 					env_list = tmp->next;
-
 				free(tmp);
-				break;
+				break ;
 			}
 			prev = tmp;
 			tmp = tmp->next;
@@ -54,7 +49,7 @@ int	ft_unset(char **envp, t_env_list *env_list, char **argv)
 	return (0);
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_env_list	*env_list;
 	int			env_count;

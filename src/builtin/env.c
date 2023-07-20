@@ -6,13 +6,13 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:55:47 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/20 13:56:09 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:27:12 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_env()
+int	ft_env(char **envp)
 {
 	int	i;
 

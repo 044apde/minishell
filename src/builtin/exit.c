@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:25:04 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/19 22:47:24 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:26:50 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	print_error_exit(char *str, int flag)
 {
 	int	exit_num;
+
 	if (flag == 1)
 	{
 		ft_putstr_fd("exit\n", 2);
@@ -31,7 +32,6 @@ int	print_error_exit(char *str, int flag)
 	}
 	return (exit_num);
 }
-
 
 int	check_num(char *str)
 {
@@ -60,13 +60,13 @@ void	ft_exit(int argc, char **argv)
 	ft_putstr_fd("exit\n", 2);
 	if (argc > 1)
 	{
-		if (check_num(argv[1]) != 1) // 숫자가 아니면 에러 메시지 출력 후 종료
+		if (check_num(argv[1]) != 1)
 		{
 			exit_num = print_error_exit(argv[1], 1);
 		}
 		else if (argc == 2)
 			exit(ft_atoi(argv[1]));
-		if (argc > 2) // 인자가 2개 이상이면 에러 메시지 출력 후 종료안됨
+		if (argc > 2)
 		{
 			ft_putstr_fd("ohmybash# exit: too many arguments\n", 2);
 			exit_num = 1;
