@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:54:53 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/20 20:44:40 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:36:23 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ t_env_list	*create_env_node(char *key, char *value)
 
 void	add_env_node(t_env_list **env_list, t_env_list *node)
 {
-	t_env_list	*tmp; // env_list의 포인터를 복사해둠
+	t_env_list	*tmp;
 
 	tmp = *env_list;
 	if (tmp == NULL)
 	{
-		*env_list = node; // env_list가 NULL이면 node를 넣어줌
+		*env_list = node;
 		node->next = NULL;
 		return ;
 	}
@@ -66,22 +66,27 @@ t_env_list	*build_env_list(char **envp, int env_count, t_env_list *env_list)
 	return (env_list);
 }
 
-// void	print_env_list(t_env_list *env_list)
-// {
-// 	while (env_list)
-// 	{
-// 		printf("%s=%s\n", env_list->key, env_list->value);
-// 		env_list = env_list->next;
-// 	}
-// }
+char	*get_env(t_env_list *env_list, char *str)
+{
+	while (env_list != NULL)
+	{
+		if (ft_strncmp(env_list->key, str + 1, ft_strlen(str)) == 0)
+			return (env_list->value);
+		env_list = env_list->next;
+	}
+	return (NULL);
+}
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
 	int			env_count;
 	t_env_list	*env_list;
+	char		*value;
+	char		*str;
 
+	str = "$USER";
 	env_list = NULL;
 	env_count = 0;
 	while (envp[env_count])
@@ -89,7 +94,6 @@ int main(int argc, char **argv, char **envp)
 	env_list = build_env_list(envp, env_count, env_list);
 	if (!env_list)
 		return (1);
-	// print_env_list(env_list);
+	value = get_env(env_list, str);
+	printf("%s\n", value);
 }
-
-
