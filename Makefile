@@ -4,7 +4,7 @@ LDFLAGS		=	-L${HOME}/.brew/opt/readline/lib -lreadline
 CFALG		=	-I${HOME}/.brew/opt/readline/include
 SOURCE		=	main.c src/read_input.c src/sig_handler.c src/term.c src/utils1.c src/init_minishell.c \
 				src/parse/parse_input.c src/split/split.c src/split/split_utils.c src/split/split_utils2.c \
-				src/split/split_utils3.c src/parse/parse_utils.c src/parse/parse_utils2.c
+				src/split/split_utils3.c src/parse/parse_utils.c src/parse/parse_utils2.c src/parse/parse_utils3.c
 HEADER		=	minishell.h
 LIBRARY 	=	libft/libft.a
 
