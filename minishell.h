@@ -6,16 +6,29 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/20 15:44:25 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 15:18:51 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+// true and false
 # define FALSE 0
 # define TRUE 1
+
+// check quote in split
 # define DONE 2
+
+// token type
+# define HEREDOC 3
+# define REDIR_IN 4
+# define REDIR_OUT 5
+# define APPEND 6
+# define PIPE 7
+# define DOUBLE_QUOTE 8
+# define SIGNLE_QUOTE 9
+# define WORD 10
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -40,6 +53,11 @@ typedef struct s_split
 
 // parse
 void	parse_input(char *input);
+void	check_type(t_token *head);
+void	substitution(t_token *head);
+void	check_syntax(t_token *head);
+void	unquote(t_token *head);
+char	*replace_to_env(char *s);
 
 // split
 int		is_sep(char c);
