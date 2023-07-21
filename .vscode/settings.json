@@ -7,6 +7,8 @@
 		"chrono": "c",
 		"__locale": "c",
 		"ios": "c",
-		"readline.h": "c"
+		"readline.h": "c",
+		"history.h": "c",
+		"__node_handle": "c"
 	}
 }
