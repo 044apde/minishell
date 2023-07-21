@@ -53,6 +53,7 @@ void	substitution(t_token *head);
 void	check_syntax(t_token *head);
 void	unquote(t_token *head);
 char	*replace_to_env(char *s);
+int		is_operator(char *s);
 
 // split
 int		is_sep(char c);
