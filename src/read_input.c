@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:31:48 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 17:48:25 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 19:57:29 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	add_input_to_history(char *input)
 	return ;
 }
 
-char	*read_input()
+char	*read_input(void)
 {
 	char	*input;
 
