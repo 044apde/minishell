@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:30:41 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 15:46:33 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 16:58:25 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ char	*replace_to_env(char *s)
 
 int	is_operator(char *s)
 {
-	if (compare_str(s, "|") == TRUE)
+	if (s == NULL)
+		return (TRUE);
+	else if (compare_str(s, "|") == TRUE)
 		return (TRUE);
 	else if (compare_str(s, "<") == TRUE)
 		return (TRUE);
@@ -48,8 +50,6 @@ int	is_operator(char *s)
 	else if (compare_str(s, "<<") == TRUE)
 		return (TRUE);
 	else if (compare_str(s, ">>") == TRUE)
-		return (TRUE);
-	else if (s == NULL)
 		return (TRUE);
 	else
 		return (FALSE);
