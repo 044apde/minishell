@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_envp_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:54:53 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/21 15:36:23 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/21 21:09:36 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,23 +77,17 @@ char	*get_env(t_env_list *env_list, char *str)
 	return (NULL);
 }
 
-int	main(int argc, char **argv, char **envp)
+t_env_list	*set_env(char **envp)
 {
-	(void)argc;
-	(void)argv;
-	int			env_count;
 	t_env_list	*env_list;
-	char		*value;
-	char		*str;
-
-	str = "$USER";
+	int			env_count;
+	
 	env_list = NULL;
 	env_count = 0;
 	while (envp[env_count])
 		env_count++;
 	env_list = build_env_list(envp, env_count, env_list);
-	if (!env_list)
-		return (1);
-	value = get_env(env_list, str);
-	printf("%s\n", value);
+	if (env_list == NULL)
+		exit_program("failed to get env");
+	return (env_list);
 }

@@ -60,12 +60,12 @@ typedef struct s_env_list
 }	t_env_list;
 
 // parse
-void	parse_input(char *input);
+void	parse_input(char *input, t_env_list *env_list);
 void	check_type(t_token *head);
-void	substitution(t_token *head);
+void	substitution(t_token *head, t_env_list *env_list);
 void	check_syntax(t_token *head);
 void	unquote(t_token *head);
-char	*replace_to_env(char *s);
+char	*replace_to_env(char *s, t_env_list *env_list);
 int		is_operator(char *s);
 int		compare_str(char *str1, char *str2);
 t_node	*make_tree(t_token *head);
@@ -86,7 +86,7 @@ t_token	*insert_node(t_token *head, char *s);
 t_token	*create_token(char *s);
 
 // init_minishell
-void	init_minishell(void);
+void	init_minishell(int argc, char **argv);
 
 // read_input
 char	*read_input(void);
@@ -103,6 +103,7 @@ void	set_pid(int	*pid);
 void	exit_program(char *s);
 
 // env
-char	*get_env(t_env_list *env_list, char *str);
+char		*get_env(t_env_list *env_list, char *str);
+t_env_list	*set_env(char **envp);
 
 #endif

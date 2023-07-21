@@ -6,14 +6,22 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 13:27:17 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 19:59:24 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 20:59:07 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	init_minishell(void)
+void	trash_can(int argc, char **argv)
 {
+	(void)argc;
+	(void)argv;
+	return ;
+}
+
+void	init_minishell(int argc, char **argv)
+{
+	trash_can(argc, argv);
 	set_signal();
 	set_terminal();
 	return ;
