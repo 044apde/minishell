@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:57:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 15:27:24 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 17:48:47 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 int	main(void)
 {
 	char	*input;
-	int		pid;
 
-	init_minishell(&pid);
+	init_minishell();
 	while (TRUE)
 	{
-		input = read_input(pid);
+		input = read_input();
 		parse_input(input);
 		free(input);
 	}

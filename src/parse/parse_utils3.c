@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Init_minishell.c                                   :+:      :+:    :+:   */
+/*   parse_utils3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/12 13:27:17 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 17:47:58 by shikim           ###   ########.fr       */
+/*   Created: 2023/07/21 17:41:12 by shikim            #+#    #+#             */
+/*   Updated: 2023/07/21 17:49:58 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-void	init_minishell()
+t_node	*make_tree(t_token *head)
 {
-	set_signal();
-	set_terminal();
-	return ;
+	t_node	*root;
+	
+	return (root);
 }

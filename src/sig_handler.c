@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:10:14 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/16 13:32:05 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 17:47:51 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	quit_handler(void)
 	return ;
 }
 
-void	set_signal(int *pid)
+void	set_signal()
 {
 	signal(SIGINT, int_handler);
 	signal(SIGQUIT, SIG_IGN);

@@ -26,6 +26,14 @@
 # include <termios.h>
 # include "libft/libft.h"
 
+typedef struct s_node
+{
+	int				type;
+	struct s_token	*token;
+	struct s_node	*left;
+	struct s_nope	*right;
+}	t_node;
+
 typedef struct s_token
 {
 	char			*token;
@@ -55,6 +63,7 @@ void	unquote(t_token *head);
 char	*replace_to_env(char *s);
 int		is_operator(char *s);
 int		compare_str(char *str1, char *str2);
+t_node	*make_tree(t_token *head);
 
 // split
 int		is_sep(char c);
@@ -72,13 +81,13 @@ t_token	*insert_node(t_token *head, char *s);
 t_token	*create_token(char *s);
 
 // init_minishell
-void	init_minishell(int *pid);
+void	init_minishell(void);
 
 // read_input
-char	*read_input(int pid);
+char	*read_input(void);
 
 // sig_handler
-void	set_signal(int *pid);
+void	set_signal(void);
 void	term_handler(void);
 
 // term
