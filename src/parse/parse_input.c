@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:41:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 17:45:36 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 19:52:37 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	parse_input(char *input)
 	unquote(head);
 	check_syntax(head);
 	show_token(head);
-	make_tree(head);
+	// make_tree(head);
 	return ;
 }
