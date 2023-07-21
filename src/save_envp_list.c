@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:54:53 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/21 21:41:53 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 22:14:05 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,17 @@ t_env_list	*set_env(char **envp)
 	env_list = build_env_list(envp, env_count, env_list);
 	if (env_list == NULL)
 		exit_program("failed to get env");
-	return (NULL);
+	return (env_list);
 }
 
 char	*get_env(t_env_list *env_list, char *str)
 {
 	while (env_list != NULL)
 	{
-		if (ft_strncmp(env_list->key, str + 1, ft_strlen(str)) == 0)
+		if (compare_str(env_list->key, str + 1) == TRUE)
+		{
 			return (env_list->value);
+		}
 		env_list = env_list->next;
 	}
 	return (NULL);

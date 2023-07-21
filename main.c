@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:57:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 21:40:54 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 21:48:55 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 	while (TRUE)
 	{
 		input = read_input();
-		parse_input(input);
+		parse_input(input, env_list);
 		free(input);
 	}
 	return (0);

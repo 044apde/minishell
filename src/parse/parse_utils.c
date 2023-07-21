@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 04:13:36 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 17:01:21 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 21:50:27 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	check_type(t_token *head)
 	return ;
 }
 
-void	substitution(t_token *head)
+void	substitution(t_token *head, t_env_list *env_list)
 {
 	t_token	*n;
 
@@ -66,7 +66,7 @@ void	substitution(t_token *head)
 		if (n->type == WORD || n->type == DOUBLE_QUOTE)
 		{
 			if (ft_strnstr(n->token, "$", ft_strlen(n->token)) != NULL)
-				n->token = replace_to_env(n->token);
+				n->token = replace_to_env(n->token, env_list);
 		}
 		n = n->next;
 	}
