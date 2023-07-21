@@ -18,6 +18,10 @@
 # define SIGNLE_QUOTE 9
 # define WORD 10
 
+// node type
+# define SIMPLE_COMMAND 11
+# define COMMAND 12
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
@@ -29,7 +33,8 @@
 typedef struct s_node
 {
 	int				type;
-	struct s_token	*token;
+	char			*token;
+	struct s_node	*next;
 	struct s_node	*left;
 	struct s_nope	*right;
 }	t_node;
@@ -96,5 +101,8 @@ void	set_terminal(void);
 // utils
 void	set_pid(int	*pid);
 void	exit_program(char *s);
+
+// env
+char	*get_env(t_env_list *env_list, char *str);
 
 #endif
