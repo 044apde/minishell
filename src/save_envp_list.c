@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_envp_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:54:53 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/21 15:36:23 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/21 21:41:53 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	add_env_node(t_env_list **env_list, t_env_list *node)
 		tmp = tmp->next;
 	tmp->next = node;
 	node->next = NULL;
+	return ;
 }
 
 t_env_list	*build_env_list(char **envp, int env_count, t_env_list *env_list)
@@ -54,16 +55,31 @@ t_env_list	*build_env_list(char **envp, int env_count, t_env_list *env_list)
 	{
 		key_copy = envp[i];
 		value_copy = ft_strchr(key_copy, '=');
-		if (!value_copy)
+		if (value_copy == NULL)
 			return (NULL);
 		*value_copy = '\0';
 		node = create_env_node(ft_strdup(key_copy), ft_strdup(value_copy + 1));
-		if (!node)
+		if (node == NULL)
 			return (NULL);
 		add_env_node(&env_list, node);
 		i++;
 	}
 	return (env_list);
+}
+
+t_env_list	*set_env(char **envp)
+{
+	t_env_list	*env_list;
+	int			env_count;
+
+	env_list = NULL;
+	env_count = 0;
+	while (envp[env_count])
+		env_count++;
+	env_list = build_env_list(envp, env_count, env_list);
+	if (env_list == NULL)
+		exit_program("failed to get env");
+	return (NULL);
 }
 
 char	*get_env(t_env_list *env_list, char *str)
@@ -75,25 +91,4 @@ char	*get_env(t_env_list *env_list, char *str)
 		env_list = env_list->next;
 	}
 	return (NULL);
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	(void)argc;
-	(void)argv;
-	int			env_count;
-	t_env_list	*env_list;
-	char		*value;
-	char		*str;
-
-	str = "$USER";
-	env_list = NULL;
-	env_count = 0;
-	while (envp[env_count])
-		env_count++;
-	env_list = build_env_list(envp, env_count, env_list);
-	if (!env_list)
-		return (1);
-	value = get_env(env_list, str);
-	printf("%s\n", value);
 }

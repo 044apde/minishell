@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:41:12 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 19:52:31 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 21:42:56 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	count_node(t_token *head)
 {
 	int		count;
 	t_token	*node;
-	
-	count =  0;
+
+	count = 0;
 	node = head->next;
 	while (node != NULL)
 	{
@@ -62,7 +62,6 @@ t_node	*make_tree(t_token *node)
 		{
 			while (j < i)
 			{
-				
 			}
 		}
 	}
