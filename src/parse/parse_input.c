@@ -6,18 +6,22 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:41:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/20 15:45:32 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 04:56:14 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	parse_input(char *input)
 {
-	t_token *head;
+	t_token	*head;
 
 	head = split(input);
-	// To do: check token
-	// check syntax
+	check_type(head);
+	substitution(head);
+	unquote(head);
+	check_syntax(head);
+	show_token(head);
+	// treeing
 	return ;
 }
