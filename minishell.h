@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 15:18:51 by shikim           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -50,6 +38,13 @@ typedef struct s_split
 	struct s_token	*head;
 	int				status;
 }	t_split;
+
+typedef struct s_env_list
+{
+	char				*key;
+	char				*value;
+	struct s_env_list	*next;
+}	t_env_list;
 
 // parse
 void	parse_input(char *input);

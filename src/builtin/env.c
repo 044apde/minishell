@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 13:10:54 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 15:02:16 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/07/20 13:55:47 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/07/20 22:27:12 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-char	*ft_strdup(const char *s1)
+int	ft_env(char **envp)
 {
-	size_t	len_s1;
-	char	*dst;
+	int	i;
 
-	len_s1 = ft_strlen(s1) + 1;
-	dst = (char *)malloc(sizeof(char) * len_s1);
-	if (dst == 0)
-		return (0);
-	ft_memmove(dst, s1, len_s1);
-	return (dst);
+	i = 0;
+	while (envp[i])
+	{
+		ft_putstr_fd(envp[i], 1);
+		ft_putstr_fd("\n", 1);
+		i++;
+	}
+	return (0);
 }

@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 13:10:54 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 15:02:16 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/07/19 22:47:43 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/07/19 22:51:32 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-char	*ft_strdup(const char *s1)
+void	ft_pwd(void)
 {
-	size_t	len_s1;
-	char	*dst;
+	char	*buf;
 
-	len_s1 = ft_strlen(s1) + 1;
-	dst = (char *)malloc(sizeof(char) * len_s1);
-	if (dst == 0)
-		return (0);
-	ft_memmove(dst, s1, len_s1);
-	return (dst);
+	buf = getcwd(NULL, 0);
+	ft_putstr_fd(buf, 1);
+	ft_putstr_fd("\n", 1);
+	free(buf);
 }
