@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 04:13:36 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 15:20:54 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 15:46:18 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,9 @@ void	check_syntax(t_token *head)
 	n = head->next;
 	while (n != NULL)
 	{
+		if (is_operator(n->token) == TRUE)
+		{
+		}
 		n = n->next;
 	}
 	return ;

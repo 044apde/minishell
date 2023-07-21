@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:55:55 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 15:18:51 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 15:35:10 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	substitution(t_token *head);
 void	check_syntax(t_token *head);
 void	unquote(t_token *head);
 char	*replace_to_env(char *s);
+int		is_operator(char *s);
 
 // split
 int		is_sep(char c);

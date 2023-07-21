@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:30:41 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 15:22:49 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/21 15:46:33 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,22 @@ char	*replace_to_env(char *s)
 	free(dangling);
 	free(temp);
 	return (result);
+}
+
+int	is_operator(char *s)
+{
+	if (compare_str(s, "|") == TRUE)
+		return (TRUE);
+	else if (compare_str(s, "<") == TRUE)
+		return (TRUE);
+	else if (compare_str(s, ">") == TRUE)
+		return (TRUE);
+	else if (compare_str(s, "<<") == TRUE)
+		return (TRUE);
+	else if (compare_str(s, ">>") == TRUE)
+		return (TRUE);
+	else if (s == NULL)
+		return (TRUE);
+	else
+		return (FALSE);
 }
