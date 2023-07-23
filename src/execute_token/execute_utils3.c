@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_input.c                                      :+:      :+:    :+:   */
+/*   execute_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/13 17:41:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/23 21:30:40 by shikim           ###   ########.fr       */
+/*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
+/*   Updated: 2023/07/23 22:20:42 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_token	*parse_input(char *input, t_env_list *env_list)
+void	do_redirin(t_token *list, t_execute *pack)
 {
-	t_token	*head;
+	return ;
+}
 
-	head = split(input);
-	check_type(head);
-	substitution(head, env_list);
-	unquote(head);
-	check_syntax(head);
-	show_token(head);
-	// make_tree(head);
-	return (head);
+void	do_redirout(t_token *list, t_execute *pack)
+{
+	return ;
 }
