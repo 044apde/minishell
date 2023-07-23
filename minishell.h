@@ -22,6 +22,11 @@
 # define SIMPLE_COMMAND 11
 # define COMMAND 12
 
+// order
+# define FIRST 99
+# define MIDDLE 100
+# define LAST 101
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
@@ -59,8 +64,16 @@ typedef struct s_env_list
 	struct s_env_list	*next;
 }	t_env_list;
 
+typedef struct s_execute
+{
+	int	n_of_process;
+	int	s_n_of_process;
+	int	**pipe_fd;
+	int	count;
+}	t_execute;
+
 // parse
-void		parse_input(char *input, t_env_list *env_list);
+t_token		*parse_input(char *input, t_env_list *env_list);
 void		check_type(t_token *head);
 void		substitution(t_token *head, t_env_list *env_list);
 void		check_syntax(t_token *head);
@@ -105,5 +118,10 @@ void		exit_program(char *s);
 // env
 char		*get_env(t_env_list *env_list, char *str);
 t_env_list	*set_env(char **envp);
+
+// exec
+void		execute(t_token *token_list, t_env_list *env_list);
+void		execute_command(t_token *list, t_execute *pack);
+t_token		*move_list(int count, t_token *list);
 
 #endif
