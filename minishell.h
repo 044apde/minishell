@@ -49,6 +49,7 @@ typedef struct s_token
 	char			*token;
 	int				type;
 	struct s_token	*next;
+	struct s_token	*prev;
 }	t_token;
 
 typedef struct s_split
@@ -123,5 +124,6 @@ t_env_list	*set_env(char **envp);
 void		execute(t_token *token_list, t_env_list *env_list);
 void		execute_command(t_token *list, t_execute *pack);
 t_token		*move_list(int count, t_token *list);
+void		execute_first_command(t_token *list, t_execute *pack);
 
 #endif
