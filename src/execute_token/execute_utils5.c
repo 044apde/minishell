@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:18:37 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/24 23:30:52 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/25 03:12:14 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	remvove_heredoc_file(void)
 {
 	int	heredoc;
 
-	heredoc = open(".heredoc", O_CREAT | O_RDWR | O_TRUNC);
+	heredoc = open("src/execute_token/.heredoc", O_CREAT | O_RDWR | O_TRUNC);
 	write(heredoc, "", 1);
 	close(heredoc);
 	return ;

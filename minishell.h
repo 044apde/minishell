@@ -131,7 +131,7 @@ void		execute_first_command(t_token *list, t_execute *pack);
 void		execute_middle_command(t_token *list, t_execute *pack);
 void		execute_last_command(t_token *list, t_execute *pack);
 
-int			do_redirin(t_token *list, t_execute *pack);
+int			do_redirin(t_token *list, t_execute *pack, int origin_stdout);
 int			do_redirout(t_token *list, t_execute *pack);
 t_token		*find_command(t_token *list, t_execute *pack);
 void		execute_word(t_token *list, t_execute *pack);
