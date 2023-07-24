@@ -125,5 +125,6 @@ void		execute(t_token *token_list, t_env_list *env_list);
 void		execute_command(t_token *list, t_execute *pack);
 t_token		*move_list(int count, t_token *list);
 void		execute_first_command(t_token *list, t_execute *pack);
-
+void		execute_middle_command(t_token *list, t_execute *pack);
+void		execute_last_command(t_token *list, t_execute *pack);
 #endif
