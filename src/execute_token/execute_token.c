@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/24 20:46:45 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/24 23:38:28 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,12 @@ t_execute	*init_execute(t_token *token_list, t_env_list *env_list)
 	int			**pipe_fd;
 
 	execute = (t_execute *)malloc(sizeof(t_execute));
-	pipe_fd = (int **)malloc(sizeof(int *) * 2);
-	pipe_fd[0] = (int *)malloc(sizeof(int));
-	pipe_fd[1] = (int *)malloc(sizeof(int));
 	execute->n_of_process = count_pipe(token_list) + 1;
-	execute->pipe_fd = pipe_fd;
 	execute->count = -1;
 	execute->s_n_of_process = execute->n_of_process;
 	execute->env_list = env_list;
+	if (pipe(execute->pipe_fd) == -1)
+		exit_program("fail to call system");
 	return (execute);
 }
 
@@ -65,6 +63,7 @@ void	execute(t_token *token_list, t_env_list *env_list)
 			t_token *list = move_list(pack->count, token_list);
 			if (list == NULL)
 				return ;
+			remvove_heredoc_file();
 			execute_command(list, pack);
 			exit (1);
 		}

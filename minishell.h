@@ -71,7 +71,7 @@ typedef struct s_execute
 {
 	int			n_of_process;
 	int			s_n_of_process;
-	int			**pipe_fd;
+	int			pipe_fd[2];
 	int			count;
 	t_env_list	*env_list;
 }	t_execute;
@@ -135,4 +135,7 @@ int			do_redirin(t_token *list, t_execute *pack);
 int			do_redirout(t_token *list, t_execute *pack);
 t_token		*find_command(t_token *list, t_execute *pack);
 void		execute_word(t_token *list, t_execute *pack);
+int			is_pipe(t_token *list);
+void		do_heredoc(t_token *list, t_execute *pack, int infile);
+void		remvove_heredoc_file(void);
 #endif
