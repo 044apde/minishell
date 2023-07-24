@@ -4,6 +4,7 @@
 // true and false
 # define FALSE 0
 # define TRUE 1
+# define ERROR -1
 
 // check quote in split
 # define DONE 2
@@ -33,6 +34,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <termios.h>
+# include <fcntl.h>
 # include "libft/libft.h"
 
 typedef struct s_node
@@ -67,17 +69,18 @@ typedef struct s_env_list
 
 typedef struct s_execute
 {
-	int	n_of_process;
-	int	s_n_of_process;
-	int	**pipe_fd;
-	int	count;
+	int			n_of_process;
+	int			s_n_of_process;
+	int			**pipe_fd;
+	int			count;
+	t_env_list	*env_list;
 }	t_execute;
 
 // parse
 t_token		*parse_input(char *input, t_env_list *env_list);
 void		check_type(t_token *head);
 void		substitution(t_token *head, t_env_list *env_list);
-void		check_syntax(t_token *head);
+int			check_syntax(t_token *head);
 void		unquote(t_token *head);
 char		*replace_to_env(char *s, t_env_list *env_list);
 int			is_operator(char *s);
@@ -127,4 +130,9 @@ t_token		*move_list(int count, t_token *list);
 void		execute_first_command(t_token *list, t_execute *pack);
 void		execute_middle_command(t_token *list, t_execute *pack);
 void		execute_last_command(t_token *list, t_execute *pack);
+
+int			do_redirin(t_token *list, t_execute *pack);
+int			do_redirout(t_token *list, t_execute *pack);
+t_token		*find_command(t_token *list, t_execute *pack);
+void		execute_word(t_token *list, t_execute *pack);
 #endif

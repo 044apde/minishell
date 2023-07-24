@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/24 15:43:44 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/24 20:46:45 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	count_pipe(t_token *token_list)
 	return (count);
 }
 
-t_execute	*init_execute(t_token *token_list)
+t_execute	*init_execute(t_token *token_list, t_env_list *env_list)
 {
 	t_execute	*execute;
 	int			**pipe_fd;
@@ -40,6 +40,7 @@ t_execute	*init_execute(t_token *token_list)
 	execute->pipe_fd = pipe_fd;
 	execute->count = -1;
 	execute->s_n_of_process = execute->n_of_process;
+	execute->env_list = env_list;
 	return (execute);
 }
 
@@ -49,8 +50,9 @@ void	execute(t_token *token_list, t_env_list *env_list)
 	int			pid;
 	int			n;
 
-	(void)env_list;
-	pack = init_execute(token_list);
+	if (token_list == NULL)
+		return ;
+	pack = init_execute(token_list, env_list);
 	while (pack->n_of_process-- > 0)
 	{
 		pid = fork();

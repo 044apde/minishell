@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:54:53 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/21 22:14:05 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/24 18:05:37 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,13 @@ char	*get_env(t_env_list *env_list, char *str)
 {
 	while (env_list != NULL)
 	{
-		if (compare_str(env_list->key, str + 1) == TRUE)
+		if (str[0] == '$')
+		{
+			++str;
+			if (*str == '\0')
+				return (--str);
+		}
+		if (compare_str(env_list->key, str) == TRUE)
 		{
 			return (env_list->value);
 		}
