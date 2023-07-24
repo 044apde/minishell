@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/24 20:51:07 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/25 03:04:44 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 t_token	*find_command(t_token *list, t_execute *pack)
 {
-	list = list->next;
 	if (list->type == REDIR_IN || list->type == REDIR_OUT)
 		list = list->next->next;
 	return (list);
@@ -59,6 +58,8 @@ void	execute_word(t_token *list, t_execute *pack)
 
 	cmd_path = ft_split(get_env(pack->env_list, "PATH"), ':');
 	cmd_option = make_cmd_option(list, pack);
+	if (list->type == HEREDOC)
+		execve("/bin/cat", NULL, NULL);
 	while(*cmd_path != NULL)
 	{
 		cmd = ft_strjoin(*cmd_path, "/");
@@ -68,12 +69,23 @@ void	execute_word(t_token *list, t_execute *pack)
 		if (access(cmd, F_OK) == 0)
 		{
 			execve(cmd, cmd_option, NULL);
+			free(cmd);
 			return ;
 		}
 		free(cmd);
 		cmd_path++;
 	}
-	execve(list->token, cmd_option, NULL);
-	// printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", list->token);
+	printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", list->token);
 	return ;
+}
+
+int	is_pipe(t_token *list)
+{
+	while(list != NULL)
+	{
+		if (list->type == PIPE)
+			return (TRUE);
+		list = list->next;
+	}
+	return (FALSE);
 }
