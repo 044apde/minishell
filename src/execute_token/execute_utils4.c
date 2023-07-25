@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/25 20:09:45 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/25 23:03:20 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ t_token	*find_command(t_token *list, t_execute *pack)
 
 int	is_operator2(t_token *list)
 {
-	if (list->type == PIPE || list->type == REDIR_IN || list->type == REDIR_OUT || list->type == HEREDOC || list->type == APPEND)
+	if (list->type == PIPE || list->type == REDIR_IN || \
+		list->type == REDIR_OUT || list->type == HEREDOC || \
+		list->type == APPEND)
 		return (TRUE);
 	return (FALSE);
 }
@@ -56,33 +58,22 @@ void	execute_word(t_token *list, t_execute *pack, t_env_list *env_list)
 	char	*dangling;
 	char	**cmd_option;
 
-	cmd_path = ft_split(get_env(pack->env_list, "PATH"), ':');
-	cmd_option = make_cmd_option(list, pack);
 	if (list->type == HEREDOC)
 		execve("/bin/cat", NULL, env_list->envp_copy);
-	while(*cmd_path != NULL)
-	{
-		cmd = ft_strjoin(*cmd_path, "/");
-		dangling = cmd;
-		cmd = ft_strjoin(cmd, list->token);
-		free(dangling);
-		if (access(cmd, F_OK) == 0)
-		{
-			execve(cmd, cmd_option, env_list->envp_copy);
-			free(cmd);
-			return ;
-		}
-		free(cmd);
-		cmd_path++;
-	}
-	// 여기서 처리 minishell 파일 실행
-	printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", list->token);
+	cmd_option = make_cmd_option(list, pack);
+	if (list->token[0] == '.' || list->token[0] == '/')
+		cmd = list->token;
+	else
+		cmd = make_cmd(list, pack);
+	execve(cmd, cmd_option, env_list->envp_copy);
+	printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", \
+			list->token);
 	return ;
 }
 
 int	is_pipe(t_token *list)
 {
-	while(list != NULL)
+	while (list != NULL)
 	{
 		if (list->type == PIPE)
 			return (TRUE);

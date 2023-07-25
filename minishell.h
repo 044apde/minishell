@@ -123,6 +123,8 @@ void		exit_program(char *s);
 // env
 char		*get_env(t_env_list *env_list, char *str);
 t_env_list	*set_env(char **envp);
+void		free_envp(char **envp_copy);
+char		**env_list_to_envp(t_env_list *env_list, char **envp, int count);
 
 // exec
 void		execute(t_token *token_list, t_env_list *env_list);
@@ -139,7 +141,6 @@ void		execute_word(t_token *list, t_execute *pack, t_env_list *env_list);
 int			is_pipe(t_token *list);
 void		do_heredoc(t_token *list, t_execute *pack, int infile);
 void		remvove_heredoc_file(void);
-void		free_envp(char **envp_copy);
-char		**env_list_to_envp(t_env_list *env_list, char **envp, int count);
+char		*make_cmd(t_token *list, t_execute *pack);
 
 #endif
