@@ -6,13 +6,14 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/25 16:46:42 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/25 23:00:21 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	execute_first_command(t_token *list, t_execute *pack, t_env_list *env_list)
+void	execute_first_command(t_token *list, t_execute *pack, \
+								t_env_list *env_list)
 {
 	char	*command;
 	char	**cmd_path;
@@ -36,7 +37,8 @@ void	execute_first_command(t_token *list, t_execute *pack, t_env_list *env_list)
 	return ;
 }
 
-void	execute_middle_command(t_token *list, t_execute *pack, t_env_list *env_list)
+void	execute_middle_command(t_token *list, t_execute *pack, \
+								t_env_list *env_list)
 {
 	int		origin_stdout;
 
@@ -53,7 +55,8 @@ void	execute_middle_command(t_token *list, t_execute *pack, t_env_list *env_list
 	return ;
 }
 
-void	execute_last_command(t_token *list, t_execute *pack, t_env_list *env_list)
+void	execute_last_command(t_token *list, t_execute *pack, \
+							t_env_list *env_list)
 {
 	int		origin_stdout;
 
