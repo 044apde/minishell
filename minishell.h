@@ -62,6 +62,7 @@ typedef struct s_split
 
 typedef struct s_env_list
 {
+	char				**envp_copy;
 	char				*key;
 	char				*value;
 	struct s_env_list	*next;
@@ -125,17 +126,20 @@ t_env_list	*set_env(char **envp);
 
 // exec
 void		execute(t_token *token_list, t_env_list *env_list);
-void		execute_command(t_token *list, t_execute *pack);
+void		execute_command(t_token *list, t_execute *pack, t_env_list *env_list);
 t_token		*move_list(int count, t_token *list);
-void		execute_first_command(t_token *list, t_execute *pack);
-void		execute_middle_command(t_token *list, t_execute *pack);
-void		execute_last_command(t_token *list, t_execute *pack);
+void		execute_first_command(t_token *list, t_execute *pack, t_env_list *env_list);
+void		execute_middle_command(t_token *list, t_execute *pack, t_env_list *env_list);
+void		execute_last_command(t_token *list, t_execute *pack, t_env_list *env_list);
 
 int			do_redirin(t_token *list, t_execute *pack, int origin_stdout);
 int			do_redirout(t_token *list, t_execute *pack);
 t_token		*find_command(t_token *list, t_execute *pack);
-void		execute_word(t_token *list, t_execute *pack);
+void		execute_word(t_token *list, t_execute *pack, t_env_list *env_list);
 int			is_pipe(t_token *list);
 void		do_heredoc(t_token *list, t_execute *pack, int infile);
 void		remvove_heredoc_file(void);
+void		free_envp(char **envp_copy);
+char		**env_list_to_envp(t_env_list *env_list, char **envp, int count);
+
 #endif

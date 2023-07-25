@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:54:44 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/24 15:43:13 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/25 16:46:40 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ static int	set_order(t_execute *pack)
 		return (MIDDLE);
 }
 
-void	execute_command(t_token *list, t_execute *pack)
+void	execute_command(t_token *list, t_execute *pack, t_env_list *env_list)
 {
 	int	order;
 
 	order = set_order(pack);
 	if (order == FIRST)
-		execute_first_command(list, pack);
+		execute_first_command(list, pack, env_list);
 	else if (order == MIDDLE)
-		execute_middle_command(list, pack);
+		execute_middle_command(list, pack, env_list);
 	else
-		execute_last_command(list, pack);
+		execute_last_command(list, pack, env_list);
 	return ;
 }
