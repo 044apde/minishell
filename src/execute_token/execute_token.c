@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/24 23:38:28 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/25 03:49:17 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,22 @@ void	execute(t_token *token_list, t_env_list *env_list)
 	if (token_list == NULL)
 		return ;
 	pack = init_execute(token_list, env_list);
-	while (pack->n_of_process-- > 0)
-	{
+	while (pack->n_of_process-- > 0) {
 		pid = fork();
 		pack->count = pack->count + 1;
-		if (pid != 0)
-			waitpid(pid, NULL, 0); 
-		else if (pid == 0)
-		{
+		if (pid != 0) {
+			continue;
+		} else if (pid == 0) {
 			usleep(100);
 			t_token *list = move_list(pack->count, token_list);
 			if (list == NULL)
-				return ;
+				return;
 			remvove_heredoc_file();
 			execute_command(list, pack);
-			exit (1);
+			exit(1);
 		}
 	}
+	while (wait(NULL) > 0)
+		;
 	return ;
 }
