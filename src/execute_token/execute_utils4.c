@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/25 03:04:44 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/25 20:09:45 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**make_cmd_option(t_token *cmd_node, t_execute *pack)
 	return (cmd_option);
 }
 
-void	execute_word(t_token *list, t_execute *pack)
+void	execute_word(t_token *list, t_execute *pack, t_env_list *env_list)
 {
 	char	**cmd_path;
 	char	*cmd;
@@ -59,7 +59,7 @@ void	execute_word(t_token *list, t_execute *pack)
 	cmd_path = ft_split(get_env(pack->env_list, "PATH"), ':');
 	cmd_option = make_cmd_option(list, pack);
 	if (list->type == HEREDOC)
-		execve("/bin/cat", NULL, NULL);
+		execve("/bin/cat", NULL, env_list->envp_copy);
 	while(*cmd_path != NULL)
 	{
 		cmd = ft_strjoin(*cmd_path, "/");
@@ -68,13 +68,14 @@ void	execute_word(t_token *list, t_execute *pack)
 		free(dangling);
 		if (access(cmd, F_OK) == 0)
 		{
-			execve(cmd, cmd_option, NULL);
+			execve(cmd, cmd_option, env_list->envp_copy);
 			free(cmd);
 			return ;
 		}
 		free(cmd);
 		cmd_path++;
 	}
+	// 여기서 처리 minishell 파일 실행
 	printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", list->token);
 	return ;
 }

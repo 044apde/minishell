@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/25 03:53:14 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/25 16:46:42 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	execute_first_command(t_token *list, t_execute *pack)
+void	execute_first_command(t_token *list, t_execute *pack, t_env_list *env_list)
 {
 	char	*command;
 	char	**cmd_path;
@@ -32,11 +32,11 @@ void	execute_first_command(t_token *list, t_execute *pack)
 	if (do_redirout(list, pack) == ERROR)
 		return ;
 	list = find_command(list, pack);
-	execute_word(list, pack);
+	execute_word(list, pack, env_list);
 	return ;
 }
 
-void	execute_middle_command(t_token *list, t_execute *pack)
+void	execute_middle_command(t_token *list, t_execute *pack, t_env_list *env_list)
 {
 	int		origin_stdout;
 
@@ -49,11 +49,11 @@ void	execute_middle_command(t_token *list, t_execute *pack)
 	if (do_redirout(list, pack) == ERROR)
 		return ;
 	list = find_command(list, pack);
-	execute_word(list, pack);
+	execute_word(list, pack, env_list);
 	return ;
 }
 
-void	execute_last_command(t_token *list, t_execute *pack)
+void	execute_last_command(t_token *list, t_execute *pack, t_env_list *env_list)
 {
 	int		origin_stdout;
 
@@ -65,6 +65,6 @@ void	execute_last_command(t_token *list, t_execute *pack)
 	if (do_redirout(list, pack) == ERROR)
 		return ;
 	list = find_command(list, pack);
-	execute_word(list, pack);
+	execute_word(list, pack, env_list);
 	return ;
 }
