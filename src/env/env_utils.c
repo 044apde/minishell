@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:47:46 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/25 17:48:06 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:01:54 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ char	**env_list_to_envp(t_env_list *env_list, char **envp, int count)
 	i = 0;
 	while (env_list != NULL)
 	{
-		envp_copy[i] = ft_strjoin(ft_strjoin(env_list->key, "="), env_list->value);
+		envp_copy[i] = ft_strjoin(ft_strjoin(env_list->key, "="), \
+		env_list->value);
 		if (envp_copy[i] == NULL)
 		{
 			free_envp(envp_copy);
@@ -48,4 +49,23 @@ char	**env_list_to_envp(t_env_list *env_list, char **envp, int count)
 	}
 	envp_copy[i] = NULL;
 	return (envp_copy);
+}
+
+char	*get_env(t_env_list *env_list, char *str)
+{
+	while (env_list != NULL)
+	{
+		if (str[0] == '$')
+		{
+			++str;
+			if (*str == '\0')
+				return (--str);
+		}
+		if (compare_str(env_list->key, str) == TRUE)
+		{
+			return (env_list->value);
+		}
+		env_list = env_list->next;
+	}
+	return (NULL);
 }

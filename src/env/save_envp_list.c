@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:54:53 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/25 18:35:15 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:02:17 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,16 @@ t_env_list	*build_env_list(char **envp, int env_count, t_env_list *env_list)
 		key_copy = envp[i];
 		value_copy = ft_strchr(key_copy, '=');
 		if (value_copy == NULL)
-		{
-			free_envp(envp_copy);
 			return (NULL);
-		}
 		*value_copy = '\0';
-		node = create_env_node(envp_copy, ft_strdup(key_copy), ft_strdup(value_copy + 1));
+		node = create_env_node(envp_copy, ft_strdup(key_copy), \
+		ft_strdup(value_copy + 1));
 		if (node == NULL)
-		{
-			free_envp(envp_copy);
 			return (NULL);
-		}
 		add_env_node(&env_list, node);
 		i++;
 	}
 	envp_copy = env_list_to_envp(env_list, envp, env_count);
-	free_envp(envp_copy);
 	return (env_list);
 }
 
@@ -90,23 +84,4 @@ t_env_list	*set_env(char **envp)
 	if (env_list == NULL)
 		exit_program("failed to get env");
 	return (env_list);
-}
-
-char	*get_env(t_env_list *env_list, char *str)
-{
-	while (env_list != NULL)
-	{
-		if (str[0] == '$')
-		{
-			++str;
-			if (*str == '\0')
-				return (--str);
-		}
-		if (compare_str(env_list->key, str) == TRUE)
-		{
-			return (env_list->value);
-		}
-		env_list = env_list->next;
-	}
-	return (NULL);
 }
