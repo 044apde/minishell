@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/25 23:07:19 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:53:53 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,33 +37,36 @@ t_token	*move_to_redirout(t_token *list)
 
 int	do_redirin(t_token *list, t_execute *pack, int origin_stdout)
 {
-	int	infile;
+	int infile;
 
 	list = move_to_last(list);
 	list = move_to_redirin(list);
 	if (list == NULL || list->type == PIPE)
 		return (FALSE);
-	// if (list->type == HEREDOC)
-	// {
-	// 	infile = open("src/execute_token/.heredoc", \
-	// 					O_CREAT | O_APPEND | O_RDWR, 0777);
-	// 	dup2(origin_stdout, STDOUT_FILENO);
-	// 	do_heredoc(list, pack, infile);
-	// 	if (is_pipe(list) == TRUE)
-	// 		dup2(pack->pipe_fd[1], STDOUT_FILENO);
-	// 	close(infile);
-	// 	infile = open("src/execute_token/.heredoc", O_RDONLY, 0777);
-	// }
-	else
-		infile = open(list->next->token, O_RDONLY, 0777);
-	if (infile == ERROR)
+	if (list->type == HEREDOC)
 	{
-		printf("\033[31mohmybash# %s: No such file or directory\033[0m\n", \
-				list->next->token);
-		return (ERROR);
+		infile = open("src/execute_token/.heredoc", O_RDONLY);
+		if (infile == ERROR)
+		{
+			printf("\033[0;31mohmybash# %s: No such file or directory\033[0;0m\n", list->next->token);
+			return (ERROR);
+		}
+		dup2(infile, STDIN_FILENO);
+		close(infile);
+		return (HEREDOC);
 	}
-	dup2(infile, STDIN_FILENO);
-	return (HEREDOC);
+	else
+	{
+		infile = open(list->next->token, O_RDONLY, 0777);
+		if (infile == ERROR)
+		{
+			printf("\033[0;31mohmybash# %s: No such file or directory\033[0;0m\n", list->next->token);
+			return (ERROR);
+		}
+		dup2(infile, STDIN_FILENO);
+		close(infile);
+		return (TRUE);
+	}
 }
 
 int	do_redirout(t_token *list, t_execute *pack)

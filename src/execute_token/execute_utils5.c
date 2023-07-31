@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:18:37 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/25 23:03:41 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:55:46 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	do_heredoc(t_token *list, t_execute *pack, int infile)
 	return ;
 }
 
-void	remvove_heredoc_file(void)
+void	remove_heredoc_file(void)
 {
 	int	heredoc;
 
