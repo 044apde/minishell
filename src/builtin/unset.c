@@ -6,57 +6,79 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 22:52:14 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/20 22:33:30 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/30 21:38:18 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	ft_unset(char **envp, t_env_list *env_list, char **argv)
+int	is_valid_key(char *str, t_env_list *env_list)
 {
-	char		*str;
 	int			i;
-	t_env_list	*tmp;
-	t_env_list	*prev;
+	t_env_list	*list;
 
-	env_list = NULL;
-	if (argv[1] == NULL)
-		return (0);
+	if (str == NULL || ft_isdigit(str[0]) == TRUE)
+		return (FALSE);
 	i = 1;
-	while (argv[i])
+	while (str[i] != '\0')
 	{
-		tmp = env_list;
-		prev = env_list;
-		while (tmp)
-		{
-			if (ft_strncmp(tmp->key, argv[i], ft_strlen(tmp->key)) == 0)
-			{
-				free(tmp->key);
-				if (tmp->value)
-					free(tmp->value);
-				if (prev != tmp)
-					prev->next = tmp->next;
-				else
-					env_list = tmp->next;
-				free(tmp);
-				break ;
-			}
-			prev = tmp;
-			tmp = tmp->next;
-		}
+		if (ft_isalnum(str[i]) == FALSE && str[i] != '_')
+			return (FALSE);
 		i++;
 	}
-	return (0);
+	list = env_list;
+	while (list != NULL)
+	{
+		if (compare_str(list->key, str) == TRUE)
+			return (TRUE);
+		list = list->next;
+	}
+	return (FALSE);
 }
 
-int	main(int argc, char **argv, char **envp)
+t_env_list	*delete_env_node(t_env_list *env_list, char *str)
 {
-	t_env_list	*env_list;
-	int			env_count;
+	t_env_list	*list;
+	t_env_list	*prev;
 
-	env_list = NULL;
-	env_count = 0;
-	env_list = build_env_list(envp, env_count, env_list);
-	ft_unset(envp, env_list, argv);
-	return (0);
+	list = env_list;
+	prev = NULL;
+	while (list != NULL)
+	{
+		if (compare_str(list->key, str) == TRUE)
+		{
+			if (prev == NULL)
+				env_list = list->next;
+			else
+				prev->next = list->next;
+			free(list->key);
+			free(list->value);
+			free(list);
+			return (env_list);
+		}
+		prev = list;
+		list = list->next;
+	}
+	return (env_list);
+}
+
+void	ft_unset(t_env_list *env_list, t_token *token_list)
+{
+	t_token	*list;
+
+	list = token_list;
+	if (list->next == NULL)
+		return ;
+	else
+	{
+		while (list->next != NULL && list->next->type == WORD)
+		{
+			if (is_valid_key(list->next->token, env_list) == TRUE)
+				env_list = delete_env_node(env_list, list->next->token);
+			else
+				return ;
+			list = list->next;
+		}
+	}
+	return ;
 }

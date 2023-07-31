@@ -6,11 +6,11 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 22:47:43 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/19 22:51:32 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/30 14:53:24 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_pwd(void)
 {

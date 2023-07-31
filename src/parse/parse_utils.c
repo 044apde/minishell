@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 04:13:36 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/24 22:00:38 by shikim           ###   ########.fr       */
+/*   Updated: 2023/07/28 22:28:02 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ int	compare_str(char *str1, char *str2)
 	int	i;
 
 	i = 0;
-	while (str1[i] != '\0')
+	if (str1 == NULL || str2 == NULL)
+		return (FALSE);
+	while (str1[i] != '\0' && str2[i] != '\0')
 	{
 		if (str1[i] != str2[i])
 			return (FALSE);
 		i++;
 	}
-	if (str2[i] != '\0')
+	if (str1[i] != '\0' || str2[i] != '\0')
 		return (FALSE);
 	return (TRUE);
 }

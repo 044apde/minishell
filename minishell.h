@@ -140,7 +140,22 @@ t_token		*find_command(t_token *list, t_execute *pack);
 void		execute_word(t_token *list, t_execute *pack, t_env_list *env_list);
 int			is_pipe(t_token *list);
 void		do_heredoc(t_token *list, t_execute *pack, int infile);
-void		remvove_heredoc_file(void);
+void		remove_heredoc_file(void);
 char		*make_cmd(t_token *list, t_execute *pack);
+void		heredoc_process(t_token *token_list, t_execute *pack);
+
+// builtin
+int			is_builtin(t_token *token_list);
+int			execute_builtin(t_token *token_list, t_env_list *env_list);
+void		ft_echo(t_token *token_list);
+void		ft_cd(t_env_list *env_list, t_token *token_list);
+void		ft_pwd(void);
+void		ft_export(t_env_list *env_list, t_token *token_list);
+t_env_list	*sorted_list(t_env_list *list);
+int			compare_keys(t_env_list *a, t_env_list *b);
+int			ft_strcmp(char *s1, char *s2);
+void		ft_unset(t_env_list *env_list, t_token *token_list);
+void		ft_env(t_env_list *env_list);
+void		ft_exit(t_token *token_list);
 
 #endif

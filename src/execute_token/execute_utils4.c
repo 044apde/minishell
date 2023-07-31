@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/25 23:03:20 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:54:29 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,25 @@ void	execute_word(t_token *list, t_execute *pack, t_env_list *env_list)
 	cmd_option = make_cmd_option(list, pack);
 	if (list->token[0] == '.' || list->token[0] == '/')
 		cmd = list->token;
+	else if (is_builtin(list) == TRUE)
+	{
+		execute_builtin(list, env_list);
+		free(cmd_option);
+		return ;
+	}
 	else
 		cmd = make_cmd(list, pack);
-	execve(cmd, cmd_option, env_list->envp_copy);
-	printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", \
+	if (cmd == NULL)
+	{
+		printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", \
 			list->token);
+		free(cmd_option);
+		return ;
+	}
+	execve(cmd, cmd_option, env_list->envp_copy);
+	// printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", \
+	// 		list->token);
+	free(cmd_option);
 	return ;
 }
 
@@ -81,3 +95,4 @@ int	is_pipe(t_token *list)
 	}
 	return (FALSE);
 }
+

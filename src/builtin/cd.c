@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/20 13:55:47 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/30 14:52:13 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/07/27 20:41:59 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/07/31 18:51:32 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_env(t_env_list *env_list)
+static char	*get_env_value(char *key, t_env_list *env_list)
 {
-	int			i;
 	t_env_list	*list;
 
-	i = 0;
 	list = env_list;
 	while (list != NULL)
 	{
-		printf("%s=%s\n", list->key, list->value);
+		if (ft_strncmp(list->key, key, ft_strlen(key)) == 0)
+			return (list->value);
 		list = list->next;
+	}
+	return (NULL);
+}
+
+void	ft_cd(t_env_list *env_list, t_token *token_list)
+{
+	if (token_list->next == NULL)
+		chdir(get_env_value("HOME", env_list));
+	else if (token_list->next->next == NULL)
+	{
+		if (chdir(token_list->next->token) == -1)
+			printf("cd: %s: No such file or directory\n", 
+			token_list->next->token);
 	}
 	return ;
 }

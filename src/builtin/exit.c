@@ -6,20 +6,20 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:25:04 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/20 22:26:50 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/07/30 20:07:46 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	print_error_exit(char *str, int flag)
+static int	print_error_exit(char *str, int flag)
 {
 	int	exit_num;
 
 	if (flag == 1)
 	{
 		ft_putstr_fd("exit\n", 2);
-		ft_putstr_fd("ohmybash# exit:a", 2);
+		ft_putstr_fd("ohmybash# exit: ", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
 		exit_num = 255;
@@ -33,7 +33,7 @@ int	print_error_exit(char *str, int flag)
 	return (exit_num);
 }
 
-int	check_num(char *str)
+static int	check_num(char *str)
 {
 	int	i;
 
@@ -51,25 +51,26 @@ int	check_num(char *str)
 	return (1);
 }
 
-void	ft_exit(int argc, char **argv)
+void	ft_exit(t_token *token_list)
 {
-	int	i;
 	int	exit_num;
 
-	i = 0;
-	ft_putstr_fd("exit\n", 2);
-	if (argc > 1)
+	exit_num = 0;
+	if (token_list->next == NULL)
+		exit_num = 0;
+	else if (token_list->next != NULL)
 	{
-		if (check_num(argv[1]) != 1)
+		if (!check_num(token_list->next->token))
 		{
-			exit_num = print_error_exit(argv[1], 1);
+			exit_num = print_error_exit(token_list->next->token, 1);
 		}
-		else if (argc == 2)
-			exit(ft_atoi(argv[1]));
-		if (argc > 2)
+		else
 		{
-			ft_putstr_fd("ohmybash# exit: too many arguments\n", 2);
-			exit_num = 1;
+			if (token_list->next->next != NULL)
+				exit_num = print_error_exit(NULL, 2);
+			else
+				exit_num = ft_atoi(token_list->next->token);
 		}
 	}
+	exit(exit_num);
 }
