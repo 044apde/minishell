@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/31 18:53:14 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 15:00:34 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,19 @@ void	execute(t_token *token_list, t_env_list *env_list)
 	t_execute	*pack;
 	int			pid;
 	t_token		*list;
-	int			infile;
 	int			status;
 
 	if (token_list == NULL)
 		return ;
 	pack = init_execute(token_list, env_list);
+	remove_heredoc_file();
 	heredoc_process(token_list, pack);
 	while (pack->n_of_process-- > 0)
 	{
 		if (is_pipe(token_list) == FALSE && is_builtin(token_list->next) == TRUE)
 		{
-			execute_builtin(token_list->next, env_list);
+			if (execute_builtin(token_list->next, env_list, pack) == ERROR)
+				return ;
 			break ;
 		}
 		pid = fork();
@@ -68,7 +69,6 @@ void	execute(t_token *token_list, t_env_list *env_list)
 			list = move_list(pack->count, token_list);
 			if (list == NULL)
 				return ;
-			remove_heredoc_file();
 			execute_command(list, pack, env_list);
 			exit(1);
 		}

@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 04:13:36 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/28 22:28:02 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:40:40 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ int	check_syntax(t_token *head)
 			}
 			else if (is_operator(n->next->token) == TRUE)
 			{
+				if (n->type == PIPE && n->next->type == HEREDOC)
+					return (TRUE);
 				printf("\033[0;31mohmybash# check syntax\033[0;0m\n");
 				return (ERROR);
 			}
