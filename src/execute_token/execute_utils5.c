@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:18:37 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/31 18:55:46 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:51:25 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,33 @@ void	do_heredoc(t_token *list, t_execute *pack, int infile)
 	while (TRUE)
 	{
 		input = readline("\033[0;32m>\033[0m ");
-		if (compare_str(input, limiter) == TRUE)
+		if (input == NULL || compare_str(input, limiter) == TRUE)
+		{
+			free(input);
 			break ;
+		}
 		write(infile, input, ft_strlen(input));
 		write(infile, "\n", 1);
+		free(input);
 	}
 	return ;
 }
 
 void	remove_heredoc_file(void)
 {
-	int	heredoc;
+	int			i;
+	char		*heredoc_file_name;
+	static int	here_doc_file_count;
 
-	heredoc = open("src/execute_token/.heredoc", O_CREAT | O_RDWR | O_TRUNC);
-	write(heredoc, "", 1);
-	close(heredoc);
+	i = 0;
+	while (i < here_doc_file_count)
+	{
+		heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", ft_itoa(i));
+		if (access(heredoc_file_name, F_OK) < 0)
+			break ;
+		unlink(heredoc_file_name);
+		i++;
+	}
 	return ;
 }
 
@@ -57,4 +69,15 @@ char	*make_cmd(t_token *list, t_execute *pack)
 		cmd_path++;
 	}
 	return (NULL);
+}
+
+int	is_redir(t_token *list)
+{
+	while (list != NULL)
+	{
+		if (list->type == REDIR_IN || list->type == REDIR_OUT || \
+			list->type == APPEND)
+			return (TRUE);
+	}
+	return (FALSE);
 }

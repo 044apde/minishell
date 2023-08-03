@@ -142,11 +142,14 @@ int			is_pipe(t_token *list);
 void		do_heredoc(t_token *list, t_execute *pack, int infile);
 void		remove_heredoc_file(void);
 char		*make_cmd(t_token *list, t_execute *pack);
+char		**make_heredoc_option(t_token *cmd_node, t_execute *pack);
 void		heredoc_process(t_token *token_list, t_execute *pack);
+char		*find_last_heredoc_name(t_token *token_list);
+
 
 // builtin
 int			is_builtin(t_token *token_list);
-int			execute_builtin(t_token *token_list, t_env_list *env_list);
+int			execute_builtin(t_token *token_list, t_env_list *env_list, t_execute *pack);
 void		ft_echo(t_token *token_list);
 void		ft_cd(t_env_list *env_list, t_token *token_list);
 void		ft_pwd(void);

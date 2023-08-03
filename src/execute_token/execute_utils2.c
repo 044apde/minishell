@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/31 18:53:42 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 14:58:45 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	execute_first_command(t_token *list, t_execute *pack, \
 								t_env_list *env_list)
 {
 	int	origin_stdout;
-	int	heredoc_fd;
 
 	printf("\033[0;35mFIRST COMMAND EXECUTE\033[0;0m\n");
 	list = list->next;
@@ -26,23 +25,18 @@ void	execute_first_command(t_token *list, t_execute *pack, \
 		origin_stdout = dup(STDOUT_FILENO);
 		dup2(pack->pipe_fd[1], STDOUT_FILENO);
 	}
-	if ((heredoc_fd = do_redirin(list, pack, origin_stdout)) == ERROR)
+	if (do_redirin(list, pack, origin_stdout) == ERROR)
 		return ;
 	if (do_redirout(list, pack) == ERROR)
-	{
-		close(heredoc_fd);
 		return ;
-	}
 	list = find_command(list, pack);
 	execute_word(list, pack, env_list);
-	close(heredoc_fd);
 	if (is_pipe(list) == TRUE)
 	{
 		dup2(origin_stdout, STDOUT_FILENO);
 		close(origin_stdout);
 	}
 	wait(NULL);
-	close(heredoc_fd);
 	return ;
 }
 
