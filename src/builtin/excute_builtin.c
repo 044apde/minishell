@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:33:06 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/03 15:18:15 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 20:08:48 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,25 @@ int	is_builtin(t_token *token_list)
 	return (FALSE);
 }
 
-int	execute_builtin(t_token *token_list, t_env_list *env_list, t_execute *pack)
+void	restore_standard_fd(int stdin_backup, int stdout_backup)
 {
-	int stdin_backup;
-	int stdout_backup;
+	dup2(stdin_backup, STDIN_FILENO);
+	close(stdin_backup);
+	dup2(stdout_backup, STDOUT_FILENO);
+	close(stdout_backup);
+	return ;
+}
+
+int	execute_builtin(t_token *token_list, t_env_list *env_list)
+{
+	int	stdin_backup;
+	int	stdout_backup;
 
 	stdin_backup = dup(STDIN_FILENO);
 	stdout_backup = dup(STDOUT_FILENO);
-	if (do_redirin(token_list, pack, 0) == ERROR)
+	if (do_redirin(token_list) == ERROR)
 		return (ERROR);
-	if (do_redirout(token_list, pack) == ERROR)
+	if (do_redirout(token_list) == ERROR)
 		return (ERROR);
 	if (compare_str(token_list->token, "echo") == TRUE)
 		ft_echo(token_list);
@@ -85,9 +94,6 @@ int	execute_builtin(t_token *token_list, t_env_list *env_list, t_execute *pack)
 		ft_env(env_list);
 	else if (compare_str(token_list->token, "exit") == TRUE)
 		ft_exit(token_list);
-	dup2(stdin_backup, STDIN_FILENO);
-	close(stdin_backup);
-	dup2(stdout_backup, STDOUT_FILENO);
-	close(stdout_backup);
+	restore_standard_fd(stdin_backup, stdout_backup);
 	return (0);
 }

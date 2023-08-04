@@ -6,19 +6,19 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:11:34 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/03 14:59:53 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 21:00:36 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	process(t_token *current, t_execute *pack)
+void	process(t_token *current)
 {
 	int			infile;
 	char		*input;
 	char		*heredoc_file_name;
 
-	heredoc_file_name = find_last_heredoc_name(current);
+	heredoc_file_name = find_last_heredoc_name();
 	infile = open(heredoc_file_name, O_CREAT | O_TRUNC | O_WRONLY, 0777);
 	while (1)
 	{
@@ -29,27 +29,27 @@ void	process(t_token *current, t_execute *pack)
 		write(infile, "\n", 1);
 		free(input);
 	}
+	free(current->next->token); // delimiter free
 	current->next->token = heredoc_file_name;
 	free(input);
 	close(infile);
 	return ;
 }
 
-void	heredoc_process(t_token *token_list, t_execute *pack)
+void	heredoc_process(t_token *token_list)
 {
 	t_token	*current;
-	int		heredoc_pid;
 
 	current = token_list;
 	while (current != NULL)
 	{
 		if (current->type == HEREDOC)
-			process(current, pack);
+			process(current);
 		current = current->next;
 	}
 }
 
-char	**make_heredoc_option(t_token *cmd_node, t_execute *pack)
+char	**make_heredoc_option(void)
 {
 	char	**cmd_option;
 
@@ -61,7 +61,7 @@ char	**make_heredoc_option(t_token *cmd_node, t_execute *pack)
 	return (cmd_option);
 }
 
-char	*find_last_heredoc_name(t_token *token_list)
+char	*find_last_heredoc_name(void)
 {
 	static int	heredoc_file_count;
 	char		*heredoc_file_name;

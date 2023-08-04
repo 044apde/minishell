@@ -6,13 +6,13 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/03 15:00:35 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 21:05:36 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_token	*find_command(t_token *list, t_execute *pack)
+t_token	*find_command(t_token *list)
 {
 	if (list->type == REDIR_IN || list->type == REDIR_OUT)
 		list = list->next->next;
@@ -28,7 +28,7 @@ int	is_operator2(t_token *list)
 	return (FALSE);
 }
 
-char	**make_cmd_option(t_token *cmd_node, t_execute *pack)
+char	**make_cmd_option(t_token *cmd_node)
 {
 	char	**cmd_option;
 	int		count;
@@ -51,49 +51,48 @@ char	**make_cmd_option(t_token *cmd_node, t_execute *pack)
 	return (cmd_option);
 }
 
+void	cmd_process(t_token *list, t_env_list *env_list, \
+					const char *cmd, char **cmd_option)
+{
+	if (cmd == NULL)
+	{
+		printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", \
+				list->token);
+		free(cmd_option);
+		return ;
+	}
+	execve(cmd, cmd_option, env_list->envp_copy);
+	printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", list->token);
+	free(cmd_option);
+}
+
 void	execute_word(t_token *list, t_execute *pack, t_env_list *env_list)
 {
-	char	**cmd_path;
 	char	*cmd;
 	char	**cmd_option;
 
 	if (list->type == HEREDOC)
 	{
-		cmd_option = make_heredoc_option(list, pack);
+		cmd_option = make_heredoc_option();
 		execve("/bin/cat", cmd_option, env_list->envp_copy);
 	}
-	cmd_option = make_cmd_option(list, pack);
+	else
+		cmd_option = make_cmd_option(list);
 	if (list->token[0] == '.' || list->token[0] == '/')
+	{
 		cmd = list->token;
+		cmd_process(list, env_list, cmd, cmd_option);
+	}
 	else if (is_builtin(list) == TRUE)
 	{
-		execute_builtin(list, env_list, pack);
+		execute_builtin(list, env_list);
 		free(cmd_option);
 		return ;
 	}
 	else
+	{
 		cmd = make_cmd(list, pack);
-	if (cmd == NULL)
-	{
-		printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", \
-			list->token);
-		free(cmd_option);
-		return ;
+		cmd_process(list, env_list, cmd, cmd_option);
 	}
-	execve(cmd, cmd_option, env_list->envp_copy);
-	printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", \
-			list->token);
-	free(cmd_option);
 	return ;
-}
-
-int	is_pipe(t_token *list)
-{
-	while (list != NULL)
-	{
-		if (list->type == PIPE)
-			return (TRUE);
-		list = list->next;
-	}
-	return (FALSE);
 }

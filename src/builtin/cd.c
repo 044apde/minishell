@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:41:59 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/31 18:51:32 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 19:52:24 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	ft_cd(t_env_list *env_list, t_token *token_list)
 	else if (token_list->next->next == NULL)
 	{
 		if (chdir(token_list->next->token) == -1)
-			printf("cd: %s: No such file or directory\n", 
-			token_list->next->token);
+			printf("cd: %s: No such file or directory\n", \
+				token_list->next->token);
 	}
 	return ;
 }

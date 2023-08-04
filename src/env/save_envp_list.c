@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:54:53 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/25 22:31:32 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:56:57 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_env_list	*build_env_list(char **envp, int env_count, t_env_list *env_list)
 	int			i;
 
 	i = 0;
+	envp_copy = NULL;
 	while (i < env_count)
 	{
 		key_copy = envp[i];
@@ -67,7 +68,7 @@ t_env_list	*build_env_list(char **envp, int env_count, t_env_list *env_list)
 		add_env_node(&env_list, node);
 		i++;
 	}
-	env_list->envp_copy = env_list_to_envp(env_list, envp, env_count);
+	env_list->envp_copy = env_list_to_envp(env_list, env_count);
 	return (env_list);
 }
 

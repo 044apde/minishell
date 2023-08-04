@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:47:46 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/25 22:01:54 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:56:49 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ void	free_envp(char **envp_copy)
 	return ;
 }
 
-char	**env_list_to_envp(t_env_list *env_list, char **envp, int count)
+char	**env_list_to_envp(t_env_list *env_list, int count)
 {
-	char		**envp_copy;
-	t_env_list	*tmp;
-	int			i;
+	char	**envp_copy;
+	int		i;
 
 	envp_copy = (char **)malloc(sizeof(char *) * (count + 1));
 	envp_copy[count] = NULL;

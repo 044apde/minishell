@@ -124,7 +124,7 @@ void		exit_program(char *s);
 char		*get_env(t_env_list *env_list, char *str);
 t_env_list	*set_env(char **envp);
 void		free_envp(char **envp_copy);
-char		**env_list_to_envp(t_env_list *env_list, char **envp, int count);
+char		**env_list_to_envp(t_env_list *env_list, int count);
 
 // exec
 void		execute(t_token *token_list, t_env_list *env_list);
@@ -134,29 +134,31 @@ void		execute_first_command(t_token *list, t_execute *pack, t_env_list *env_list
 void		execute_middle_command(t_token *list, t_execute *pack, t_env_list *env_list);
 void		execute_last_command(t_token *list, t_execute *pack, t_env_list *env_list);
 
-int			do_redirin(t_token *list, t_execute *pack, int origin_stdout);
-int			do_redirout(t_token *list, t_execute *pack);
-t_token		*find_command(t_token *list, t_execute *pack);
+int			do_redirin(t_token *list);
+int			do_redirout(t_token *list);
+t_token		*find_command(t_token *list);
 void		execute_word(t_token *list, t_execute *pack, t_env_list *env_list);
 int			is_pipe(t_token *list);
-void		do_heredoc(t_token *list, t_execute *pack, int infile);
 void		remove_heredoc_file(void);
 char		*make_cmd(t_token *list, t_execute *pack);
-char		**make_heredoc_option(t_token *cmd_node, t_execute *pack);
-void		heredoc_process(t_token *token_list, t_execute *pack);
-char		*find_last_heredoc_name(t_token *token_list);
+char		**make_heredoc_option(void);
+void		heredoc_process(t_token *token_list);
+char		*find_last_heredoc_name(void);
 
 
 // builtin
 int			is_builtin(t_token *token_list);
-int			execute_builtin(t_token *token_list, t_env_list *env_list, t_execute *pack);
+int			execute_builtin(t_token *token_list, t_env_list *env_list);
 void		ft_echo(t_token *token_list);
 void		ft_cd(t_env_list *env_list, t_token *token_list);
 void		ft_pwd(void);
 void		ft_export(t_env_list *env_list, t_token *token_list);
+void		add_update_env_list(t_env_list *env_list, char *key, char *value);
 t_env_list	*sorted_list(t_env_list *list);
 int			compare_keys(t_env_list *a, t_env_list *b);
 int			ft_strcmp(char *s1, char *s2);
+t_env_list	*create_new_node(t_env_list *list);
+t_env_list	*sort_env_list(t_env_list *env_list);
 void		ft_unset(t_env_list *env_list, t_token *token_list);
 void		ft_env(t_env_list *env_list);
 void		ft_exit(t_token *token_list);
