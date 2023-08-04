@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/03 14:59:04 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:55:14 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,46 +35,31 @@ t_token	*move_to_redirout(t_token *list)
 	return (list);
 }
 
-int	do_redirin(t_token *list, t_execute *pack, int origin_stdout)
+int	do_redirin(t_token *list)
 {
 	int		infile;
-	char	*heredoc_file_name;
 
 	list = move_to_last(list);
 	list = move_to_redirin(list);
 	if (list == NULL || list->type == PIPE)
 		return (FALSE);
-	if (list->type == HEREDOC)
+	infile = open(list->next->token, O_RDONLY, 0777);
+	if (infile == ERROR)
 	{
-		infile = open(list->next->token, O_RDONLY);
-		if (infile == ERROR)
-		{
-			printf("\033[0;31mohmybash# %s: No such file or directory\033[0;0m\n", list->next->token);
-			return (ERROR);
-		}
-		dup2(infile, STDIN_FILENO);
-		close(infile);
-		return (TRUE);
+		printf("\033[0;35mohmybash#: %s: can't open file\033[0;0m\n", \
+				list->next->token);
+		return (ERROR);
 	}
-	else
-	{
-		printf("REDIR IN\n");
-		infile = open(list->next->token, O_RDONLY, 0777);
-		if (infile == ERROR)
-		{
-			printf("\033[0;31mohmybash# %s: No such file or directory\033[0;0m\n", list->next->token);
-			return (ERROR);
-		}
-		dup2(infile, STDIN_FILENO);
-		close(infile);
-		return (TRUE);
-	}
+	dup2(infile, STDIN_FILENO);
+	close(infile);
+	return (TRUE);
 }
 
-int	do_redirout(t_token *list, t_execute *pack)
+int	do_redirout(t_token *list)
 {
 	int	outfile;
 
+	outfile = 0;
 	list = move_to_last(list);
 	list = move_to_redirout(list);
 	if (list == NULL || list->type == PIPE)

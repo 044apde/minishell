@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:25:04 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/30 20:07:46 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:45:04 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	print_error_exit(char *str, int flag)
 {
 	int	exit_num;
 
+	exit_num = 0;
 	if (flag == 1)
 	{
 		ft_putstr_fd("exit\n", 2);

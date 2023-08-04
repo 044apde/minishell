@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/03 14:58:45 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:55:49 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	execute_first_command(t_token *list, t_execute *pack, \
 {
 	int	origin_stdout;
 
+	origin_stdout = 0;
 	printf("\033[0;35mFIRST COMMAND EXECUTE\033[0;0m\n");
 	list = list->next;
 	if (is_pipe(list) == TRUE)
@@ -25,11 +26,11 @@ void	execute_first_command(t_token *list, t_execute *pack, \
 		origin_stdout = dup(STDOUT_FILENO);
 		dup2(pack->pipe_fd[1], STDOUT_FILENO);
 	}
-	if (do_redirin(list, pack, origin_stdout) == ERROR)
+	if (do_redirin(list) == ERROR)
 		return ;
-	if (do_redirout(list, pack) == ERROR)
+	if (do_redirout(list) == ERROR)
 		return ;
-	list = find_command(list, pack);
+	list = find_command(list);
 	execute_word(list, pack, env_list);
 	if (is_pipe(list) == TRUE)
 	{
@@ -49,11 +50,11 @@ void	execute_middle_command(t_token *list, t_execute *pack, \
 	dup2(pack->pipe_fd[0], STDIN_FILENO);
 	origin_stdout = dup(STDOUT_FILENO);
 	dup2(pack->pipe_fd[1], STDOUT_FILENO);
-	if (do_redirin(list, pack, origin_stdout) == ERROR)
+	if (do_redirin(list) == ERROR)
 		return ;
-	if (do_redirout(list, pack) == ERROR)
+	if (do_redirout(list) == ERROR)
 		return ;
-	list = find_command(list, pack);
+	list = find_command(list);
 	execute_word(list, pack, env_list);
 	dup2(origin_stdout, STDOUT_FILENO);
 	close(origin_stdout);
@@ -69,11 +70,11 @@ void	execute_last_command(t_token *list, t_execute *pack, \
 	printf("\033[0;35mLAST COMMAND EXECUTE\033[0;0m\n");
 	dup2(pack->pipe_fd[0], STDIN_FILENO);
 	origin_stdout = dup(STDOUT_FILENO);
-	if (do_redirin(list, pack, origin_stdout) == ERROR)
+	if (do_redirin(list) == ERROR)
 		return ;
-	if (do_redirout(list, pack) == ERROR)
+	if (do_redirout(list) == ERROR)
 		return ;
-	list = find_command(list, pack);
+	list = find_command(list);
 	execute_word(list, pack, env_list);
 	wait(NULL);
 	return ;

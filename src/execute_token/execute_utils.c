@@ -6,11 +6,22 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:54:44 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/28 22:40:31 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 20:58:14 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	is_pipe(t_token *list)
+{
+	while (list != NULL)
+	{
+		if (list->type == PIPE)
+			return (TRUE);
+		list = list->next;
+	}
+	return (FALSE);
+}
 
 t_token	*move_list(int count, t_token *list)
 {

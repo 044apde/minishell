@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:22:22 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/07/31 18:52:20 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/03 20:38:51 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,31 +76,4 @@ t_env_list	*sort_env_list(t_env_list *env_list)
 		i = i->next;
 	}
 	return (env_list);
-}
-
-t_env_list	*copy_env_list(t_env_list *env_list)
-{
-	t_env_list	*copy;
-	t_env_list	*current;
-	t_env_list	*new;
-
-	copy = NULL;
-	current = env_list;
-	while (current != NULL)
-	{
-		new = create_new_node(current);
-		new->next = copy;
-		copy = new;
-		current = current->next;
-	}
-	return (copy);
-}
-
-t_env_list	*sorted_list(t_env_list *env_list)
-{
-	t_env_list	*sorted_list;
-
-	sorted_list = copy_env_list(env_list);
-	sorted_list = sort_env_list(sorted_list);
-	return (sorted_list);
 }
