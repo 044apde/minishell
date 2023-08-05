@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 20:52:44 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/05 21:10:01 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/05 22:44:08 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	find_dollar_index(char *token)
 	return (ERROR);
 }
 
-int	find_sep_index(char *token)
+int	find_sep_index(char *token, int dollar_index)
 {
 	int	index;
 
-	index = 0;
+	index = dollar_index;
 	while (token[++index] != '\0')
 	{
 		if (is_sep(token[index]) == TRUE)
@@ -45,8 +45,12 @@ char	*make_substitute(char *token)
 	int		sep_index;
 
 	dollar_index = find_dollar_index(token);
+	if (dollar_index == -1)
+		return (NULL);
 	printf("dollar: %d\n", dollar_index);
-	sep_index = find_sep_index(token);
+	sep_index = find_sep_index(token, dollar_index);
 	printf("sep: %d\n", sep_index);
+	if (sep_index == ERROR)
+		return (NULL);
 	return (new_token);
 }
