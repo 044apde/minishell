@@ -1,5 +1,5 @@
 TARGET		=	minishell
-CC			=	cc -Wall -Wextra -Werror
+CC			=	cc
 CFLAGS		=	
 LDFLAGS		=	-L${HOME}/.brew/opt/readline/lib -lreadline
 CFALG		=	-I${HOME}/.brew/opt/readline/include
@@ -10,7 +10,7 @@ SOURCE		=	main.c src/read_input.c src/sig_handler.c src/term.c src/utils1.c src/
 				src/execute_token/execute_utils2.c src/execute_token/execute_utils3.c src/execute_token/execute_utils4.c \
 				src/execute_token/execute_utils5.c src/env/env_utils.c src/execute_token/execute_utils6.c src/builtin/excute_builtin.c \
 				src/builtin/cd.c src/builtin/echo.c src/builtin/env.c src/builtin/exit.c src/builtin/export.c src/builtin/pwd.c src/builtin/unset.c \
-				src/builtin/export_utils.c src/builtin/export_utils2.c
+				src/builtin/export_utils.c src/builtin/export_utils2.c src/split/split_utils4.c
 
 HEADER		=	minishell.h
 LIBRARY 	=	libft/libft.a

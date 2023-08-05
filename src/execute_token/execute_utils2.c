@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/03 18:55:49 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/05 18:51:12 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	execute_first_command(t_token *list, t_execute *pack, \
 	int	origin_stdout;
 
 	origin_stdout = 0;
-	printf("\033[0;35mFIRST COMMAND EXECUTE\033[0;0m\n");
 	list = list->next;
 	if (is_pipe(list) == TRUE)
 	{
@@ -46,7 +45,6 @@ void	execute_middle_command(t_token *list, t_execute *pack, \
 {
 	int		origin_stdout;
 
-	printf("\033[0;35mMIDDLE COMMAND EXECUTE\033[0;0\n");
 	dup2(pack->pipe_fd[0], STDIN_FILENO);
 	origin_stdout = dup(STDOUT_FILENO);
 	dup2(pack->pipe_fd[1], STDOUT_FILENO);
@@ -67,7 +65,6 @@ void	execute_last_command(t_token *list, t_execute *pack, \
 {
 	int		origin_stdout;
 
-	printf("\033[0;35mLAST COMMAND EXECUTE\033[0;0m\n");
 	dup2(pack->pipe_fd[0], STDIN_FILENO);
 	origin_stdout = dup(STDOUT_FILENO);
 	if (do_redirin(list) == ERROR)

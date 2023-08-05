@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:55:04 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 19:53:47 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/05 19:03:38 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,4 @@ void	trim_word(char **arr)
 		free(dangling);
 	}
 	return ;
-}
-
-int	check_quote(char c)
-{
-	int			check1;
-	int			check2;
-	static int	owner;
-
-	check1 = check_quote1(c);
-	check2 = check_quote2(c);
-	if (owner == 0)
-	{
-		if ((check1 >= TRUE) && ++owner)
-			return (check1);
-		else if (check2 >= TRUE)
-		{
-			owner = 2;
-			return (check2);
-		}
-	}
-	else if (owner == 1)
-	{
-		if (check1 == DONE)
-			owner = 0;
-		return (check1);
-	}
-	if (check2 == DONE)
-		owner = 0;
-	return (check2);
 }

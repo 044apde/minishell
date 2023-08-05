@@ -6,37 +6,51 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:01:58 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 19:56:59 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/05 19:21:29 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+t_token_pack	*init_token_pack(char *s, t_token *head)
+{
+	t_token_pack *token_pack;
+
+	token_pack = (t_token_pack *)malloc(sizeof(t_token_pack));
+	if (token_pack == NULL)
+	{
+		printf("Error: failed to system call\n");
+		exit(1);
+	}
+	token_pack->s = s;
+	token_pack->start = 0;
+	token_pack->end = 0;
+	token_pack->prev_quote_type = 0;
+	token_pack->head = head;
+	return (token_pack);
+}
+
 t_split	*make_token(char *s, t_split *split)
 {
-	int		e;
-	int		st;
+	t_token_pack	*t_pack;
 
-	e = -1;
-	st = 0;
-	while (s[++e] != '\0')
+	t_pack = init_token_pack(s, split->head);
+	while (s[++t_pack->end] != '\0')
 	{
-		split->status = check_quote(s[e]);
-		if (split->status == TRUE)
+		if (s[t_pack->end] == '\'' | s[t_pack->end] == '\"')
+			check_quote(t_pack);
+		else if (s[t_pack->end] == ' ' && t_pack->prev_quote_type == 0 && ++t_pack->start)
 			continue ;
-		else if (split->status == DONE)
-			insert_string_node(split->head, s, &st, e);
-		else if (s[e] == ' ' && ++st)
-			continue ;
-		else if (s[e] == '|' && ++st)
+		else if (s[t_pack->end] == '|' && t_pack->prev_quote_type == 0 && ++t_pack->start)
 			insert_node(split->head, ft_strdup("|"));
-		else if (s[e] == '<')
-			make_redir_in(split->head, s, st++);
-		else if (s[e] == '>')
-			make_redir_out(split->head, s, st++);
-		else if (is_sep(s[e + 1]) == TRUE)
-			insert_string_node(split->head, s, &st, e);
+		else if (s[t_pack->end] == '<' && t_pack->prev_quote_type == 0)
+			make_redir_in(split->head, s, t_pack->start++);
+		else if (s[t_pack->end] == '>' && t_pack->prev_quote_type == 0)
+			make_redir_out(split->head, s, t_pack->start++);
+		else if (is_sep(s[t_pack->end + 1]) == TRUE && t_pack->prev_quote_type == 0)
+			insert_string_node(split->head, s, &t_pack->start, t_pack->end);
 	}
+	free(t_pack);
 	return (split);
 }
 

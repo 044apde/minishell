@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:39:31 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/24 14:33:48 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/05 18:43:08 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ t_token	*insert_node(t_token *head, char *s)
 	return (head);
 }
 
-void	insert_string_node(t_token *head, char *s, int *st, int e)
+void	insert_string_node(t_token *head, char *s, int *start, int end)
 {
-	insert_node(head, ft_substr(s, *st, e - *st + 1));
-	*st = e + 1;
+	insert_node(head, ft_substr(s, *start, end - *start + 1));
+	*start = end + 1;
 	return ;
 }
 
