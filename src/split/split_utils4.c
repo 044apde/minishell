@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:15:08 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/05 19:23:47 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/05 21:20:08 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void	check_quote(t_token_pack *t_pack)
 	if (t_pack->s[t_pack->end] == '\'')
 	{
 		if (t_pack->prev_quote_type == 0)
+		{
 			t_pack->prev_quote_type = 1;
+		}
 		else if (t_pack->prev_quote_type == 1)
 		{
 			make_quoted_string(t_pack->head, t_pack->s, &t_pack->start, t_pack->end);

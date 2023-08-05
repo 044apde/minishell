@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:01:58 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/05 19:21:29 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/05 21:20:14 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_token_pack	*init_token_pack(char *s, t_token *head)
 	}
 	token_pack->s = s;
 	token_pack->start = 0;
-	token_pack->end = 0;
+	token_pack->end = -1;
 	token_pack->prev_quote_type = 0;
 	token_pack->head = head;
 	return (token_pack);
