@@ -1,5 +1,5 @@
 TARGET		=	minishell
-CC			=	cc
+CC			=	cc -g
 CFLAGS		=	
 LDFLAGS		=	-L${HOME}/.brew/opt/readline/lib -lreadline
 CFALG		=	-I${HOME}/.brew/opt/readline/include

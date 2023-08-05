@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:30:41 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/21 22:22:00 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/05 19:39:12 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*replace_to_env(char *s, t_env_list *env_list)
 	result = ft_strjoin(result, s + j);
 	free(temp);
 	free(s);
+	printf("here: %s\n", result);
 	return (result);
 }
 
