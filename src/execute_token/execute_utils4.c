@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/03 21:05:36 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/05 21:27:06 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,19 @@ void	cmd_process(t_token *list, t_env_list *env_list, \
 {
 	if (cmd == NULL)
 	{
-		printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", \
-				list->token);
+		if (compare_str(list->token, "\n") == TRUE)
+			printf("\033[0;31mohmybash# : command not found\033[0;0m\n");
+		else
+			printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", \
+					list->token);
 		free(cmd_option);
 		return ;
 	}
 	execve(cmd, cmd_option, env_list->envp_copy);
-	printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", list->token);
+	if (compare_str(list->token, "\n") == TRUE)
+			printf("\033[0;31mohmybash# : command not found\033[0;0m\n");
+	printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", \
+				list->token);
 	free(cmd_option);
 }
 
