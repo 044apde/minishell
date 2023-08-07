@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 04:13:36 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/05 21:27:45 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/07 20:17:42 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,21 @@ void	check_type(t_token *head)
 void	substitution(t_token *head, t_env_list *env_list)
 {
 	t_token	*n;
+	char	*sub;
+	char	*dangling;
 
 	n = head->next;
 	while (n != NULL)
 	{
 		if (n->type == WORD || n->type == DOUBLE_QUOTE)
 		{
-			make_substitute(n->token);
-			if (ft_strnstr(n->token, "$", ft_strlen(n->token)) != NULL)
+			sub = make_substitute(n->token, env_list);
+			if (sub == NULL)
+				;
+			else
 			{
-				n->token = replace_to_env(n->token, env_list);
-				if (compare_str(n->token, "\n") == TRUE)
-					n->token = ft_strdup("\n");
+				free(n->token);
+				n->token =  sub;
 			}
 		}
 		n = n->next;

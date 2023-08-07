@@ -102,7 +102,7 @@ int			pre_check_quote(char *input);
 void		free_token_list(t_token *list);
 void		make_quoted_string(t_token *head, char *s, int *st, int e);
 void		check_quote(t_token_pack *t_pack);
-char		*make_substitute(char *token);
+char		*make_substitute(char *token, t_env_list *env_list);
 
 // split
 int			is_sep(char c);
