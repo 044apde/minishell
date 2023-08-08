@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:41:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/08 12:57:22 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/08 16:05:53 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_token	*parse_input(char *input, t_env_list *env_list)
 	check_type(head);
 	substitution(head, env_list);
 	unquote(head);
-	show_token(head);
 	if (check_syntax(head) == ERROR)
 		return (NULL);
 	return (head);

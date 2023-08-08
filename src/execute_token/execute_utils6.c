@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils6.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:11:34 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/08 13:26:09 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/08 14:42:26 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char	*find_last_heredoc_name(void)
 	static int	heredoc_file_count;
 	char		*heredoc_file_name;
 
+	heredoc_file_count = 1;
 	heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", \
 						ft_itoa(heredoc_file_count));
 	while (access(heredoc_file_name, F_OK) == 0)

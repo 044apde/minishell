@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/08 13:23:33 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/08 16:07:13 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,32 +51,16 @@ t_execute	*init_and_process(t_token *token_list, t_env_list *env_list)
 	return (pack);
 }
 
-void	handle_execute_list(t_execute *pack, t_token *token_list, \
-							t_env_list *env_list)
-{
-	int		pid;
-	t_token	*list;
-
-	pid = fork();
-	pack->count = pack->count + 1;
-	if (pid == 0)
-	{
-		list = move_list(pack->count, token_list);
-		if (list == NULL)
-			return ;
-		execute_command(list, pack, env_list);
-		exit(1);
-	}
-}
-
+/*ohmybash 문구가 두개 나오는 이유가 자식프로세스 에서 ctrl+c를 누르면
+부모프로세스에서도 프롬프트를 출력하고, 자식프로세스에서도 빠져나오면서 출력하기 때문이다.*/
 void	execute(t_token *token_list, t_env_list *env_list)
 {
 	t_execute	*pack;
 	int			status;
+	int			pid;
 
 	if (token_list == NULL)
 		return ;
-	// unlink herdoc file
 	pack = init_and_process(token_list, env_list);
 	while (pack->n_of_process-- > 0)
 	{
@@ -87,14 +71,18 @@ void	execute(t_token *token_list, t_env_list *env_list)
 				return ;
 			break ;
 		}
-		handle_execute_list(pack, token_list, env_list);
+		pid = fork();
+		pack->count = pack->count + 1;
+		if (pid == 0)
+		{
+			token_list = move_list(pack->count, token_list);
+			if (token_list == NULL)
+				return ;
+			execute_command(token_list, pack, env_list);
+			exit(1);
+		}
 	}
-	// sleep 100 | sleep 1 -> 100초 기다리기.
-	// 자식 프로세스의 개수만큼 기다리도록
-	while (wait(&status) > 0)
-	{
-		if (WIFEXITED(status) || WIFCONTINUED(status))
-			break ;
-	}
+	while (pack->s_n_of_process-- > 0)
+		wait(&status);
 	return ;
 }

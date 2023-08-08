@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 04:13:36 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/07 20:17:42 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/08 14:36:10 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	substitution(t_token *head, t_env_list *env_list)
 {
 	t_token	*n;
 	char	*sub;
-	char	*dangling;
+	char	*dangling; // 쓰는건지 물어보기
 
 	n = head->next;
 	while (n != NULL)
@@ -75,7 +75,7 @@ void	substitution(t_token *head, t_env_list *env_list)
 			else
 			{
 				free(n->token);
-				n->token =  sub;
+				n->token = sub;
 			}
 		}
 		n = n->next;

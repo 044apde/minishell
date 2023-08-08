@@ -86,6 +86,8 @@ typedef struct s_execute
 	t_env_list	*env_list;
 }	t_execute;
 
+int	g_exit_code;
+
 // parse
 t_token		*parse_input(char *input, t_env_list *env_list);
 void		check_type(t_token *head);

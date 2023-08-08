@@ -6,11 +6,35 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:18:37 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/03 17:56:00 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/08 14:43:39 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	count_heredoc_file(void)
+{
+	int			i;
+	char		*heredoc_file_name;
+	static int	here_doc_file_count;
+
+	i = 1;
+	here_doc_file_count = 1;
+	while (1)
+	{
+		heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", \
+							ft_itoa(i));
+		if (access(heredoc_file_name, F_OK) < 0)
+		{
+			free(heredoc_file_name);
+			break ;
+		}
+		here_doc_file_count++;
+		i++;
+		free(heredoc_file_name);
+	}
+	return (here_doc_file_count);
+}
 
 void	remove_heredoc_file(void)
 {
@@ -18,14 +42,16 @@ void	remove_heredoc_file(void)
 	char		*heredoc_file_name;
 	static int	here_doc_file_count;
 
-	i = 0;
+	i = 1;
+	here_doc_file_count = count_heredoc_file();
 	while (i < here_doc_file_count)
 	{
 		heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", \
 							ft_itoa(i));
 		if (access(heredoc_file_name, F_OK) < 0)
 			break ;
-		unlink(heredoc_file_name);
+		unlink(ft_strjoin("src/execute_token/.heredoc", ft_itoa(i)));
+		free(heredoc_file_name);
 		i++;
 	}
 	return ;
