@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:25:04 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/08 15:38:54 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/08 19:32:28 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	print_error_exit(char *str, int flag)
 		ft_putstr_fd("ohmybash# exit: too many arguments\n", 2);
 		g_exit_code = 1;
 	}
-	return (g_exit_code);
+	return (1);
 }
 
 static int	check_num(char *str)
@@ -57,14 +57,18 @@ void	ft_exit(t_token *token_list)
 	{
 		if (!check_num(token_list->next->token))
 		{
-			g_exit_code = print_error_exit(token_list->next->token, 1);
+			print_error_exit(token_list->next->token, 1);
+			exit(g_exit_code);
 		}
 		else
 		{
 			if (token_list->next->next != NULL)
+			{
 				g_exit_code = print_error_exit(NULL, 2);
+				return ;
+			}
 			else
-				g_exit_code = ft_atoi(token_list->next->token);
+				exit(ft_atoi(token_list->next->token));
 		}
 	}
 	exit(g_exit_code);
