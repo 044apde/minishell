@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/03 18:59:22 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:23:33 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	execute(t_token *token_list, t_env_list *env_list)
 
 	if (token_list == NULL)
 		return ;
+	// unlink herdoc file
 	pack = init_and_process(token_list, env_list);
 	while (pack->n_of_process-- > 0)
 	{
@@ -88,6 +89,8 @@ void	execute(t_token *token_list, t_env_list *env_list)
 		}
 		handle_execute_list(pack, token_list, env_list);
 	}
+	// sleep 100 | sleep 1 -> 100초 기다리기.
+	// 자식 프로세스의 개수만큼 기다리도록
 	while (wait(&status) > 0)
 	{
 		if (WIFEXITED(status) || WIFCONTINUED(status))

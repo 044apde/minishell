@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:39:31 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/05 18:43:08 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/08 12:56:35 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	show_token(t_token *head)
 	t_token	*node;
 
 	node = head->next;
-	printf("\033[0;34m===============================================\n");
+	printf("\033[0;34m===============PARSED TOKEN===================\n");
 	while (node != NULL)
 	{
 		printf("[%s]:%d ", node->token, node->type);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:33:06 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/03 20:08:48 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:15:02 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	execute_builtin(t_token *token_list, t_env_list *env_list)
 	int	stdin_backup;
 	int	stdout_backup;
 
+	// bultin exicode 저장하기
 	stdin_backup = dup(STDIN_FILENO);
 	stdout_backup = dup(STDOUT_FILENO);
 	if (do_redirin(token_list) == ERROR)

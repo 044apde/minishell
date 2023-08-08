@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils6.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:11:34 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/03 21:00:36 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:26:09 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ void	process(t_token *current)
 
 	heredoc_file_name = find_last_heredoc_name();
 	infile = open(heredoc_file_name, O_CREAT | O_TRUNC | O_WRONLY, 0777);
-	while (1)
+	while (TRUE)
 	{
 		input = readline("> ");
+		if (input == NULL)
+			return ;
 		if (compare_str(input, current->next->token) == TRUE)
 			break ;
 		write(infile, input, ft_strlen(input));

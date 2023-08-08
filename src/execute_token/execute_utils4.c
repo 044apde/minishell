@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/05 21:27:06 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/08 13:14:14 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	cmd_process(t_token *list, t_env_list *env_list, \
 		free(cmd_option);
 		return ;
 	}
+	// process exit code 저장하기
 	execve(cmd, cmd_option, env_list->envp_copy);
 	if (compare_str(list->token, "\n") == TRUE)
 			printf("\033[0;31mohmybash# : command not found\033[0;0m\n");
