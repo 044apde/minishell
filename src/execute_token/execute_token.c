@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/08 16:07:13 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:09:12 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_execute	*init_and_process(t_token *token_list, t_env_list *env_list)
 
 /*ohmybash 문구가 두개 나오는 이유가 자식프로세스 에서 ctrl+c를 누르면
 부모프로세스에서도 프롬프트를 출력하고, 자식프로세스에서도 빠져나오면서 출력하기 때문이다.*/
-void	execute(t_token *token_list, t_env_list *env_list)
+void	execute(t_token *token_list, t_env_list *env_list, struct sigaction act_new)
 {
 	t_execute	*pack;
 	int			status;
@@ -62,6 +62,7 @@ void	execute(t_token *token_list, t_env_list *env_list)
 	if (token_list == NULL)
 		return ;
 	pack = init_and_process(token_list, env_list);
+	signal(SIGINT, SIG_IGN);
 	while (pack->n_of_process-- > 0)
 	{
 		if (is_pipe(token_list) == FALSE && \
@@ -75,6 +76,7 @@ void	execute(t_token *token_list, t_env_list *env_list)
 		pack->count = pack->count + 1;
 		if (pid == 0)
 		{
+			signal(SIGINT, child_handler);
 			token_list = move_list(pack->count, token_list);
 			if (token_list == NULL)
 				return ;
@@ -83,6 +85,8 @@ void	execute(t_token *token_list, t_env_list *env_list)
 		}
 	}
 	while (pack->s_n_of_process-- > 0)
+	{
 		wait(&status);
+	}
 	return ;
 }

@@ -1,15 +1,19 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-// true and false
+/*sig mode*/
+# define PARENT 0
+# define CHILD 1
+
+/*true and false*/
 # define FALSE 0
 # define TRUE 1
 # define ERROR -1
 
-// check quote in split
+/*check quote in split*/
 # define DONE 2
 
-// token type
+/*token type*/
 # define HEREDOC 3
 # define REDIR_IN 4
 # define REDIR_OUT 5
@@ -19,11 +23,11 @@
 # define SIGNLE_QUOTE 9
 # define WORD 10
 
-// node type
+/*node type*/
 # define SIMPLE_COMMAND 11
 # define COMMAND 12
 
-// order
+/*order*/
 # define FIRST 99
 # define MIDDLE 100
 # define LAST 101
@@ -88,25 +92,24 @@ typedef struct s_execute
 
 int	g_exit_code;
 
-// parse
+/*parse*/
 t_token		*parse_input(char *input, t_env_list *env_list);
 void		check_type(t_token *head);
 void		substitution(t_token *head, t_env_list *env_list);
 int			check_syntax(t_token *head);
 void		unquote(t_token *head);
-char		*replace_to_env(char *s, t_env_list *env_list);
 int			is_operator(char *s);
 int			compare_str(char *str1, char *str2);
 t_node		*make_tree(t_token *head);
 
-// fixing parsing
+/*fixing parsing*/
 int			pre_check_quote(char *input);
 void		free_token_list(t_token *list);
 void		make_quoted_string(t_token *head, char *s, int *st, int e);
 void		check_quote(t_token_pack *t_pack);
 char		*make_substitute(char *token, t_env_list *env_list);
 
-// split
+/*split*/
 int			is_sep(char c);
 int			check_quote1(char c);
 int			check_quote2(char c);
@@ -120,31 +123,33 @@ t_token		*split(char *s);
 t_token		*insert_node(t_token *head, char *s);
 t_token		*create_token(char *s);
 
-// init_minishell
-void		init_minishell(int argc, char **argv);
+/*init_minishell*/
+void		init_minishell(int argc, char **argv, struct sigaction act_new);
 
-// read_input
+/*read_input*/
 char		*read_input(void);
 
-// sig_handler
-void		set_signal(void);
+/*sig_handler*/
+void		set_signal(struct sigaction act_new);
 void		term_handler(void);
+void		int_handler(int sig);
+void		child_handler(int sig);
 
-// term
+/*term*/
 void		set_terminal(void);
 
-// utils
+/*utils*/
 void		set_pid(int	*pid);
 void		exit_program(char *s);
 
-// env
+/*env*/
 char		*get_env(t_env_list *env_list, char *str);
 t_env_list	*set_env(char **envp);
 void		free_envp(char **envp_copy);
 char		**env_list_to_envp(t_env_list *env_list, int count);
 
-// exec
-void		execute(t_token *token_list, t_env_list *env_list);
+/*exec*/
+void		execute(t_token *token_list, t_env_list *env_list, struct sigaction act_new);
 void		execute_command(t_token *list, t_execute *pack, t_env_list *env_list);
 t_token		*move_list(int count, t_token *list);
 void		execute_first_command(t_token *list, t_execute *pack, t_env_list *env_list);
@@ -163,7 +168,7 @@ void		heredoc_process(t_token *token_list);
 char		*find_last_heredoc_name(void);
 
 
-// builtin
+/*builtin*/
 int			is_builtin(t_token *token_list);
 int			execute_builtin(t_token *token_list, t_env_list *env_list);
 void		ft_echo(t_token *token_list);

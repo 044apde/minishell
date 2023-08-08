@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:10:14 by shikim            #+#    #+#             */
-/*   Updated: 2023/07/28 22:35:00 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:59:29 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 void	int_handler(int sig)
 {
 	sig++;
+	printf("parent handler on\n");
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	return ;
+}
+
+void	child_handler(int sig)
+{
+	sig++;
+	printf("parent handler on\n");
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -39,7 +51,7 @@ void	quit_handler(void)
 	return ;
 }
 
-void	set_signal(void)
+void	set_signal(struct sigaction act_new)
 {
 	signal(SIGINT, int_handler);
 	signal(SIGQUIT, SIG_IGN);

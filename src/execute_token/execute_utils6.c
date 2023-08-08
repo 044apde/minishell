@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:11:34 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/08 14:42:26 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:11:10 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ void	process(t_token *current)
 	{
 		input = readline("> ");
 		if (input == NULL)
+		{
+			free(current->next->token); // delimiter free
+			current->next->token = heredoc_file_name;
+			free(input);
+			close(infile);
 			return ;
+		}
 		if (compare_str(input, current->next->token) == TRUE)
 			break ;
 		write(infile, input, ft_strlen(input));
