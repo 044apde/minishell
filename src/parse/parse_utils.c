@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 04:13:36 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/08 20:02:50 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/08 20:11:11 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	substitution(t_token *head, t_env_list *env_list)
 {
 	t_token	*n;
 	char	*sub;
-	char	*dangling; // 쓰는건지 물어보기
 
 	n = head->next;
 	while (n != NULL)
