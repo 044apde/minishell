@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/08 18:09:12 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/08 19:10:47 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ void	execute(t_token *token_list, t_env_list *env_list, struct sigaction act_new
 	{
 		wait(&status);
 	}
+	signal(SIGINT, int_handler);
 	return ;
 }
