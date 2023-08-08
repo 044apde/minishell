@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 20:52:44 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/07 20:19:06 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/08 20:08:14 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	find_s_index(char *token, int d_index)
 		if (is_sep(token[index]) == TRUE)
 			return (index);
 	}
+	if (token[index] == '\0')
+		return (index);
 	return (ERROR);
 }
 
@@ -49,7 +51,12 @@ char	*make_substitute(char *token, t_env_list *env_list)
 	d_index = find_d_index(token);
 	s_index = find_s_index(token, d_index);
 	if (s_index == ERROR || d_index == ERROR)
+	{
+		printf("d_index: %d\n", d_index);
+		printf("s_index: %d\n", s_index);
+		printf("ERROR\n");
 		return (NULL);
+	}
 	env_token = get_env(env_list, ft_substr(token, d_index, s_index - d_index));
 	if (env_token == NULL)
 		env_token = ft_strdup("\n");
