@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/08 19:10:47 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/08 19:23:39 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ t_execute	*init_and_process(t_token *token_list, t_env_list *env_list)
 	return (pack);
 }
 
-/*ohmybash 문구가 두개 나오는 이유가 자식프로세스 에서 ctrl+c를 누르면
-부모프로세스에서도 프롬프트를 출력하고, 자식프로세스에서도 빠져나오면서 출력하기 때문이다.*/
 void	execute(t_token *token_list, t_env_list *env_list, struct sigaction act_new)
 {
 	t_execute	*pack;
