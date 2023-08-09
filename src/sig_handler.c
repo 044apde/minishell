@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:10:14 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/09 12:48:50 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/09 16:22:08 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	term_handler(void)
 	return ;
 }
 
-void	set_signal(struct sigaction act_new)
+void	set_signal(void)
 {
 	signal(SIGINT, int_handler);
 	signal(SIGQUIT, SIG_IGN);

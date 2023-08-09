@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:41:59 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/08 20:52:57 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/09 16:25:05 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,13 @@ void	ft_cd(t_env_list *env_list, t_token *token_list)
 	else if (token_list->next->next == NULL)
 	{
 		if (chdir(token_list->next->token) == -1)
+		{
 			printf("cd: %s: No such file or directory\n", \
 				token_list->next->token);
-		g_exit_code = 1;
+			exit(1);
+		}
+		
 	}
+	exit(0);
 	return ;
 }

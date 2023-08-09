@@ -3,37 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   excute_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:33:06 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/08 13:15:02 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/09 16:49:48 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*find_builtin_cmd(t_token *token_list)
-{
-	t_token	*list;
-	char	*cmd;
+// char	*find_builtin_cmd(t_token *token_list)
+// {
+// 	t_token	*list;
+// 	char	*cmd;
 
-	list = token_list;
-	cmd = NULL;
-	while (list != NULL && list->type != PIPE)
+// 	list = token_list;
+// 	cmd = NULL;
+// 	while (list != NULL && list->type != PIPE)
+// 	{
+// 		if (list->type == REDIR_IN || list->type == REDIR_OUT)
+// 		{
+// 			if (list->next != NULL && list->next->next != NULL)
+// 				list = list->next->next;
+// 			else
+// 				break ;
+// 		}
+// 		else if (list->type == WORD && !cmd)
+// 			cmd = list->token;
+// 		if (list != NULL)
+// 			list = list->next;
+// 	}
+// 	return (cmd);
+// }
+
+int	find_builtin_cmd(t_token *token_list)
+{
+	while (token_list != NULL)
 	{
-		if (list->type == REDIR_IN || list->type == REDIR_OUT)
-		{
-			if (list->next != NULL && list->next->next != NULL)
-				list = list->next->next;
-			else
-				break ;
-		}
-		else if (list->type == WORD && !cmd)
-			cmd = list->token;
-		if (list != NULL)
-			list = list->next;
+		if (compare_str(token_list->token, "echo") == TRUE)
+			return (TRUE);
+		
+		token_list = token_list->next;
 	}
-	return (cmd);
 }
 
 int	is_builtin(t_token *token_list)

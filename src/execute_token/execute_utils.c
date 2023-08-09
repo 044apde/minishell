@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:54:44 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/08 21:39:39 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/09 16:19:36 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	is_exit(t_token *list)
+{
+	while (list != NULL)
+	{
+		if (compare_str(list->token, "exit") == TRUE)
+			return (TRUE);
+		list = list->next;
+	}
+	return (FALSE);
+}
 
 int	is_pipe(t_token *list)
 {

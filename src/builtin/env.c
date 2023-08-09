@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:55:47 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/08 15:38:38 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:25:20 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	ft_env(t_env_list *env_list)
 		printf("%s=%s\n", list->key, list->value);
 		list = list->next;
 	}
-	g_exit_code = 0;
+	exit(0);
 	return ;
 }

@@ -124,13 +124,13 @@ t_token		*insert_node(t_token *head, char *s);
 t_token		*create_token(char *s);
 
 /*init_minishell*/
-void		init_minishell(int argc, char **argv, struct sigaction act_new);
+void		init_minishell(int argc, char **argv);
 
 /*read_input*/
 char		*read_input(void);
 
 /*sig_handler*/
-void		set_signal(struct sigaction act_new);
+void		set_signal(void);
 void		term_handler(void);
 void		int_handler(int sig);
 void		child_handler(int sig);
@@ -150,7 +150,7 @@ void		free_envp(char **envp_copy);
 char		**env_list_to_envp(t_env_list *env_list, int count);
 
 /*exec*/
-void		execute(t_token *token_list, t_env_list *env_list, struct sigaction act_new);
+void		execute(t_token *token_list, t_env_list *env_list);
 void		execute_command(t_token *list, t_execute *pack, t_env_list *env_list);
 t_token		*move_list(int count, t_token *list);
 void		execute_first_command(t_token *list, t_execute *pack, t_env_list *env_list);
@@ -167,6 +167,7 @@ char		*make_cmd(t_token *list, t_execute *pack);
 char		**make_heredoc_option(void);
 void		heredoc_process(t_token *token_list);
 char		*find_last_heredoc_name(void);
+int			is_exit(t_token *list);
 
 
 /*builtin*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:25:04 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/09 16:04:08 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/09 16:37:04 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	check_num(char *str)
 void	ft_exit(t_token *token_list)
 {
 	if (token_list->next == NULL)
-		exit(100);
+		exit(0);
 	else if (token_list->next != NULL)
 	{
 		if (check_num(token_list->next->token) == FALSE)

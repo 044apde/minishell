@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:21:06 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/08 15:39:17 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:25:32 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ void	ft_export(t_env_list *env_list, t_token *token_list)
 	}
 	else
 		export_process(env_list, token_list->next);
-	g_exit_code = 0;
+	exit(0);
 	return ;
 }
