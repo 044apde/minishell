@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:47:46 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/08 20:03:28 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/08 20:59:00 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ char	**env_list_to_envp(t_env_list *env_list, int count)
 
 char	*get_env(t_env_list *env_list, char *str)
 {
+	if (compare_str(str, "$?") == TRUE)
+	{
+		printf("exit code: %d\n", g_exit_code);
+		return (ft_itoa(g_exit_code));
+	}
 	while (env_list != NULL)
 	{
 		if (str[0] == '$')

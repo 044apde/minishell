@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:10:14 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/08 19:22:53 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/09 12:48:50 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,7 @@ void	int_handler(int sig)
 
 void	child_handler(int sig)
 {
-	sig++;
-	printf("parent handler on\n");
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	printf("I'm child process\n");
 	return ;
 }
 

@@ -3,73 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:25:04 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/08 19:32:28 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:04:08 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static int	print_error_exit(char *str, int flag)
-{
-	if (flag == 1)
-	{
-		ft_putstr_fd("exit\n", 2);
-		ft_putstr_fd("ohmybash# exit: ", 2);
-		ft_putstr_fd(str, 2);
-		ft_putstr_fd(": numeric argument required\n", 2);
-		g_exit_code = 255;
-	}
-	else if (flag == 2)
-	{
-		ft_putstr_fd("exit\n", 2);
-		ft_putstr_fd("ohmybash# exit: too many arguments\n", 2);
-		g_exit_code = 1;
-	}
-	return (1);
-}
-
 static int	check_num(char *str)
 {
 	int	i;
 
-	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if (!str[i])
-		return (0);
-	while (str[i])
+	i = -1;
+	while (str[++i] == '+')
+		;
+	if (str[i] == '-')
+		return (FALSE);
+	while (str[i] != '\0')
 	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
+		if (ft_isdigit(str[i++]) == FALSE)
+			return (FALSE);
 	}
-	return (1);
+	if (ft_atoi(str) == -1)
+		return (FALSE);
+	return (TRUE);
 }
 
 void	ft_exit(t_token *token_list)
 {
 	if (token_list->next == NULL)
-		g_exit_code = 0;
+		exit(100);
 	else if (token_list->next != NULL)
 	{
-		if (!check_num(token_list->next->token))
+		if (check_num(token_list->next->token) == FALSE)
 		{
-			print_error_exit(token_list->next->token, 1);
-			exit(g_exit_code);
+			ft_putstr_fd("ohmybash# exit: ", 2);
+			ft_putstr_fd(token_list->next->token, 2);
+			ft_putstr_fd(": check argument\n", 2);
+			exit(255);
 		}
-		else
+		if (token_list->next->next != NULL && is_operator(token_list->next->next->token) == FALSE)
 		{
-			if (token_list->next->next != NULL)
-			{
-				g_exit_code = print_error_exit(NULL, 2);
-				return ;
-			}
-			else
-				exit(ft_atoi(token_list->next->token));
+			ft_putstr_fd("ohmybash# exit: ", 2);
+			ft_putstr_fd("check argument\n", 2);
+			exit(1);
 		}
+		exit(ft_atoi(token_list->next->token));
 	}
 	exit(g_exit_code);
 }

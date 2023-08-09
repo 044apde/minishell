@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/08 19:23:39 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/09 16:13:35 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	execute(t_token *token_list, t_env_list *env_list, struct sigaction act_new
 	signal(SIGINT, SIG_IGN);
 	while (pack->n_of_process-- > 0)
 	{
-		if (is_pipe(token_list) == FALSE && \
-			is_builtin(token_list->next) == TRUE)
+		// exit 수정
+		if (is_pipe(token_list) == FALSE && is_exit(token_list->next) == TRUE)
 		{
 			if (execute_builtin(token_list->next, env_list) == ERROR)
 				return ;
@@ -74,18 +74,20 @@ void	execute(t_token *token_list, t_env_list *env_list, struct sigaction act_new
 		pack->count = pack->count + 1;
 		if (pid == 0)
 		{
-			signal(SIGINT, child_handler);
 			token_list = move_list(pack->count, token_list);
 			if (token_list == NULL)
 				return ;
 			execute_command(token_list, pack, env_list);
-			exit(1);
+			exit(0);
 		}
 	}
 	while (pack->s_n_of_process-- > 0)
 	{
 		wait(&status);
+		printf("status: %d\n", WEXITSTATUS(status));
+		g_exit_code = status;
 	}
+	g_exit_code = WEXITSTATUS(status);
 	signal(SIGINT, int_handler);
 	return ;
 }

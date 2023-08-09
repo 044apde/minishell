@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:26:00 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/08 15:38:29 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:21:14 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ void	ft_echo(t_token *token_list)
 	echo_process(token_list);
 	if (i == 0)
 		ft_putstr_fd("\n", 1);
-	g_exit_code = 0;
+	exit(0);
 	return ;
 }

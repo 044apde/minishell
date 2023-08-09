@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:46:53 by shikim            #+#    #+#             */
-/*   Updated: 2023/04/04 17:55:48 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/09 16:01:16 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	ft_atoi(const char *str)
 	{
 		result = result * 10 + (*str - 48);
 		str++;
+		if (result > 255)
+			return (-1);
 	}
 	return (result * f_minus);
 }

@@ -141,6 +141,7 @@ void		set_terminal(void);
 /*utils*/
 void		set_pid(int	*pid);
 void		exit_program(char *s);
+void		check_exit_code(void);
 
 /*env*/
 char		*get_env(t_env_list *env_list, char *str);
