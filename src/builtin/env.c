@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:55:47 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/09 16:25:20 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:15:22 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	ft_env(t_env_list *env_list)
 		printf("%s=%s\n", list->key, list->value);
 		list = list->next;
 	}
-	exit(0);
+	g_exit_code = 0;
 	return ;
 }

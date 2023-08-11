@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:26:00 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/09 15:21:14 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/11 11:24:42 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	echo_process(t_token *token_list)
 	{
 		if (compare_str(token_list->next->token, "-n") == TRUE)
 			token_list = token_list->next;
-		else if (token_list->next->type == REDIR_IN || \
-				token_list->next->type == REDIR_OUT)
+		else if (token_list->next->type == REDIR_IN || token_list->next->type == REDIR_OUT)
 			token_list = token_list->next->next;
 		else
 		{
@@ -39,6 +38,7 @@ void	ft_echo(t_token *token_list)
 	if (token_list->next == NULL)
 	{
 		ft_putstr_fd("\n", 1);
+		g_exit_code = 0;
 		return ;
 	}
 	if (compare_str(token_list->next->token, "-n") == TRUE)
@@ -46,6 +46,6 @@ void	ft_echo(t_token *token_list)
 	echo_process(token_list);
 	if (i == 0)
 		ft_putstr_fd("\n", 1);
-	exit(0);
+	g_exit_code = 0;
 	return ;
 }

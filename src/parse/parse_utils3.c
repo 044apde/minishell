@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:41:12 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/05 18:12:01 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/11 11:34:23 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	pre_check_quote(char *input)
 	}
 	if (count_single_quote == 1 || count_double_quote == 1)
 	{
-		printf("Error: check quote\n");
+		printf("\033[0;31mError: check quote\033[0;0m\n");
 		return (ERROR);
 	}
 	return (TRUE);

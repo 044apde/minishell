@@ -28,6 +28,7 @@
 		"unordered_map": "c",
 		"__config": "c",
 		"locale": "c",
-		"__string": "c"
+		"__string": "c",
+		"sstream": "c"
 	}
 }

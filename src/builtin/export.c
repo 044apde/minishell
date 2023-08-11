@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:21:06 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/09 16:25:32 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:15:40 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ void	ft_export(t_env_list *env_list, t_token *token_list)
 	}
 	else
 		export_process(env_list, token_list->next);
-	exit(0);
+	g_exit_code = 0;
 	return ;
 }

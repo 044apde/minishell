@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:01:58 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/05 21:20:14 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/11 11:34:37 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token_pack	*init_token_pack(char *s, t_token *head)
 	token_pack = (t_token_pack *)malloc(sizeof(t_token_pack));
 	if (token_pack == NULL)
 	{
-		printf("Error: failed to system call\n");
+		printf("\033[0;31mError: failed to system call\033[0;0m\n");
 		exit(1);
 	}
 	token_pack->s = s;

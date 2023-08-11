@@ -99,6 +99,7 @@ void		substitution(t_token *head, t_env_list *env_list);
 int			check_syntax(t_token *head);
 void		unquote(t_token *head);
 int			is_operator(char *s);
+int			is_operator2(t_token *list);
 int			compare_str(char *str1, char *str2);
 t_node		*make_tree(t_token *head);
 
@@ -175,7 +176,7 @@ int			is_builtin(t_token *token_list);
 int			execute_builtin(t_token *token_list, t_env_list *env_list);
 void		ft_echo(t_token *token_list);
 void		ft_cd(t_env_list *env_list, t_token *token_list);
-void		ft_pwd(void);
+void		ft_pwd(t_token *bulilt_in_node);
 void		ft_export(t_env_list *env_list, t_token *token_list);
 void		add_update_env_list(t_env_list *env_list, char *key, char *value);
 t_env_list	*sorted_list(t_env_list *list);

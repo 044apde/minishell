@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/09 16:24:05 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:58:27 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-t_token	*find_command(t_token *list)
-{
-	if (list->type == REDIR_IN || list->type == REDIR_OUT)
-		list = list->next->next;
-	return (list);
-}
 
 int	is_operator2(t_token *list)
 {
@@ -26,6 +19,33 @@ int	is_operator2(t_token *list)
 		list->type == APPEND)
 		return (TRUE);
 	return (FALSE);
+}
+
+int	is_operator3(t_token *list)
+{
+	if (list->type == REDIR_IN || \
+		list->type == REDIR_OUT || list->type == HEREDOC || \
+		list->type == APPEND)
+		return (TRUE);
+	return (FALSE);
+}
+
+t_token	*find_command(t_token *list)
+{
+	if (list->token == NULL)
+		list = list->next;
+	while (list != NULL)
+	{
+		if (is_operator2(list) == TRUE)
+			list = list->next;
+		else if (list->prev->token != NULL && is_operator3(list->prev) == TRUE)
+			list = list->next;
+		else
+		{
+			return (list);
+		}
+	}
+	return (list);
 }
 
 char	**make_cmd_option(t_token *cmd_node)
