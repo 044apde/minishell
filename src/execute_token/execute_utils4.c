@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/11 11:58:27 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/11 18:25:45 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,13 @@ void	cmd_process(t_token *list, t_env_list *env_list, \
 		exit(127);
 		return ;
 	}
-	execve(cmd, cmd_option, env_list->envp_copy);
+	if (execve(cmd, cmd_option, env_list->envp_copy) == -1)
+	{
+		
+	}
 	if (compare_str(list->token, "\n") == TRUE)
 			printf("\033[0;31mohmybash# : command not found\033[0;0m\n");
 	printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", list->token);
-	exit(127);
 	free(cmd_option);
 }
 
@@ -112,6 +114,7 @@ void	execute_word(t_token *list, t_execute *pack, t_env_list *env_list)
 	else if (is_builtin(list) == TRUE)
 	{
 		execute_builtin(list, env_list);
+		exit (g_exit_code);
 		free(cmd_option);
 		return ;
 	}
@@ -119,6 +122,7 @@ void	execute_word(t_token *list, t_execute *pack, t_env_list *env_list)
 	{
 		cmd = make_cmd(list, pack);
 		cmd_process(list, env_list, cmd, cmd_option);
+		exit (g_exit_code);
 	}
 	return ;
 }

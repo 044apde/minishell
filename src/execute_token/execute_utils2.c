@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/11 11:46:41 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/11 18:27:44 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ void	execute_first_command(t_token *list, t_execute *pack, \
 	}
 	if (do_redirin(list) == ERROR)
 		return ;
-	// if (do_redirout(list) == ERROR)
-	// 	return ;
+	if (do_redirout(list) == ERROR)
+		return ;
 	list = find_command(list);
+	printf("cmd: %s\n", list->token);
 	execute_word(list, pack, env_list);
 	if (is_pipe(list) == TRUE)
 	{

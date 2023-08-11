@@ -1,0 +1,9 @@
+cmd: ls
+Makefile
+libft
+main.c
+main.o
+minishell
+minishell.h
+out
+src
