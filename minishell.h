@@ -60,11 +60,11 @@ typedef struct s_token
 
 typedef struct s_token_pack
 {
-	char	*s;
-	int		start;
-	int		end;
-	int		prev_quote_type;
-	t_token	*head;
+	char					*s;
+	int						start;
+	int						end;
+	int						prev_quote_type;
+	t_token					*head;
 }	t_token_pack;
 
 typedef struct s_split
@@ -83,12 +83,18 @@ typedef struct s_env_list
 
 typedef struct s_execute
 {
-	int			n_of_process;
-	int			s_n_of_process;
-	int			pipe_fd[2];
-	int			count;
-	t_env_list	*env_list;
+	int						n_of_process;
+	int						s_n_of_process;
+	int						pipe_fd[2];
+	int						count;
+	t_env_list				*env_list;
 }	t_execute;
+
+typedef struct s_linked_list
+{
+	int	fd;
+	struct s_linked_list *next;
+}	t_linked_list;
 
 int	g_exit_code;
 
@@ -158,17 +164,18 @@ void		execute_first_command(t_token *list, t_execute *pack, t_env_list *env_list
 void		execute_middle_command(t_token *list, t_execute *pack, t_env_list *env_list);
 void		execute_last_command(t_token *list, t_execute *pack, t_env_list *env_list);
 
-int			do_redirin(t_token *list);
-int			do_redirout(t_token *list);
-t_token		*find_command(t_token *list);
-void		execute_word(t_token *list, t_execute *pack, t_env_list *env_list);
-int			is_pipe(t_token *list);
-void		remove_heredoc_file(void);
-char		*make_cmd(t_token *list, t_execute *pack);
-char		**make_heredoc_option(void);
-void		heredoc_process(t_token *token_list);
-char		*find_last_heredoc_name(void);
-int			is_exit(t_token *list);
+int				do_redirin(t_token *list);
+int				do_redirout(t_token *list);
+t_token			*find_command(t_token *list);
+void			execute_word(t_token *list, t_execute *pack, t_env_list *env_list);
+int				is_pipe(t_token *list);
+void			remove_heredoc_file(void);
+char			*make_cmd(t_token *list, t_execute *pack);
+char			**make_heredoc_option(void);
+void			heredoc_process(t_token *token_list);
+char			*find_last_heredoc_name(void);
+int				is_exit(t_token *list);
+t_linked_list	*insert_l_node(t_linked_list *head, int data);
 
 
 /*builtin*/
