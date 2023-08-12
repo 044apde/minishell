@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:31:48 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/05 19:06:33 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/12 16:39:43 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ char	*read_input(void)
 	if (input == NULL)
 		term_handler();
 	add_input_to_history(input);
+	g_exit_code = 0;
 	return (input);
 }

@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:18:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/12 13:29:00 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/12 17:03:42 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,13 @@ t_linked_list	*insert_l_node(t_linked_list *head, int data)
 		new_node->next = NULL;
 	}
 	return (head);
+}
+
+void	ctrl_exit_status_with_singal(int status)
+{
+	if (WIFEXITED(status)) {
+		g_exit_code = WEXITSTATUS(status);
+	} else if (WIFSIGNALED(status)) {
+		g_exit_code = WTERMSIG(status) + 128;
+	}
 }

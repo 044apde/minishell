@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/12 13:34:13 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/12 17:04:02 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	execute(t_token *token_list, t_env_list *env_list)
 	if (token_list == NULL || token_list->next == NULL)
 		return ;
 	pack = init_and_process(token_list, env_list);
-	signal(SIGINT, child_handler);
+	signal(SIGINT, SIG_IGN);
 	while (pack->n_of_process-- > 0)
 	{
 		if (is_pipe(token_list) == FALSE && is_builtin(token_list) == TRUE)
@@ -76,6 +76,7 @@ void	execute(t_token *token_list, t_env_list *env_list)
 		pack->count = pack->count + 1;
 		if (pid == 0)
 		{
+			signal(SIGINT, SIG_DFL);
 			token_list = move_list(pack->count, token_list);
 			if (token_list == NULL)
 				return ;
@@ -83,12 +84,20 @@ void	execute(t_token *token_list, t_env_list *env_list)
 			exit(0);
 		}
 	}
+	// while (pack->s_n_of_process-- > 0)
+	// {
+	// 	wait(&status);
+	// 	ctrl_exit_status_with_singal(status);
+	// 	printf("exit_code: %d\n", g_exit_code);
+	// }
 	while (pid_list != NULL)
 	{
 		waitpid(pid_list->fd, &status, 0);
-		g_exit_code = WEXITSTATUS(status);
+		ctrl_exit_status_with_singal(status);
+		printf("exit_status: %d\n", g_exit_code);
 		pid_list = pid_list->next;
 	}
 	signal(SIGINT, int_handler);
+	// pid list를 해제하는 함수를 작성해야함.
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:10:14 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/12 13:10:52 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/12 16:52:58 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	int_handler(int sig)
 
 void	child_handler(int sig)
 {
-	g_exit_code = sig + 128;
+	printf("signal: %d\n", sig);
+	exit(2);
 	return ;
 }
 
