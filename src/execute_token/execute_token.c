@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/11 11:48:18 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/11 18:47:40 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ void	execute(t_token *token_list, t_env_list *env_list)
 			break ;
 		}
 		pid = fork();
+		if (pid != 0)
+		{
+			waitpid(pid, &status, 0);
+			g_exit_code = WEXITSTATUS(status);
+		}
 		pack->count = pack->count + 1;
 		if (pid == 0)
 		{
@@ -79,12 +84,6 @@ void	execute(t_token *token_list, t_env_list *env_list)
 			execute_command(token_list, pack, env_list);
 			exit(0);
 		}
-	}
-	while (pack->s_n_of_process-- > 0)
-	{
-		wait(&status); // pid를 순서대로 기다리도록 수정
-		printf("status: %d\n", WEXITSTATUS(status));
-		g_exit_code = WEXITSTATUS(status);
 	}
 	signal(SIGINT, int_handler);
 	return ;

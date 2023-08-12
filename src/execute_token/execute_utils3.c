@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/09 16:41:37 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:41:37 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	do_redirin(t_token *list)
 	infile = open(list->next->token, O_RDONLY, 0777);
 	if (infile == ERROR)
 	{
-		printf("\033[0;35mohmybash#: %s: can't open file\033[0;0m\n", \
-				list->next->token);
+		printf("\033[0;35mohmybash#: %s: can't open file\033[0;0m\n", list->next->token);
+		exit(126);
 		return (ERROR);
 	}
 	dup2(infile, STDIN_FILENO);
@@ -72,6 +72,7 @@ int	do_redirout(t_token *list)
 	{
 		printf("\033[0;35mohmybash#: %s: can't open file\033[0;0m\n", \
 				list->next->token);
+		exit(126);
 		return (ERROR);
 	}
 	dup2(outfile, STDOUT_FILENO);

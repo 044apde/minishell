@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils6.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:11:34 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/08 16:11:10 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:42:31 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void	process(t_token *current)
 
 	heredoc_file_name = find_last_heredoc_name();
 	infile = open(heredoc_file_name, O_CREAT | O_TRUNC | O_WRONLY, 0777);
+	if (infile == ERROR)
+	{
+		printf("\033[0;35mohmybash#: %s: can't open file\033[0;0m\n", current->token);
+		exit(126);
+	}
 	while (TRUE)
 	{
 		input = readline("> ");
