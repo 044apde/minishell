@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/12 17:04:02 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/12 17:21:18 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	execute(t_token *token_list, t_env_list *env_list)
 	// }
 	while (pid_list != NULL)
 	{
+		printf("here\n");
 		waitpid(pid_list->fd, &status, 0);
 		ctrl_exit_status_with_singal(status);
 		printf("exit_status: %d\n", g_exit_code);

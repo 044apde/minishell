@@ -177,6 +177,10 @@ char			*find_last_heredoc_name(void);
 int				is_exit(t_token *list);
 t_linked_list	*insert_l_node(t_linked_list *head, int data);
 void			ctrl_exit_status_with_singal(int status);
+int				custom_WIFEXITED(int status);
+int				custom_WEXITSTATUS(int status);
+int				custom_WIFSIGNALED(int status);
+int				custom_WTERMSIG(int status);
 
 
 /*builtin*/

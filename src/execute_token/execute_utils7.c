@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:18:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/12 17:03:42 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/12 17:19:23 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ t_linked_list	*insert_l_node(t_linked_list *head, int data)
 
 void	ctrl_exit_status_with_singal(int status)
 {
-	if (WIFEXITED(status)) {
-		g_exit_code = WEXITSTATUS(status);
-	} else if (WIFSIGNALED(status)) {
-		g_exit_code = WTERMSIG(status) + 128;
+	if (custom_WIFEXITED(status)) {
+		g_exit_code = custom_WEXITSTATUS(status);
+	} else if (custom_WIFSIGNALED(status)) {
+		g_exit_code = custom_WTERMSIG(status) + 128;
 	}
 }
