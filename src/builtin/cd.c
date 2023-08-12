@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:41:59 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/11 11:33:44 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/12 17:23:51 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	ft_cd(t_env_list *env_list, t_token *token_list)
 	{
 		if (chdir(token_list->next->token) == -1)
 		{
-			printf("\033[0;31mcd: %s: No such file or directory\n\033[0;0m", token_list->next->token);
+			printf("\033[0;31mcd: %s: No such file or directory\n\033[0;0m", \
+						token_list->next->token);
 			g_exit_code = 1;
 			return ;
 		}
-		
 	}
 	g_exit_code = 0;
 	return ;

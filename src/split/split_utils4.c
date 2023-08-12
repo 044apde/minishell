@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:15:08 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/05 21:20:08 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/12 17:27:36 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,28 @@ void	make_quoted_string(t_token *head, char *s, int *start, int end)
 	insert_node(head, quoted_string);
 }
 
-void	check_quote(t_token_pack *t_pack)
+void	check_quote(t_token_pack *t_p)
 {
-	if (t_pack->s[t_pack->end] == '\'')
+	if (t_p->s[t_p->end] == '\'')
 	{
-		if (t_pack->prev_quote_type == 0)
+		if (t_p->prev_quote_type == 0)
 		{
-			t_pack->prev_quote_type = 1;
+			t_p->prev_quote_type = 1;
 		}
-		else if (t_pack->prev_quote_type == 1)
+		else if (t_p->prev_quote_type == 1)
 		{
-			make_quoted_string(t_pack->head, t_pack->s, &t_pack->start, t_pack->end);
-			t_pack->prev_quote_type = 0;
+			make_quoted_string(t_p->head, t_p->s, &t_p->start, t_p->end);
+			t_p->prev_quote_type = 0;
 		}
 	}
-	else if(t_pack->s[t_pack->end] == '\"')
+	else if (t_p->s[t_p->end] == '\"')
 	{
-		if (t_pack->prev_quote_type == 0)
-			t_pack->prev_quote_type = 2;
-		else if (t_pack->prev_quote_type == 2)
+		if (t_p->prev_quote_type == 0)
+			t_p->prev_quote_type = 2;
+		else if (t_p->prev_quote_type == 2)
 		{
-			make_quoted_string(t_pack->head, t_pack->s, &t_pack->start, t_pack->end);
-			t_pack->prev_quote_type = 0;
+			make_quoted_string(t_p->head, t_p->s, &t_p->start, t_p->end);
+			t_p->prev_quote_type = 0;
 		}
 	}
 	return ;

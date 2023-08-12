@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/12 15:57:08 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/12 17:36:34 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	cmd_process(t_token *list, t_env_list *env_list, \
 	printf("execve: %d\n", execve(cmd, cmd_option, env_list->envp_copy));
 	printf("is from signal?\n");
 	if (compare_str(list->token, "\n") == TRUE)
-			printf("\033[0;31mohmybash# : command not found\033[0;0m\n");
+		printf("\033[0;31mohmybash# : command not found\033[0;0m\n");
 	printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", list->token);
 	exit(127);
 	free(cmd_option);

@@ -92,82 +92,85 @@ typedef struct s_execute
 
 typedef struct s_linked_list
 {
-	int	fd;
-	struct s_linked_list *next;
+	int						fd;
+	struct s_linked_list	*next;
 }	t_linked_list;
 
 int	g_exit_code;
 
 /*parse*/
-t_token		*parse_input(char *input, t_env_list *env_list);
-void		check_type(t_token *head);
-void		substitution(t_token *head, t_env_list *env_list);
-int			check_syntax(t_token *head);
-void		unquote(t_token *head);
-int			is_operator(char *s);
-int			is_operator2(t_token *list);
-int			compare_str(char *str1, char *str2);
-t_node		*make_tree(t_token *head);
+t_token			*parse_input(char *input, t_env_list *env_list);
+void			check_type(t_token *head);
+void			substitution(t_token *head, t_env_list *env_list);
+int				check_syntax(t_token *head);
+void			unquote(t_token *head);
+int				is_operator(char *s);
+int				is_operator2(t_token *list);
+int				compare_str(char *str1, char *str2);
+t_node			*make_tree(t_token *head);
 
 /*fixing parsing*/
-int			pre_check_quote(char *input);
-void		free_token_list(t_token *list);
-void		make_quoted_string(t_token *head, char *s, int *st, int e);
-void		check_quote(t_token_pack *t_pack);
-char		*make_substitute(char *token, t_env_list *env_list);
+int				pre_check_quote(char *input);
+void			free_token_list(t_token *list);
+void			make_quoted_string(t_token *head, char *s, int *st, int e);
+void			check_quote(t_token_pack *t_pack);
+char			*make_substitute(char *token, t_env_list *env_list);
 
 /*split*/
-int			is_sep(char c);
-int			check_quote1(char c);
-int			check_quote2(char c);
-void		trim_word(char **arr);
-void		free_list(t_token *head);
-void		show_token(t_token *head);
-void		make_redir_in(t_token *head, char *s, int st);
-void		make_redir_out(t_token *head, char *s, int st);
-void		insert_string_node(t_token *head, char *s, int *st, int e);
-t_token		*split(char *s);
-t_token		*insert_node(t_token *head, char *s);
-t_token		*create_token(char *s);
+int				is_sep(char c);
+int				check_quote1(char c);
+int				check_quote2(char c);
+void			trim_word(char **arr);
+void			free_list(t_token *head);
+void			show_token(t_token *head);
+void			make_redir_in(t_token *head, char *s, int st);
+void			make_redir_out(t_token *head, char *s, int st);
+void			insert_string_node(t_token *head, char *s, int *st, int e);
+t_token			*split(char *s);
+t_token			*insert_node(t_token *head, char *s);
+t_token			*create_token(char *s);
 
 /*init_minishell*/
-void		init_minishell(int argc, char **argv);
+void			init_minishell(int argc, char **argv);
 
 /*read_input*/
-char		*read_input(void);
+char			*read_input(void);
 
 /*sig_handler*/
-void		set_signal(void);
-void		term_handler(void);
-void		int_handler(int sig);
-void		child_handler(int sig);
+void			set_signal(void);
+void			term_handler(void);
+void			int_handler(int sig);
+void			child_handler(int sig);
 
 /*term*/
-void		set_terminal(void);
+void			set_terminal(void);
 
 /*utils*/
-void		set_pid(int	*pid);
-void		exit_program(char *s);
-void		check_exit_code(void);
+void			set_pid(int	*pid);
+void			exit_program(char *s);
 
 /*env*/
-char		*get_env(t_env_list *env_list, char *str);
-t_env_list	*set_env(char **envp);
-void		free_envp(char **envp_copy);
-char		**env_list_to_envp(t_env_list *env_list, int count);
+char			*get_env(t_env_list *env_list, char *str);
+t_env_list		*set_env(char **envp);
+void			free_envp(char **envp_copy);
+char			**env_list_to_envp(t_env_list *env_list, int count);
 
 /*exec*/
-void		execute(t_token *token_list, t_env_list *env_list);
-void		execute_command(t_token *list, t_execute *pack, t_env_list *env_list);
-t_token		*move_list(int count, t_token *list);
-void		execute_first_command(t_token *list, t_execute *pack, t_env_list *env_list);
-void		execute_middle_command(t_token *list, t_execute *pack, t_env_list *env_list);
-void		execute_last_command(t_token *list, t_execute *pack, t_env_list *env_list);
-
+void			execute(t_token *token_list, t_env_list *env_list);
+void			execute_command(t_token *list, t_execute *pack, \
+									t_env_list *env_list);
+t_token			*move_list(int count, t_token *list);
+void			execute_first_command(t_token *list, t_execute *pack, \
+										t_env_list *env_list);
+void			execute_middle_command(t_token *list, t_execute *pack, \
+										t_env_list *env_list);
+void			execute_last_command(t_token *list, t_execute *pack, \
+										t_env_list *env_list);
 int				do_redirin(t_token *list);
 int				do_redirout(t_token *list);
 t_token			*find_command(t_token *list);
-void			execute_word(t_token *list, t_execute *pack, t_env_list *env_list);
+void			execute_word(t_token *list, t_execute *pack, \
+								t_env_list *env_list);
 int				is_pipe(t_token *list);
 void			remove_heredoc_file(void);
 char			*make_cmd(t_token *list, t_execute *pack);
@@ -177,27 +180,27 @@ char			*find_last_heredoc_name(void);
 int				is_exit(t_token *list);
 t_linked_list	*insert_l_node(t_linked_list *head, int data);
 void			ctrl_exit_status_with_singal(int status);
-int				custom_WIFEXITED(int status);
-int				custom_WEXITSTATUS(int status);
-int				custom_WIFSIGNALED(int status);
-int				custom_WTERMSIG(int status);
-
+int				custom_wxd(int status);
+int				custom_wss(int status);
+int				custom_wgd(int status);
+int				custom_wsg(int status);
 
 /*builtin*/
-int			is_builtin(t_token *token_list);
-int			execute_builtin(t_token *token_list, t_env_list *env_list);
-void		ft_echo(t_token *token_list);
-void		ft_cd(t_env_list *env_list, t_token *token_list);
-void		ft_pwd(t_token *bulilt_in_node);
-void		ft_export(t_env_list *env_list, t_token *token_list);
-void		add_update_env_list(t_env_list *env_list, char *key, char *value);
-t_env_list	*sorted_list(t_env_list *list);
-int			compare_keys(t_env_list *a, t_env_list *b);
-int			ft_strcmp(char *s1, char *s2);
-t_env_list	*create_new_node(t_env_list *list);
-t_env_list	*sort_env_list(t_env_list *env_list);
-void		ft_unset(t_env_list *env_list, t_token *token_list);
-void		ft_env(t_env_list *env_list);
-void		ft_exit(t_token *token_list);
+int				is_builtin(t_token *token_list);
+int				execute_builtin(t_token *token_list, t_env_list *env_list);
+void			ft_echo(t_token *token_list);
+void			ft_cd(t_env_list *env_list, t_token *token_list);
+void			ft_pwd(t_token *bulilt_in_node);
+void			ft_export(t_env_list *env_list, \
+							t_token *token_list);
+void			add_update_env_list(t_env_list *env_list, char *key, char *value);
+t_env_list		*sorted_list(t_env_list *list);
+int				compare_keys(t_env_list *a, t_env_list *b);
+int				ft_strcmp(char *s1, char *s2);
+t_env_list		*create_new_node(t_env_list *list);
+t_env_list		*sort_env_list(t_env_list *env_list);
+void			ft_unset(t_env_list *env_list, t_token *token_list);
+void			ft_env(t_env_list *env_list);
+void			ft_exit(t_token *token_list);
 
 #endif

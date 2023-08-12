@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/11 18:33:53 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/12 17:36:12 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	execute_last_command(t_token *list, t_execute *pack, \
 							t_env_list *env_list)
 {
 	int		origin_stdout;
+
 	dup2(pack->pipe_fd[0], STDIN_FILENO);
 	origin_stdout = dup(STDOUT_FILENO);
 	if (do_redirin(list) == ERROR)

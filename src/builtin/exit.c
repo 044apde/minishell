@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:25:04 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/11 11:36:10 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/12 17:24:19 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	ft_exit(t_token *token_list)
 		ft_putstr_fd(": check argument\033[0;0m\n", 2);
 		exit(255);
 	}
-	if (token_list->next->next != NULL && is_operator(token_list->next->next->token) == FALSE)
+	if (token_list->next->next != NULL && \
+			is_operator(token_list->next->next->token) == FALSE)
 	{
 		ft_putstr_fd("\033[0;31mohmybash# exit: ", 2);
 		ft_putstr_fd("check argument\033[0;0m\n", 2);

@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:41:12 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/11 11:34:23 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/12 17:26:33 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,13 @@ int	pre_check_quote(char *input)
 
 void	free_token_list(t_token *list)
 {
-	t_token *temp_node;
+	t_token	*temp_node;
 
 	while (list != NULL)
 	{
 		temp_node = list;
 		list = list->next;
-		if(temp_node != NULL)
+		if (temp_node != NULL)
 			free(temp_node->token);
 		free(temp_node);
 	}

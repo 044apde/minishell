@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 22:47:43 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/12 17:21:39 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/12 17:24:35 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	ft_pwd(t_token *bulilt_in_node)
 {
 	char	*buf;
 
-	if (bulilt_in_node->next != NULL && is_operator2(bulilt_in_node->next) == FALSE)
+	if (bulilt_in_node->next != NULL && \
+			is_operator2(bulilt_in_node->next) == FALSE)
 	{
 		printf("\033[0;31mcd: too many arguments\033[0;0m\n");
 		g_exit_code = 1;
