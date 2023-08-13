@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/12 17:37:58 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/13 15:40:08 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	execute(t_token *token_list, t_env_list *env_list)
 	int				status;
 	int				pid;
 	t_linked_list	*pid_list;
+	t_linked_list	*origin;
 
 	pid_list = NULL;
 	if (token_list == NULL || token_list->next == NULL)
@@ -84,14 +85,14 @@ void	execute(t_token *token_list, t_env_list *env_list)
 			exit(0);
 		}
 	}
+	origin = pid_list;
 	while (pid_list != NULL)
 	{
 		waitpid(pid_list->fd, &status, 0);
 		ctrl_exit_status_with_singal(status);
-		printf("exit_status: %d\n", g_exit_code);
 		pid_list = pid_list->next;
 	}
+	free_l_list(origin);
 	signal(SIGINT, int_handler);
-	// pid list를 해제하는 함수를 작성해야함.
 	return ;
 }

@@ -184,6 +184,7 @@ int				custom_wxd(int status);
 int				custom_wss(int status);
 int				custom_wgd(int status);
 int				custom_wsg(int status);
+void			free_l_list(t_linked_list *pid_list);
 
 /*builtin*/
 int				is_builtin(t_token *token_list);

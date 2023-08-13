@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 17:16:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/12 17:34:46 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/13 15:38:44 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,15 @@ int	custom_wgd(int status)
 int	custom_wsg(int status)
 {
 	return (status & 0x7F);
+}
+
+void	free_l_list(t_linked_list *pid_list)
+{
+	t_linked_list	*temp;
+	while (pid_list != NULL)
+	{
+		temp = pid_list;
+		pid_list = pid_list->next;
+		free(temp);
+	}
 }
