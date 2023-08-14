@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/14 18:20:56 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/14 20:49:14 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	cmd_process(t_token *list, t_env_list *env_list, \
 		return ;
 	}
 	printf("execve: %d\n", execve(cmd, cmd_option, env_list->envp_copy));
-	printf("is from signal?\n");
 	if (compare_str(list->token, "\n") == TRUE)
 		printf("\033[0;31mohmybash# : command not found\033[0;0m\n");
 	printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", list->token);
@@ -121,6 +120,7 @@ void	execute_word(t_token *list, t_execute *pack, t_env_list *env_list)
 	{
 		cmd = make_cmd(list, pack);
 		cmd_process(list, env_list, cmd, cmd_option);
+		free(cmd_option);
 		exit (g_exit_code);
 	}
 	return ;

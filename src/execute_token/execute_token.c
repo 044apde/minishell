@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/14 18:26:45 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:19:22 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	execute(t_token *token_list, t_env_list *env_list)
 	int				pid;
 	t_linked_list	*pid_list;
 	t_linked_list	*origin;
-	int				tmp;
 	int				i;
 
 	i = -1;
@@ -102,5 +101,6 @@ void	execute(t_token *token_list, t_env_list *env_list)
 	}
 	free_l_list(origin);
 	signal(SIGINT, int_handler);
+	free(pack);
 	return ;
 }

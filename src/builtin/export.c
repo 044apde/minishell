@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:21:06 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/11 11:15:40 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/14 21:49:56 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	export_process(t_env_list *env_list, t_token *token_list)
 	char	*key;
 	char	*value;
 	char	*equal_sign;
+	char	*tmp;
 
 	while (token_list != NULL)
 	{
@@ -45,8 +46,12 @@ void	export_process(t_env_list *env_list, t_token *token_list)
 			token_list = token_list->next;
 			while (token_list != NULL)
 			{
+				tmp = value;
 				value = ft_strjoin(value, "");
+				free(tmp);
+				tmp = value;
 				value = ft_strjoin(value, token_list->token);
+				free(tmp);
 				token_list = token_list->next;
 			}
 			add_update_env_list(env_list, key, value);
