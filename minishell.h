@@ -87,6 +87,7 @@ typedef struct s_execute
 	int						s_n_of_process;
 	int						pipe_fd[2];
 	int						count;
+	int						tmp;
 	t_env_list				*env_list;
 }	t_execute;
 
