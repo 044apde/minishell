@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 22:47:43 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/12 17:24:35 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/14 22:14:10 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	ft_pwd(t_token *bulilt_in_node)
 	{
 		printf("\033[0;31mcd: too many arguments\033[0;0m\n");
 		g_exit_code = 1;
-		printf("exit_code: %d\n", g_exit_code);
 		return ;
 	}
 	buf = getcwd(NULL, 0);

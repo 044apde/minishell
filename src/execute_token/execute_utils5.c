@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:18:37 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/08 14:43:39 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/14 20:26:00 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,25 @@ int	count_heredoc_file(void)
 	int			i;
 	char		*heredoc_file_name;
 	static int	here_doc_file_count;
+	char		*tmp_itoa;
 
 	i = 1;
 	here_doc_file_count = 1;
 	while (1)
 	{
+		tmp_itoa = ft_itoa(i);
 		heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", \
-							ft_itoa(i));
+							tmp_itoa);
 		if (access(heredoc_file_name, F_OK) < 0)
 		{
 			free(heredoc_file_name);
+			free(tmp_itoa);
 			break ;
 		}
 		here_doc_file_count++;
 		i++;
 		free(heredoc_file_name);
+		free(tmp_itoa);
 	}
 	return (here_doc_file_count);
 }
@@ -41,17 +45,23 @@ void	remove_heredoc_file(void)
 	int			i;
 	char		*heredoc_file_name;
 	static int	here_doc_file_count;
+	char		*tmp_itoa;
 
 	i = 1;
 	here_doc_file_count = count_heredoc_file();
 	while (i < here_doc_file_count)
 	{
+		tmp_itoa = ft_itoa(i);
 		heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", \
-							ft_itoa(i));
+							tmp_itoa);
 		if (access(heredoc_file_name, F_OK) < 0)
+		{
+			free(tmp_itoa);
 			break ;
-		unlink(ft_strjoin("src/execute_token/.heredoc", ft_itoa(i)));
+		}
+		unlink(heredoc_file_name);
 		free(heredoc_file_name);
+		free(tmp_itoa);
 		i++;
 	}
 	return ;

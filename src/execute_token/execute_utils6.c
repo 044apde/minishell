@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils6.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:11:34 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/11 18:42:31 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/14 21:26:04 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	process(t_token *current)
 		input = readline("> ");
 		if (input == NULL)
 		{
-			free(current->next->token); // delimiter free
+			free(current->next->token);
 			current->next->token = heredoc_file_name;
 			free(input);
 			close(infile);
@@ -42,7 +42,7 @@ void	process(t_token *current)
 		write(infile, "\n", 1);
 		free(input);
 	}
-	free(current->next->token); // delimiter free
+	free(current->next->token);
 	current->next->token = heredoc_file_name;
 	free(input);
 	close(infile);
@@ -78,15 +78,16 @@ char	*find_last_heredoc_name(void)
 {
 	static int	heredoc_file_count;
 	char		*heredoc_file_name;
+	char		*tmp;
 
 	heredoc_file_count = 1;
-	heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", \
-						ft_itoa(heredoc_file_count));
+	tmp = ft_itoa(heredoc_file_count);
+	heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", tmp);
 	while (access(heredoc_file_name, F_OK) == 0)
 	{
 		heredoc_file_count++;
-		heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", \
-							ft_itoa(heredoc_file_count));
+		heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", tmp);
 	}
+	free(tmp);
 	return (heredoc_file_name);
 }

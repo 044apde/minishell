@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 20:34:53 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/04 19:40:44 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:49:52 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	add_update_env_list(t_env_list *env_list, char *key, char *value)
 		current = current->next;
 	}
 	new = (t_env_list *)malloc(sizeof(t_env_list));
+	if (new == NULL)
+		return ;
 	new->key = ft_strdup(key);
 	new->value = ft_strdup(value);
 	new->next = NULL;

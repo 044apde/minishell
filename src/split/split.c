@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:01:58 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/12 17:27:07 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/14 20:06:59 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,14 @@ t_split	*make_token(char *s, t_split *split)
 t_token	*split(char *s)
 {
 	t_split	*split;
+	t_token	*tmp;
 
 	split = (t_split *)malloc(sizeof(t_split));
 	split->head = insert_node(NULL, NULL);
 	split = make_token(s, split);
 	if (split->status == TRUE)
 		exit_program("check quotation");
+	tmp = split->head;
+	free(split);
 	return (split->head);
 }

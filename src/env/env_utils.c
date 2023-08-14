@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:47:46 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/14 14:54:40 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/14 22:09:54 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	*get_env(t_env_list *env_list, char *str)
 {
 	if (compare_str(str, "$?") == TRUE)
 	{
+		free(str);
 		return (ft_itoa(g_exit_code));
 	}
 	while (env_list != NULL)
