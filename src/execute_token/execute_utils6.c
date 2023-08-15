@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:11:34 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/14 21:26:04 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:19:04 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	process(t_token *current)
 	infile = open(heredoc_file_name, O_CREAT | O_TRUNC | O_WRONLY, 0777);
 	if (infile == ERROR)
 	{
-		printf("\033[0;35mohmybash#: %s: can't open file\033[0;0m\n", current->token);
+		printf("\033[0;35mohmybash#: %s: can't open file\033[0;0m\n", \
+				current->token);
 		exit(126);
 	}
 	while (TRUE)

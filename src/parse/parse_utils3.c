@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:41:12 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/12 17:26:33 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 12:19:35 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,12 @@ char	**make_arr(t_token *node)
 	return (arr);
 }
 
-t_node	*make_tree(t_token *node)
+int	count_quote(int count_quote)
 {
-	char	**arr;
-	int		i;
-	int		j;
-
-	arr = make_arr(node);
-	i = 0;
-	j = 0;
-	while (arr[i] != NULL)
-	{
-		if (compare_str(arr[i], "|") == TRUE)
-		{
-			while (j < i)
-			{
-			}
-		}
-	}
-	return (NULL);
+	if (count_quote == 0)
+		return (++count_quote);
+	else
+		return (0);
 }
 
 int	pre_check_quote(char *input)
@@ -80,19 +67,9 @@ int	pre_check_quote(char *input)
 	while (input[++index] != '\0')
 	{
 		if (input[index] == '"' && count_single_quote == 0)
-		{
-			if (count_double_quote == 0)
-				++count_double_quote;
-			else
-				count_double_quote = 0;
-		}
+			count_double_quote = count_quote(count_double_quote);
 		else if (input[index] == '\'' && count_double_quote == 0)
-		{
-			if (count_single_quote == 0)
-				++count_single_quote;
-			else
-				count_single_quote = 0;
-		}
+			count_single_quote = count_quote(count_single_quote);
 	}
 	if (count_single_quote == 1 || count_double_quote == 1)
 	{
