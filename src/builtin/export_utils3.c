@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   export_utils3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/20 13:55:47 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/15 21:01:04 by shikim           ###   ########.fr       */
+/*   Created: 2023/08/15 20:48:28 by shikim            #+#    #+#             */
+/*   Updated: 2023/08/15 20:52:38 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_env(t_env_list *env_list)
-{
-	int			i;
-	t_env_list	*list;
+// void	enroll_only_key(t_token *t_list)
+// {
+// 	char	*key;
 
-	i = 0;
-	list = env_list;
-	while (list != NULL)
-	{
-		if (list->value == NULL)
-		{
-			list = list->next;
-			continue ;
-		}
-		printf("%s=%s\n", list->key, list->value);
-		list = list->next;
-	}
-	g_exit_code = 0;
-	return ;
-}
+// 	key = t_list->next;
+// 	printf("key: %s\n", key);
+// 	return ;
+// }

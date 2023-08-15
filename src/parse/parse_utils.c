@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 04:13:36 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 20:12:49 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 20:38:59 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	check_type(t_token *head)
 		else if (compare_str("|", node->token) == TRUE)
 			node->type = PIPE;
 		else if (node->token[0] == '"')
-			node->type = DOUBLE_QUOTE;
+			node->type = D_QUOTE;
 		else if (node->token[0] == '\'')
-			node->type = SIGNLE_QUOTE;
+			node->type = S_QUOTE;
 		else
 			node->type = WORD;
 		node = node->next;
@@ -66,7 +66,7 @@ void	substitution(t_token *head, t_env_list *env_list)
 	n = head->next;
 	while (n != NULL)
 	{
-		if (n->type == WORD || n->type == DOUBLE_QUOTE)
+		if (n->type == WORD || n->type == D_QUOTE)
 		{
 			sub = make_substitute(n->token, env_list);
 			if (sub == NULL)
@@ -90,13 +90,13 @@ void	unquote(t_token *head)
 	node = head->next;
 	while (node != NULL)
 	{
-		if (node->type == DOUBLE_QUOTE)
+		if (node->type == D_QUOTE)
 		{
 			dangling = node->token;
 			node->token = ft_strtrim(node->token, "\"");
 			free(dangling);
 		}
-		else if (node->type == SIGNLE_QUOTE)
+		else if (node->type == S_QUOTE)
 		{
 			dangling = node->token;
 			node->token = ft_strtrim(node->token, "\'");

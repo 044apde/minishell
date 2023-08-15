@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:21:06 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/15 15:42:50 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 21:08:26 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,67 @@ void	export_process(t_env_list *env_list, t_token *t_list)
 	}
 }
 
+void	enroll_only_key(t_token *t_list, t_env_list *env_list)
+{
+	char	*key;
+	t_env_list *list;
+
+	list = env_list;
+	key = t_list->next->token;
+	while (list != NULL)
+	{
+		if (compare_str(key, list->key) == TRUE)
+			return ;
+		list = list->next;
+	}
+	add_update_env_list(env_list, key, NULL);
+	return ;
+}
+
+void	enroll_key_with_novalue(t_token *t_list, t_env_list *env_list)
+{
+	char	*key;
+	t_env_list *list;
+
+	list = env_list;
+	key = t_list->next->token;
+	while (list != NULL)
+	{
+		if (compare_str(key, list->key) == TRUE)
+			return ;
+		list = list->next;
+	}
+	printf("here\n");
+	add_update_env_list(env_list, key, "");
+	return ;
+}
+
 void	ft_export(t_env_list *env_list, t_token *token_list)
 {
-	if (token_list->next == NULL)
-	{
+	if (token_list->next == NULL || is_operator2(token_list->next) == TRUE)
 		no_argv_print(env_list);
-		return ;
+	else if (ft_isalpha(token_list->next->token[0]) == FALSE)
+		g_exit_code = 1;
+	else if (ft_strchr(token_list->next->token, '=') == NULL)
+		enroll_only_key(token_list, env_list);
+	else if (*(ft_strchr(token_list->next->token, '=') + 1) == '\0')
+	{
+		if (token_list->next->type == D_QUOTE || token_list->next->type == S_QUOTE)
+		{
+			if (token_list->next->next != NULL && is_operator2(token_list->next) == FALSE)
+				g_exit_code = 1;
+			else
+				export_process(env_list, token_list);
+		}
+		else if (token_list->next->next == NULL || is_operator2(token_list->next->next) == TRUE)
+			enroll_key_with_novalue(token_list, env_list);
+		else
+			g_exit_code = 1;
 	}
+	else if (token_list->next->next == NULL)
+		export_process(env_list, token_list);
+	else if (is_operator2(token_list->next->next) == FALSE)
+		g_exit_code = 1;
 	else
-		export_process(env_list, token_list->next);
-	g_exit_code = 0;
-	return ;
+		export_process(env_list, token_list);
 }

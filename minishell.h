@@ -19,8 +19,8 @@
 # define REDIR_OUT 5
 # define APPEND 6
 # define PIPE 7
-# define DOUBLE_QUOTE 8
-# define SIGNLE_QUOTE 9
+# define D_QUOTE 8
+# define S_QUOTE 9
 # define WORD 10
 
 /*node type*/

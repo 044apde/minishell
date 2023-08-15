@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 20:34:53 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/15 15:49:12 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 21:09:13 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,13 @@ void	add_update_env_list(t_env_list *env_list, char *key, char *value)
 	new = (t_env_list *)malloc(sizeof(t_env_list));
 	if (new == NULL)
 		return ;
+	printf("key: [%s]\n", key);
 	new->key = ft_strdup(key);
-	new->value = ft_strdup(value);
+	printf("value: [%s]\n", value);
+	if (value == NULL)
+		new->value = NULL;
+	else
+		new->value = ft_strdup(value);
 	new->next = NULL;
 	if (prev != NULL)
 		prev->next = new;

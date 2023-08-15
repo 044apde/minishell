@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:22:22 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/14 22:40:12 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/15 20:59:18 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_env_list	*create_new_node(t_env_list *list)
 	if (list->value != NULL)
 		new->value = ft_strdup(list->value);
 	else
-		new->value = ft_strdup("");
+		new->value = NULL;
 	new->next = NULL;
 	return (new);
 }
