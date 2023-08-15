@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 15:28:00 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 17:40:36 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,21 @@ t_token	*move_to_last(t_token *list)
 
 t_token	*move_to_redirin(t_token *list)
 {
-	while (list != NULL && list->type != REDIR_IN && \
-			list->type != HEREDOC && list->type != PIPE)
-		list = list->prev;
-	return (list);
+	t_token	*redir;
+	t_token	*heredoc;
+
+	redir = list;
+	heredoc = list;
+	while (redir != NULL && redir->type != REDIR_IN && redir->type != PIPE)
+		redir = redir->prev;
+	if (redir != NULL && redir->type != PIPE)
+		return (redir);
+	while (heredoc != NULL && heredoc->type != REDIR_IN \
+				&& heredoc->type != PIPE)
+		heredoc = heredoc->prev;
+	if (heredoc != NULL && heredoc->type != PIPE)
+		return (heredoc);
+	return (NULL);
 }
 
 t_token	*move_to_redirout(t_token *list)
@@ -46,8 +57,9 @@ int	do_redirin(t_token *list)
 	infile = open(list->next->token, O_RDONLY, 0777);
 	if (infile == ERROR)
 	{
-		printf("\033[0;35mohmybash#: %s: can't open file\033[0;0m\n", \
-				list->next->token);
+		ft_putstr_fd("\033[0;35mohmybash#: ", 2);
+		ft_putstr_fd(list->next->token, 2);
+		ft_putstr_fd(" : can't open file\033[0;0m\n", 2);
 		exit(126);
 		return (ERROR);
 	}

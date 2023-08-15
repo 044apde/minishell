@@ -186,6 +186,10 @@ int				custom_wss(int status);
 int				custom_wgd(int status);
 int				custom_wsg(int status);
 void			free_l_list(t_linked_list *pid_list);
+int				count_pipe(t_token *token_list);
+t_execute		*init_execute(t_token *token_list, t_env_list *env_list);
+t_execute		*init_and_process(t_token *token_list, t_env_list *env_list, \
+								t_token *origin_list);
 
 /*builtin*/
 int				is_builtin(t_token *token_list);
