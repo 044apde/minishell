@@ -210,4 +210,6 @@ void			ft_unset(t_env_list *env_list, t_token *token_list);
 void			ft_env(t_env_list *env_list);
 void			ft_exit(t_token *token_list);
 
+
+void			show_token(t_token *head);
 #endif
