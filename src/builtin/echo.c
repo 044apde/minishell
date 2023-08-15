@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:26:00 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/12 17:24:03 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 15:36:18 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	echo_process(t_token *token_list)
 		else if (token_list->next->type == REDIR_IN || \
 					token_list->next->type == REDIR_OUT)
 			token_list = token_list->next->next;
+		else if (token_list->next->type == PIPE)
+			break ;
 		else
 		{
 			ft_putstr_fd(token_list->next->token, 1);

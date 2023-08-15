@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:21:06 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/14 21:49:56 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:42:50 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,45 @@ static void	no_argv_print(t_env_list *env_list)
 	}
 }
 
-void	export_process(t_env_list *env_list, t_token *token_list)
+t_token	*join_export(t_token *t_list, char *value)
+{
+	char	*tmp;
+
+	while (t_list != NULL)
+	{
+		tmp = value;
+		value = ft_strjoin(value, "");
+		free(tmp);
+		tmp = value;
+		value = ft_strjoin(value, t_list->token);
+		free(tmp);
+		t_list = t_list->next;
+	}
+	return (t_list);
+}
+
+void	export_process(t_env_list *env_list, t_token *t_list)
 {
 	char	*key;
 	char	*value;
 	char	*equal_sign;
-	char	*tmp;
 
-	while (token_list != NULL)
+	while (t_list != NULL)
 	{
-		equal_sign = ft_strchr(token_list->token, '=');
+		equal_sign = ft_strchr(t_list->token, '=');
 		if (equal_sign != NULL)
 		{
-			key = ft_substr(token_list->token, 0, \
-					equal_sign - token_list->token);
+			key = ft_substr(t_list->token, 0, equal_sign - t_list->token);
 			value = ft_strdup(equal_sign + 1);
-			token_list = token_list->next;
-			while (token_list != NULL)
-			{
-				tmp = value;
-				value = ft_strjoin(value, "");
-				free(tmp);
-				tmp = value;
-				value = ft_strjoin(value, token_list->token);
-				free(tmp);
-				token_list = token_list->next;
-			}
+			t_list = t_list->next;
+			t_list = join_export(t_list, value);
 			add_update_env_list(env_list, key, value);
 			free(key);
 			free(value);
 			key = NULL;
 			break ;
 		}
-		token_list = token_list->next;
+		t_list = t_list->next;
 	}
 }
 

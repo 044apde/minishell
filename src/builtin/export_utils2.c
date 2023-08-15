@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 20:34:53 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/14 21:49:52 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:49:12 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,23 @@ void	update_env_value(t_env_list *list, char *value)
 	return ;
 }
 
+t_env_list	*find_update(t_env_list *current, char *key, char *value)
+{
+	t_env_list	*prev;
+
+	while (current != NULL)
+	{
+		if (compare_str(current->key, key) == TRUE)
+		{
+			update_env_value(current, value);
+			return (NULL);
+		}
+		prev = current;
+		current = current->next;
+	}
+	return (prev);
+}
+
 void	add_update_env_list(t_env_list *env_list, char *key, char *value)
 {
 	t_env_list	*current;
@@ -53,17 +70,9 @@ void	add_update_env_list(t_env_list *env_list, char *key, char *value)
 	t_env_list	*prev;
 
 	current = env_list;
-	prev = NULL;
-	while (current != NULL)
-	{
-		if (compare_str(current->key, key) == TRUE)
-		{
-			update_env_value(current, value);
-			return ;
-		}
-		prev = current;
-		current = current->next;
-	}
+	prev = find_update(current, key, value);
+	if (prev == NULL)
+		return ;
 	new = (t_env_list *)malloc(sizeof(t_env_list));
 	if (new == NULL)
 		return ;

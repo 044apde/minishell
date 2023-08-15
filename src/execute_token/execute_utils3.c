@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 14:40:39 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 15:28:00 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	do_redirin(t_token *list)
 	infile = open(list->next->token, O_RDONLY, 0777);
 	if (infile == ERROR)
 	{
-		printf("\033[0;35mohmybash#: %s: can't open file\033[0;0m\n", list->next->token);
+		printf("\033[0;35mohmybash#: %s: can't open file\033[0;0m\n", \
+				list->next->token);
 		exit(126);
 		return (ERROR);
 	}

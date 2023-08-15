@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 14:38:35 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 15:27:48 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ t_execute	*init_execute(t_token *token_list, t_env_list *env_list)
 	return (execute);
 }
 
-t_execute	*init_and_process(t_token *token_list, t_env_list *env_list, t_token *origin_list)
+t_execute	*init_and_process(t_token *token_list, t_env_list *env_list, \
+								t_token *origin_list)
 {
 	t_execute	*pack;
 

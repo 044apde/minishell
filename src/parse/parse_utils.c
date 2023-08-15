@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 04:13:36 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 14:42:26 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 16:13:13 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,20 +119,11 @@ int	check_syntax(t_token *head)
 		if (is_operator(n->token) == TRUE)
 		{
 			if (n->next == NULL)
-			{
-				printf("\033[0;31mohmybash# check syntax\033[0;0m\n");
 				return (ERROR);
-			}
 			else if (n->type != PIPE && is_operator(n->next->token) == TRUE)
-			{
-				printf("\033[0;31mohmybash# check syntax\033[0;0m\n");
 				return (ERROR);
-			}
 			else if (n->type == PIPE && n->prev->token == NULL)
-			{
-				printf("\033[0;31mohmybash# check syntax\033[0;0m\n");
 				return (ERROR);
-			}
 		}
 		n = n->next;
 	}

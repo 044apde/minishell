@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sig_handler.c                                      :+:      :+:    :+:   */
+/*   execute_utils9.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 18:10:14 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 15:22:06 by shikim           ###   ########.fr       */
+/*   Created: 2023/08/15 15:50:07 by shikim            #+#    #+#             */
+/*   Updated: 2023/08/15 15:50:47 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-void	int_handler(int sig)
+int	is_operator2(t_token *list)
 {
-	sig++;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	return ;
+	if (list->type == PIPE || list->type == REDIR_IN || \
+		list->type == REDIR_OUT || list->type == HEREDOC || \
+		list->type == APPEND)
+		return (TRUE);
+	return (FALSE);
 }
 
-void	term_handler(void)
+int	is_operator3(t_token *list)
 {
-	remove_heredoc_file();
-	write(1, "\033[0;35m", ft_strlen("\033[0;35m"));
-	write(1, "exit\n", 5);
-	exit(0);
-	return ;
-}
-
-void	set_signal(void)
-{
-	signal(SIGINT, int_handler);
-	signal(SIGQUIT, SIG_IGN);
-	return ;
+	if (list->type == REDIR_IN || \
+		list->type == REDIR_OUT || list->type == HEREDOC || \
+		list->type == APPEND)
+		return (TRUE);
+	return (FALSE);
 }

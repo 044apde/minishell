@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:33:06 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/11 11:25:58 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 15:32:22 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ void	restore_standard_fd(int stdin_backup, int stdout_backup)
 	return ;
 }
 
+int	do_rdir(t_token *token_list)
+{
+	if (do_redirin(token_list) == ERROR)
+		return (ERROR);
+	if (do_redirout(token_list) == ERROR)
+		return (ERROR);
+	return (TRUE);
+}
+
 int	execute_builtin(t_token *token_list, t_env_list *env_list)
 {
 	int		stdin_backup;
@@ -53,9 +62,7 @@ int	execute_builtin(t_token *token_list, t_env_list *env_list)
 
 	stdin_backup = dup(STDIN_FILENO);
 	stdout_backup = dup(STDOUT_FILENO);
-	if (do_redirin(token_list) == ERROR)
-		return (ERROR);
-	if (do_redirout(token_list) == ERROR)
+	if (do_rdir(token_list) == ERROR)
 		return (ERROR);
 	bulilt_in_node = find_command(token_list);
 	if (compare_str(bulilt_in_node->token, "echo") == TRUE)

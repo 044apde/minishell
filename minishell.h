@@ -108,6 +108,7 @@ int				check_syntax(t_token *head);
 void			unquote(t_token *head);
 int				is_operator(char *s);
 int				is_operator2(t_token *list);
+int				is_operator3(t_token *list);
 int				compare_str(char *str1, char *str2);
 
 /*fixing parsing*/
@@ -123,7 +124,6 @@ int				check_quote1(char c);
 int				check_quote2(char c);
 void			trim_word(char **arr);
 void			free_list(t_token *head);
-void			show_token(t_token *head);
 void			make_redir_in(t_token *head, char *s, int st);
 void			make_redir_out(t_token *head, char *s, int st);
 void			insert_string_node(t_token *head, char *s, int *st, int e);
@@ -141,7 +141,6 @@ char			*read_input(void);
 void			set_signal(void);
 void			term_handler(void);
 void			int_handler(int sig);
-void			child_handler(int sig);
 
 /*term*/
 void			set_terminal(void);
@@ -157,7 +156,8 @@ void			free_envp(char **envp_copy);
 char			**env_list_to_envp(t_env_list *env_list, int count);
 
 /*exec*/
-void			execute(t_token *token_list, t_env_list *env_list, t_token *origin_list);
+void			execute(t_token *token_list, t_env_list *env_list, \
+						t_token *origin_list);
 void			execute_command(t_token *list, t_execute *pack, \
 									t_env_list *env_list);
 t_token			*move_list(int count, t_token *list);
@@ -195,7 +195,8 @@ void			ft_cd(t_env_list *env_list, t_token *token_list);
 void			ft_pwd(t_token *bulilt_in_node);
 void			ft_export(t_env_list *env_list, \
 							t_token *token_list);
-void			add_update_env_list(t_env_list *env_list, char *key, char *value);
+void			add_update_env_list(t_env_list *env_list, \
+									char *key, char *value);
 t_env_list		*sorted_list(t_env_list *list);
 int				compare_keys(t_env_list *a, t_env_list *b);
 int				ft_strcmp(char *s1, char *s2);

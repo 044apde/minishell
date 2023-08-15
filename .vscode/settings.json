@@ -29,7 +29,8 @@
     "__config": "c",
     "locale": "c",
     "__string": "c",
-    "sstream": "c"
+    "sstream": "c",
+    "atomic": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "clang",
   "C_Cpp_Runner.cppCompilerPath": "clang++",

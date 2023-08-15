@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 20:52:44 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 14:53:05 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 16:11:45 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,26 @@ int	find_s_index(char *token, int d_index)
 	return (ERROR);
 }
 
+char	*make_sub(char *token, int d, int s, char *env_token)
+{
+	char	*new_token;
+	char	*dangling;
+
+	new_token = ft_substr(token, 0, d);
+	dangling = new_token;
+	new_token = ft_strjoin(new_token, env_token);
+	free(dangling);
+	free(env_token);
+	dangling = new_token;
+	env_token = ft_substr(token, s, ft_strlen(token) - d);
+	new_token = ft_strjoin(new_token, env_token);
+	free(env_token);
+	free(dangling);
+	return (new_token);
+}
+
 char	*make_substitute(char *token, t_env_list *env_list)
 {
-	char	*dangling;
 	char	*new_token;
 	char	*env_token;
 	int		d_index;
@@ -58,19 +75,10 @@ char	*make_substitute(char *token, t_env_list *env_list)
 		free(new_token);
 		return (NULL);
 	}
-	env_token = ft_strdup(get_env(env_list, new_token));
+	env_token = get_env(env_list, new_token);
 	if (env_token == NULL)
 		env_token = ft_strdup("");
 	free(new_token);
-	new_token = ft_substr(token, 0, d_index);
-	dangling = new_token;
-	new_token = ft_strjoin(new_token, env_token);
-	free(dangling);
-	free(env_token);
-	dangling = new_token;
-	env_token = ft_substr(token, s_index, ft_strlen(token) - d_index);
-	new_token = ft_strjoin(new_token, env_token);
-	free(env_token);
-	free(dangling);
+	new_token = make_sub(token, d_index, s_index, env_token);
 	return (new_token);
 }

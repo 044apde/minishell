@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:41:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 13:51:58 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 15:54:02 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_token	*parse_origin_input(char *input)
 	unquote(head);
 	if (check_syntax(head) == ERROR)
 	{
+		printf("\033[0;31mohmybash# check syntax\033[0;0m\n");
 		free_token_list(head);
 		return (NULL);
 	}

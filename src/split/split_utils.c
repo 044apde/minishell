@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:39:31 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/08 20:07:37 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 15:24:37 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,6 @@ void	insert_string_node(t_token *head, char *s, int *start, int end)
 {
 	insert_node(head, ft_substr(s, *start, end - *start + 1));
 	*start = end + 1;
-	return ;
-}
-
-void	show_token(t_token *head)
-{
-	t_token	*node;
-
-	node = head->next;
-	printf("\033[0;34m===============PARSED TOKEN===================\n");
-	while (node != NULL)
-	{
-		printf("[%s]:%d ", node->token, node->type);
-		node = node->next;
-	}
-	node = head->next;
-	printf("\n===============================================\033[0;0m\n");
 	return ;
 }
 

@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/14 20:49:14 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:51:31 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-int	is_operator2(t_token *list)
-{
-	if (list->type == PIPE || list->type == REDIR_IN || \
-		list->type == REDIR_OUT || list->type == HEREDOC || \
-		list->type == APPEND)
-		return (TRUE);
-	return (FALSE);
-}
-
-int	is_operator3(t_token *list)
-{
-	if (list->type == REDIR_IN || \
-		list->type == REDIR_OUT || list->type == HEREDOC || \
-		list->type == APPEND)
-		return (TRUE);
-	return (FALSE);
-}
 
 t_token	*find_command(t_token *list)
 {
@@ -79,12 +61,13 @@ void	cmd_process(t_token *list, t_env_list *env_list, \
 		if (compare_str(list->token, "\n") == TRUE)
 			printf("\033[0;31mohmybash# : command not found\033[0;0m\n");
 		else
-			printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", list->token);
+			printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", \
+					list->token);
 		free(cmd_option);
 		exit(127);
 		return ;
 	}
-	printf("execve: %d\n", execve(cmd, cmd_option, env_list->envp_copy));
+	execve(cmd, cmd_option, env_list->envp_copy);
 	if (compare_str(list->token, "\n") == TRUE)
 		printf("\033[0;31mohmybash# : command not found\033[0;0m\n");
 	printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", list->token);
@@ -97,13 +80,7 @@ void	execute_word(t_token *list, t_execute *pack, t_env_list *env_list)
 	char	*cmd;
 	char	**cmd_option;
 
-	if (list->type == HEREDOC)
-	{
-		cmd_option = make_heredoc_option();
-		execve("/bin/cat", cmd_option, env_list->envp_copy);
-	}
-	else
-		cmd_option = make_cmd_option(list);
+	cmd_option = make_cmd_option(list);
 	if (list->token[0] == '.' || list->token[0] == '/')
 	{
 		cmd = list->token;
