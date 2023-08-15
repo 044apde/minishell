@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 17:42:57 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 17:50:33 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ void	ctrl_pipe(int i, t_execute *pack)
 	return ;
 }
 
+void	make_pipe(t_execute *pack)
+{
+	if (pipe(pack->pipe_fd) == -1)
+		exit_program("fail to call system");
+	return ;
+}
+
 void	do_execute(t_execute *pack, t_token *token_list, t_env_list *env_list)
 {
 	int				pid;
@@ -49,8 +56,7 @@ void	do_execute(t_execute *pack, t_token *token_list, t_env_list *env_list)
 	pid_list = NULL;
 	while (++i < pack->n_of_process)
 	{
-		if (pipe(pack->pipe_fd) == -1)
-			exit_program("fail to call system");
+		make_pipe(pack);
 		if (is_pipe(token_list) == FALSE && is_builtin(token_list) == TRUE)
 		{
 			execute_builtin(token_list, env_list);
@@ -61,17 +67,12 @@ void	do_execute(t_execute *pack, t_token *token_list, t_env_list *env_list)
 		pack->count = pack->count + 1;
 		if (pid == 0)
 		{
-			signal(SIGINT, SIG_DFL);
 			token_list = move_list(pack->count, token_list);
-			if (token_list == NULL)
-				return ;
 			execute_command(token_list, pack, env_list);
-			exit(0);
 		}
 		ctrl_pipe(i, pack);
 	}
 	wait_child(pid_list, pack);
-	return ;
 }
 
 void	execute(t_token *token_list, t_env_list *env_list, t_token *origin_list)
