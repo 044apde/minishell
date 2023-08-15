@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils8.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 17:16:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/13 15:38:44 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/14 22:42:08 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	custom_wsg(int status)
 void	free_l_list(t_linked_list *pid_list)
 {
 	t_linked_list	*temp;
+
 	while (pid_list != NULL)
 	{
 		temp = pid_list;

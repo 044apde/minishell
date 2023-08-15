@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils7.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:18:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/12 17:37:11 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/14 22:41:38 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ t_linked_list	*insert_l_node(t_linked_list *head, int data)
 
 void	ctrl_exit_status_with_singal(int status)
 {
-	if (custom_wxd(status)) {
+	if (custom_wxd(status))
 		g_exit_code = custom_wss(status);
-	} else if (custom_wgd(status)) {
+	else if (custom_wgd(status))
 		g_exit_code = custom_wsg(status) + 128;
-	}
 }

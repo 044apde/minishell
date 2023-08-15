@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:22:22 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/14 21:45:36 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/14 22:40:12 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_env_list	*create_new_node(t_env_list *list)
 {
 	t_env_list	*new;
 	char		*temp;
+
 	new = (t_env_list *)malloc(sizeof(t_env_list));
 	if (new == NULL)
 		return (NULL);
