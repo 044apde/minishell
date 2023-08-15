@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 04:13:36 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 16:13:13 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 20:12:49 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,12 @@ void	unquote(t_token *head)
 		{
 			dangling = node->token;
 			node->token = ft_strtrim(node->token, "\"");
-			node->type = WORD;
 			free(dangling);
 		}
 		else if (node->type == SIGNLE_QUOTE)
 		{
 			dangling = node->token;
 			node->token = ft_strtrim(node->token, "\'");
-			node->type = WORD;
 			free(dangling);
 		}
 		node = node->next;
