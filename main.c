@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:57:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/13 16:02:33 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 14:24:23 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(int argc, char **argv, char **envp)
 	char				*input;
 	t_env_list			*env_list;
 	t_token				*token_list;
+	t_token			*origin_list;
 
 	env_list = set_env(envp);
 	init_minishell(argc, argv);
@@ -24,9 +25,11 @@ int	main(int argc, char **argv, char **envp)
 	{
 		input = read_input();
 		token_list = parse_input(input, env_list);
-		execute(token_list, env_list);
+		origin_list = parse_origin_input(input);
+		execute(token_list, env_list, origin_list);
 		free(input);
 		free_token_list(token_list);
+		free_token_list(origin_list);
 	}
 	return (0);
 }

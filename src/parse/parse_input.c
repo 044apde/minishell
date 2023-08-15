@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:41:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/13 15:48:16 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 13:51:58 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,23 @@ t_token	*parse_input(char *input, t_env_list *env_list)
 	head = split(input);
 	check_type(head);
 	substitution(head, env_list);
+	unquote(head);
+	if (check_syntax(head) == ERROR)
+	{
+		free_token_list(head);
+		return (NULL);
+	}
+	return (head);
+}
+
+t_token	*parse_origin_input(char *input)
+{
+	t_token	*head;
+
+	if (pre_check_quote(input) == ERROR)
+		return (NULL);
+	head = split(input);
+	check_type(head);
 	unquote(head);
 	if (check_syntax(head) == ERROR)
 	{

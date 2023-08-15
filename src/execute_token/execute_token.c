@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/14 21:19:22 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/15 14:38:35 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ t_execute	*init_execute(t_token *token_list, t_env_list *env_list)
 	return (execute);
 }
 
-t_execute	*init_and_process(t_token *token_list, t_env_list *env_list)
+t_execute	*init_and_process(t_token *token_list, t_env_list *env_list, t_token *origin_list)
 {
 	t_execute	*pack;
 
 	pack = init_execute(token_list, env_list);
 	remove_heredoc_file();
-	heredoc_process(token_list);
+	heredoc_process(origin_list, token_list);
 	return (pack);
 }
 
-void	execute(t_token *token_list, t_env_list *env_list)
+void	execute(t_token *token_list, t_env_list *env_list, t_token *origin_list)
 {
 	t_execute		*pack;
 	int				status;
@@ -62,7 +62,7 @@ void	execute(t_token *token_list, t_env_list *env_list)
 	pid_list = NULL;
 	if (token_list == NULL || token_list->next == NULL)
 		return ;
-	pack = init_and_process(token_list, env_list);
+	pack = init_and_process(token_list, env_list, origin_list);
 	signal(SIGINT, SIG_IGN);
 	while (++i < pack->n_of_process)
 	{

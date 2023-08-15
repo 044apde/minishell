@@ -97,10 +97,11 @@ typedef struct s_linked_list
 	struct s_linked_list	*next;
 }	t_linked_list;
 
-int	g_exit_code;
+int		g_exit_code;
 
 /*parse*/
 t_token			*parse_input(char *input, t_env_list *env_list);
+t_token			*parse_origin_input(char *input);
 void			check_type(t_token *head);
 void			substitution(t_token *head, t_env_list *env_list);
 int				check_syntax(t_token *head);
@@ -108,7 +109,6 @@ void			unquote(t_token *head);
 int				is_operator(char *s);
 int				is_operator2(t_token *list);
 int				compare_str(char *str1, char *str2);
-t_node			*make_tree(t_token *head);
 
 /*fixing parsing*/
 int				pre_check_quote(char *input);
@@ -157,7 +157,7 @@ void			free_envp(char **envp_copy);
 char			**env_list_to_envp(t_env_list *env_list, int count);
 
 /*exec*/
-void			execute(t_token *token_list, t_env_list *env_list);
+void			execute(t_token *token_list, t_env_list *env_list, t_token *origin_list);
 void			execute_command(t_token *list, t_execute *pack, \
 									t_env_list *env_list);
 t_token			*move_list(int count, t_token *list);
@@ -176,7 +176,7 @@ int				is_pipe(t_token *list);
 void			remove_heredoc_file(void);
 char			*make_cmd(t_token *list, t_execute *pack);
 char			**make_heredoc_option(void);
-void			heredoc_process(t_token *token_list);
+void			heredoc_process(t_token *origin_list, t_token *token_list);
 char			*find_last_heredoc_name(void);
 int				is_exit(t_token *list);
 t_linked_list	*insert_l_node(t_linked_list *head, int data);
