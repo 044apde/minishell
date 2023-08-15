@@ -6,36 +6,38 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:11:34 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/15 15:21:28 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/15 16:35:14 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	process(t_token *o_current, t_token *s_current)
+void	substitute_token(t_token *s_current, char *h_file_name, \
+							char *input, int infile)
+{
+	free(s_current->next->token);
+	s_current->next->token = h_file_name;
+	free(input);
+	close(infile);
+}
+
+int	process(t_token *o_current, t_token *s_current)
 {
 	int			infile;
 	char		*input;
-	char		*heredoc_file_name;
+	char		*h_file_name;
 
-	heredoc_file_name = find_last_heredoc_name();
-	infile = open(heredoc_file_name, O_CREAT | O_TRUNC | O_WRONLY, 0777);
+	h_file_name = find_last_heredoc_name();
+	infile = open(h_file_name, O_CREAT | O_TRUNC | O_WRONLY, 0777);
 	if (infile == ERROR)
-	{
-		printf("\033[0;35mohmybash#: %s: can't open file\033[0;0m\n", \
-				heredoc_file_name);
-		exit(126);
-	}
+		return (126);
 	while (TRUE)
 	{
 		input = readline("> ");
 		if (input == NULL)
 		{
-			free(s_current->next->token);
-			s_current->next->token = heredoc_file_name;
-			free(input);
-			close(infile);
-			return ;
+			substitute_token(s_current, h_file_name, input, infile);
+			return (TRUE);
 		}
 		if (compare_str(input, o_current->next->token) == TRUE)
 			break ;
@@ -43,11 +45,8 @@ void	process(t_token *o_current, t_token *s_current)
 		write(infile, "\n", 1);
 		free(input);
 	}
-	free(s_current->next->token);
-	s_current->next->token = heredoc_file_name;
-	free(input);
-	close(infile);
-	return ;
+	substitute_token(s_current, h_file_name, input, infile);
+	return (TRUE);
 }
 
 void	heredoc_process(t_token *origin_list, t_token *token_list)
@@ -61,7 +60,13 @@ void	heredoc_process(t_token *origin_list, t_token *token_list)
 	{
 		if (o_current->type == HEREDOC)
 		{
-			process(o_current, t_current);
+			if (process(o_current, t_current) == 126)
+			{
+				printf("\033[0;35mohmybash#: \
+								can't open heredoc file\033[0;0m\n");
+				g_exit_code = 126;
+				return ;
+			}
 		}
 		o_current = o_current->next;
 		t_current = t_current->next;
