@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:18:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 20:26:19 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 21:39:28 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,4 @@ void	ctrl_exit_status_with_singal(int status)
 		g_exit_code = custom_wss(status);
 	else if (custom_wgd(status))
 		g_exit_code = custom_wsg(status) + 128;
-	if (g_exit_code != 0)
-		printf("\033[0;31mohmybash# command not found\033[0;0m\n");
 }

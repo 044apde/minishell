@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 17:41:12 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 12:19:35 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/16 21:44:05 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	pre_check_quote(char *input)
 	}
 	if (count_single_quote == 1 || count_double_quote == 1)
 	{
-		printf("\033[0;31mError: check quote\033[0;0m\n");
+		ft_putstr_fd("\033[0;31mError: check quote\033[0;0m\n", 2);
+		g_exit_code = 1;
 		return (ERROR);
 	}
 	return (TRUE);

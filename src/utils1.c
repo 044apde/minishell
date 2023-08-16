@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 22:59:07 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/12 17:35:45 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 22:05:44 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,42 @@ void	set_pid(int	*pid)
 
 void	exit_program(char *s)
 {
-	printf("\033[0;31mError: %s\033[0;0m\n", s);
+	if (s == NULL)
+		ft_putstr_fd("\033[0;31mohmybash# : Error found\033[0;0m\n", 2);
+	else
+	{
+		ft_putstr_fd("\033[0;31mohmybash# :", 2);
+		write(2, s, ft_strlen(s));
+		ft_putstr_fd("\033[0;0m\n", 2);
+	}
 	exit(1);
+}
+
+void	error_cmd_not_found(char *string)
+{
+	if (string == NULL)
+		ft_putstr_fd("\033[0;31mohmybash# : command not found\033[0;0m\n", 2);
+	else
+	{
+		ft_putstr_fd("\033[0;31mohmybash# :", 2);
+		write(2, string, ft_strlen(string));
+		ft_putstr_fd(": command not found\033[0;0m\n", 2);
+	}
+	return ;
+}
+
+void	error_cmd_no_file_dir(char *string)
+{
+	if (string == NULL)
+	{
+		ft_putstr_fd("\033[0;31mohmybash# :", 2);
+		ft_putstr_fd(" No such file or directory\033[0;0m\n", 2);
+	}
+	else
+	{
+		ft_putstr_fd("\033[0;31mohmybash# :", 2);
+		write(2, string, ft_strlen(string));
+		ft_putstr_fd(": No such file or directory\033[0;0m\n", 2);
+	}
+	return ;
 }

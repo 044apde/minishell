@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:01:58 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/14 20:06:59 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/16 22:08:58 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token_pack	*init_token_pack(char *s, t_token *head)
 	token_pack = (t_token_pack *)malloc(sizeof(t_token_pack));
 	if (token_pack == NULL)
 	{
-		printf("\033[0;31mError: failed to system call\033[0;0m\n");
+		ft_putstr_fd("\033[0;31mError: failed to system call\033[0;0m\n", 2);
 		exit(1);
 	}
 	token_pack->s = s;
@@ -62,8 +62,6 @@ t_token	*split(char *s)
 	split = (t_split *)malloc(sizeof(t_split));
 	split->head = insert_node(NULL, NULL);
 	split = make_token(s, split);
-	if (split->status == TRUE)
-		exit_program("check quotation");
 	tmp = split->head;
 	free(split);
 	return (split->head);

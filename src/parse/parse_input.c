@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:41:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 14:44:08 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/16 22:54:54 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_token	*parse_input(char *input, t_env_list *env_list)
 	unquote(head);
 	if (check_syntax(head) == ERROR)
 	{
-		printf("\033[0;31mohmybash# check syntax\033[0;0m\n");
+		g_exit_code = 258;
+		ft_putstr_fd("\033[0;31mohmybash# check syntax\033[0;0m\n", 2);
 		free_token_list(head);
 		return (NULL);
 	}

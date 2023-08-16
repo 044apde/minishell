@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:56:32 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 18:00:00 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 21:36:24 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,8 @@ void			set_terminal(void);
 /*utils*/
 void			set_pid(int	*pid);
 void			exit_program(char *s);
+void			error_cmd_not_found(char *string);
+void			error_cmd_no_file_dir(char *string);
 
 /*env*/
 char			*get_env(t_env_list *env_list, char *str);

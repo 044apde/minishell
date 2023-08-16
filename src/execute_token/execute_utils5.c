@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:18:37 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 20:15:36 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 21:39:04 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ char	*make_cmd(t_token *list, t_execute *pack)
 	env = get_env(pack->env_list, "PATH");
 	if (env == NULL)
 	{
-		printf("\033[0;31mohmybash# : %s: No such file or directory\033[0;0m\n", \
-					list->token);
+		error_cmd_no_file_dir(list->token);
 		exit(127);
 	}
 	cmd_path = ft_split(env, ':');

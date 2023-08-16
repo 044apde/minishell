@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 20:48:28 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 17:58:37 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 22:36:14 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	export_process(t_env_list *env_list, t_token *t_list)
 		if (equal_sign != NULL)
 		{
 			key = ft_substr(t_list->token, 0, equal_sign - t_list->token);
-			value = ft_strdup(equal_sign + 1);
+			if (*(equal_sign + 1) == '\0')
+				value = ft_strdup(t_list->next->token);
+			else
+				value = ft_strdup(equal_sign + 1);
 			add_update_env_list(env_list, key, value);
 			free(key);
 			free(value);
@@ -86,8 +89,8 @@ void	ctrl_after_equal(t_env_list *env_list, t_token *token_list)
 	else if (token_list->next->next->type == D_QUOTE \
 				|| token_list->next->next->type == S_QUOTE)
 	{
-		if (token_list->next->next != NULL \
-				&& is_operator2(token_list->next) == FALSE)
+		if (token_list->next->next->next == NULL \
+				|| is_operator2(token_list->next->next->next) == FALSE)
 			export_process(env_list, token_list);
 		else
 			g_exit_code = 1;
