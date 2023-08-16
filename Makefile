@@ -1,6 +1,6 @@
-TARGET		=	minishell
+NAME		=	minishell
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror
 LDFLAGS		=	-L${HOME}/.brew/opt/readline/lib -lreadline
 CFALG		=	-I${HOME}/.brew/opt/readline/include
 SOURCE		=	main.c src/read_input.c src/sig_handler.c src/term.c src/utils1.c src/init_minishell.c \
@@ -17,9 +17,9 @@ HEADER		=	minishell.h
 LIBRARY 	=	libft/libft.a
 OBJECT		=	$(SOURCE:.c=.o)
 
-all			:	$(TARGET)
+all			:	$(NAME)
 
-$(TARGET)	:	$(OBJECT) $(LIBRARY) $(HEADER)
+$(NAME)	:	$(OBJECT) $(LIBRARY) $(HEADER)
 	$(CC) $(CFLAGS) -o $@ $(OBJECT) $(LIBRARY) $(LDFLAGS) $(CFALG)
 
 $(OBJECT)	:	%.o:%.c
@@ -29,7 +29,7 @@ $(LIBRARY):
 	$(MAKE) -C libft
 
 clean		:
-	rm -rf $(TARGET) $(OBJECT)
+	rm -rf $(NAME) $(OBJECT)
 	$(MAKE) -C libft clean
 
 fclean		:	clean
@@ -37,4 +37,4 @@ fclean		:	clean
 
 re			:	fclean all
 
-.PHONY		:	all clean fclean re $(TARGET) $(LIBRARY)
+.PHONY		:	all clean fclean re $(NAME) $(LIBRARY)
