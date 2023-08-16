@@ -6,11 +6,31 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:26:00 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/16 17:29:03 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 19:46:55 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	find_option_n(t_token *token_list)
+{
+	char	*token;
+	int		i;
+
+	i = 1;
+	token = token_list->token;
+	if (ft_strncmp(token, "-n", 2) == 0)
+	{
+		while (token[++i] != '\0')
+		{
+			if (token[i] != 'n')
+				return (FALSE);
+		}
+		return (TRUE);
+	}
+	else
+		return (FALSE);
+}
 
 void	echo_process(t_token *token_list)
 {
@@ -18,7 +38,7 @@ void	echo_process(t_token *token_list)
 
 	flag = 0;
 	token_list = token_list->next;
-	if (compare_str(token_list->token, "-n") == TRUE)
+	while (token_list != NULL && find_option_n(token_list) == TRUE)
 		token_list = token_list->next;
 	while (token_list != NULL && token_list->type != PIPE)
 	{
@@ -26,10 +46,10 @@ void	echo_process(t_token *token_list)
 			token_list = token_list->next->next;
 		else
 		{
-			write(1, token_list->token, ft_strlen(token_list->token));
-			flag = 1;
 			if (flag == 1)
 				write(1, " ", 1);
+			write(1, token_list->token, ft_strlen(token_list->token));
+			flag = 1;
 			token_list = token_list->next;
 		}
 	}
@@ -44,8 +64,8 @@ void	ft_echo(t_token *token_list)
 	else
 	{
 		echo_process(token_list);
+		if (find_option_n(token_list->next) == FALSE)
+			ft_putstr_fd("\n", 1);
 	}
-	if (compare_str(token_list->next->token, "-n") == FALSE)
-		ft_putstr_fd("\n", 1);
 	return ;
 }

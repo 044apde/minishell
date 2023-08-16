@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils5.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:18:37 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/14 20:26:00 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/16 20:15:36 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,16 @@ char	*make_cmd(t_token *list, t_execute *pack)
 	char	**cmd_path;
 	char	*cmd;
 	char	*dangling;
+	char	*env;
 
-	cmd_path = ft_split(get_env(pack->env_list, "PATH"), ':');
+	env = get_env(pack->env_list, "PATH");
+	if (env == NULL)
+	{
+		printf("\033[0;31mohmybash# : %s: No such file or directory\033[0;0m\n", \
+					list->token);
+		exit(127);
+	}
+	cmd_path = ft_split(env, ':');
 	while (*cmd_path != NULL)
 	{
 		cmd = ft_strjoin(*cmd_path, "/");

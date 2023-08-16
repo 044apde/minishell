@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 17:17:48 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 21:28:17 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	cmd_process(t_token *list, t_env_list *env_list, \
 	if (cmd == NULL)
 	{
 		if (compare_str(list->token, "\n") == TRUE)
-			printf("\033[0;31mohmybash# : command not found\033[0;0m\n");
+			ft_putstr_fd("\033[0;31mohmybash# : command not found\033[0;0m\n", 2);
 		else
 			printf("\033[0;31mohmybash# %s: command not found\033[0;0m\n", \
 					list->token);
