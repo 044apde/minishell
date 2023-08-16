@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:56:32 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 15:56:32 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 16:59:21 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ int				is_builtin(t_token *token_list);
 int				execute_builtin(t_token *token_list, t_env_list *env_list);
 void			ft_echo(t_token *token_list);
 void			ft_cd(t_env_list *env_list, t_token *token_list);
-void			ft_pwd(t_token *bulilt_in_node);
+void			ft_pwd(t_token *bulilt_in_node, t_env_list *env_list);
 void			ft_export(t_env_list *env_list, \
 							t_token *token_list);
 void			add_update_env_list(t_env_list *env_list, \
@@ -227,5 +227,6 @@ void			enroll_key_with_novalue(t_token *t_list, t_env_list *env_list);
 void			enroll_only_key(t_token *t_list, t_env_list *env_list);
 void			export_process(t_env_list *env_list, t_token *t_list);
 t_token			*join_export(t_token *t_list, char *value);
+void			set_oldpwd(t_env_list *env_list);
 
 #endif

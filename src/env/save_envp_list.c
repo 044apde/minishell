@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_envp_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:54:53 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/14 14:36:32 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:57:00 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,19 @@ t_env_list	*build_env_list(char **envp, int env_count, t_env_list *env_list)
 	return (env_list);
 }
 
+void	set_oldpwd(t_env_list *env_list)
+{
+	char		*key;
+	char		*value;
+
+	key = ft_strdup("NOWPWD");
+	value = getcwd(NULL, 0);
+	add_update_env_list(env_list, key, value);
+	free(key);
+	free(value);
+	return ;
+}
+
 t_env_list	*set_env(char **envp)
 {
 	t_env_list	*env_list;
@@ -82,6 +95,7 @@ t_env_list	*set_env(char **envp)
 	while (envp[env_count])
 		env_count++;
 	env_list = build_env_list(envp, env_count, env_list);
+	set_oldpwd(env_list);
 	if (env_list == NULL)
 		exit_program("failed to get env");
 	return (env_list);

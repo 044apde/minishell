@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 22:47:43 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/14 22:14:10 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:00:54 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_pwd(t_token *bulilt_in_node)
+void	ft_pwd(t_token *bulilt_in_node, t_env_list *env_list)
 {
-	char	*buf;
+	char	*now_pwd;
 
 	if (bulilt_in_node->next != NULL && \
 			is_operator2(bulilt_in_node->next) == FALSE)
@@ -23,10 +23,9 @@ void	ft_pwd(t_token *bulilt_in_node)
 		g_exit_code = 1;
 		return ;
 	}
-	buf = getcwd(NULL, 0);
-	ft_putstr_fd(buf, 1);
-	ft_putstr_fd("\n", 1);
-	free(buf);
+	now_pwd = get_env(env_list, "NOWPWD");
+	printf("%s\n", now_pwd);
+	free(now_pwd);
 	g_exit_code = 0;
 	return ;
 }

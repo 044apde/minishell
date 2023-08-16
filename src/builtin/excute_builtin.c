@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:33:06 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/15 15:32:22 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 16:59:09 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	execute_builtin(t_token *token_list, t_env_list *env_list)
 	else if (compare_str(bulilt_in_node->token, "cd") == TRUE)
 		ft_cd(env_list, bulilt_in_node);
 	else if (compare_str(bulilt_in_node->token, "pwd") == TRUE)
-		ft_pwd(bulilt_in_node);
+		ft_pwd(bulilt_in_node, env_list);
 	else if (compare_str(bulilt_in_node->token, "export") == TRUE)
 		ft_export(env_list, bulilt_in_node);
 	else if (compare_str(bulilt_in_node->token, "unset") == TRUE)
