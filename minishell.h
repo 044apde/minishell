@@ -97,8 +97,6 @@ typedef struct s_linked_list
 	struct s_linked_list	*next;
 }	t_linked_list;
 
-int		g_exit_code;
-
 /*parse*/
 t_token			*parse_input(char *input, t_env_list *env_list);
 t_token			*parse_origin_input(char *input);
@@ -209,7 +207,11 @@ t_env_list		*sort_env_list(t_env_list *env_list);
 void			ft_unset(t_env_list *env_list, t_token *token_list);
 void			ft_env(t_env_list *env_list);
 void			ft_exit(t_token *token_list);
+void			ctrl_after_equal(t_env_list *env_list, t_token *token_list);
+void			error_export(void);
+void			enroll_key_with_novalue(t_token *t_list, t_env_list *env_list);
+void			enroll_only_key(t_token *t_list, t_env_list *env_list);
+void			export_process(t_env_list *env_list, t_token *t_list);
+t_token			*join_export(t_token *t_list, char *value);
 
-
-void			show_token(t_token *head);
 #endif

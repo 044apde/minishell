@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 20:34:53 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/15 21:09:13 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 14:42:08 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ t_env_list	*find_update(t_env_list *current, char *key, char *value)
 	{
 		if (compare_str(current->key, key) == TRUE)
 		{
-			update_env_value(current, value);
+			if (value != NULL)
+				update_env_value(current, value);
 			return (NULL);
 		}
 		prev = current;
@@ -76,9 +77,7 @@ void	add_update_env_list(t_env_list *env_list, char *key, char *value)
 	new = (t_env_list *)malloc(sizeof(t_env_list));
 	if (new == NULL)
 		return ;
-	printf("key: [%s]\n", key);
 	new->key = ft_strdup(key);
-	printf("value: [%s]\n", value);
 	if (value == NULL)
 		new->value = NULL;
 	else
