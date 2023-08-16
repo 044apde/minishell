@@ -41,8 +41,6 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 
-int	g_exit_code;
-
 typedef struct s_node
 {
 	int				type;
@@ -98,6 +96,8 @@ typedef struct s_linked_list
 	int						fd;
 	struct s_linked_list	*next;
 }	t_linked_list;
+
+int	g_exit_code;
 
 /*parse*/
 t_token			*parse_input(char *input, t_env_list *env_list);
