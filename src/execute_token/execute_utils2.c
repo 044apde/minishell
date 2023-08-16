@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 17:34:06 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 16:39:12 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void	execute_first_command(t_token *list, t_execute *pack, \
 	{
 		close(pack->pipe_fd[0]);
 		dup2(pack->pipe_fd[1], STDOUT_FILENO);
+	}
+	else
+	{
+		close(pack->pipe_fd[0]);
+		close(pack->pipe_fd[1]);
 	}
 	if (do_redirin(list) == ERROR)
 		return ;
