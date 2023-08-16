@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 16:40:56 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 17:55:56 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	do_redirin(t_token *list)
 		ft_putstr_fd("\033[0;35mohmybash#: ", 2);
 		ft_putstr_fd(list->next->token, 2);
 		ft_putstr_fd(" : can't open file\033[0;0m\n", 2);
-		exit(126);
+		g_exit_code = 126 ;
 		return (ERROR);
 	}
 	dup2(infile, STDIN_FILENO);

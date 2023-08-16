@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:21:06 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/16 15:02:32 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:00:10 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,6 @@ static void	no_argv_print(t_env_list *env_list)
 			free(tmp_node->value);
 		free(tmp_node);
 	}
-}
-
-t_token	*join_export(t_token *t_list, char *value)
-{
-	char	*tmp;
-
-	while (t_list != NULL)
-	{
-		tmp = value;
-		value = ft_strjoin(value, "");
-		free(tmp);
-		tmp = value;
-		value = ft_strjoin(value, t_list->token);
-		free(tmp);
-		t_list = t_list->next;
-	}
-	return (t_list);
 }
 
 void	ft_export(t_env_list *env_list, t_token *token_list)

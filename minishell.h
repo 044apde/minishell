@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:56:32 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 17:22:30 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 18:00:00 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,6 @@ void			error_export(void);
 void			enroll_key_with_novalue(t_token *t_list, t_env_list *env_list);
 void			enroll_only_key(t_token *t_list, t_env_list *env_list);
 void			export_process(t_env_list *env_list, t_token *t_list);
-t_token			*join_export(t_token *t_list, char *value);
 void			set_oldpwd(t_env_list *env_list);
 
 #endif

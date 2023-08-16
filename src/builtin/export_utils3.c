@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 20:48:28 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 17:47:01 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 17:58:37 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	export_process(t_env_list *env_list, t_token *t_list)
 		{
 			key = ft_substr(t_list->token, 0, equal_sign - t_list->token);
 			value = ft_strdup(equal_sign + 1);
-			t_list = t_list->next;
-			t_list = join_export(t_list, value);
 			add_update_env_list(env_list, key, value);
 			free(key);
 			free(value);
