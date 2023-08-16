@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Init_minishell.c                                   :+:      :+:    :+:   */
+/*   init_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 13:27:17 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/14 22:23:52 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/16 15:20:02 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	trash_can(int argc, char **argv)
 
 void	init_minishell(int argc, char **argv)
 {
-	g_exit_code = 0;
 	trash_can(argc, argv);
 	set_signal();
 	set_terminal();

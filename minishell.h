@@ -41,6 +41,8 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 
+int g_exit_code;
+
 typedef struct s_node
 {
 	int				type;
