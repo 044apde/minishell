@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 20:48:28 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 15:08:03 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:37:21 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	enroll_key_with_novalue(t_token *t_list, t_env_list *env_list)
 
 void	error_export(void)
 {
-	ft_putstr_fd("\033[0;31mohmybash: export : \
-					not a valid identifier\033[0;0m\n", 2);
+	ft_putstr_fd("\033[0;31mohmybash: export ", 2);
+	ft_putstr_fd(":not a valid identifier\033[0;0m\n", 2);
 	g_exit_code = 1;
 	return ;
 }
