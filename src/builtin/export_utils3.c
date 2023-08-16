@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 20:48:28 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 17:37:21 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/16 17:44:32 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	enroll_only_key(t_token *t_list, t_env_list *env_list)
 
 	list = env_list;
 	key = t_list->next->token;
+	if (t_list->next->next != NULL && is_operator2(t_list->next->next) == FALSE)
+		error_export();
 	while (list != NULL)
 	{
 		if (compare_str(key, list->key) == TRUE)
