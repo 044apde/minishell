@@ -1,6 +1,6 @@
 NAME		=	minishell
 CC			=	cc
-CFLAGS		=	
+CFLAGS		=	-Wall -Wextra -Werror
 LDFLAGS		=	-L${HOME}/.brew/opt/readline/lib -lreadline
 CFALG		=	-I${HOME}/.brew/opt/readline/include
 SOURCE		=	main.c src/read_input.c src/sig_handler.c src/term.c src/utils1.c src/init_minishell.c \

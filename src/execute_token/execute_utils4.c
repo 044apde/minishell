@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/17 18:49:09 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/17 23:02:24 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	**make_cmd_option(t_token *cmd_node)
 	return (cmd_option);
 }
 
-void	cmd_process(t_token *list, t_env_list *env_list, \
+void	cmd_process(t_env_list *env_list, \
 					const char *cmd, char **cmd_option)
 {
 	execve(cmd, cmd_option, env_list->envp_copy);
@@ -74,7 +74,7 @@ void	execute_word(t_token *list, t_execute *pack, t_env_list *env_list)
 	if (list->token[0] == '.' || list->token[0] == '/')
 	{
 		check_file_exist(list->token);
-		cmd_process(list, env_list, list->token, cmd_option);
+		cmd_process(env_list, list->token, cmd_option);
 	}
 	else if (is_builtin(list) == TRUE)
 	{
@@ -87,5 +87,5 @@ void	execute_word(t_token *list, t_execute *pack, t_env_list *env_list)
 		error_cmd_not_found(list->token);
 		exit(127);
 	}
-	cmd_process(list, env_list, cmd, cmd_option);
+	cmd_process(env_list, cmd, cmd_option);
 }
