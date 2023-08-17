@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:56:32 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 21:36:24 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/17 17:22:28 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 # include <signal.h>
 # include <termios.h>
 # include <fcntl.h>
+# include <errno.h>
 # include "libft/libft.h"
 
 typedef struct s_node
@@ -201,6 +202,7 @@ int				custom_wgd(int status);
 int				custom_wsg(int status);
 void			free_l_list(t_linked_list *pid_list);
 int				count_pipe(t_token *token_list);
+void			check_file_exist(char *file);
 t_execute		*init_execute(t_token *token_list, t_env_list *env_list);
 t_execute		*init_and_process(t_token *token_list, t_env_list *env_list, \
 								t_token *origin_list);

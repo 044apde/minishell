@@ -1,6 +1,6 @@
 NAME		=	minishell
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	
 LDFLAGS		=	-L${HOME}/.brew/opt/readline/lib -lreadline
 CFALG		=	-I${HOME}/.brew/opt/readline/include
 SOURCE		=	main.c src/read_input.c src/sig_handler.c src/term.c src/utils1.c src/init_minishell.c \
@@ -12,7 +12,7 @@ SOURCE		=	main.c src/read_input.c src/sig_handler.c src/term.c src/utils1.c src/
 				src/builtin/cd.c src/builtin/echo.c src/builtin/env.c src/builtin/exit.c src/builtin/export.c src/builtin/pwd.c src/builtin/unset.c \
 				src/builtin/export_utils.c src/builtin/export_utils2.c src/split/split_utils4.c src/parse/parse_utils4.c \
 				src/execute_token/execute_utils7.c src/execute_token/execute_utils8.c src/execute_token/execute_utils9.c \
-				src/builtin/export_utils3.c
+				src/builtin/export_utils3.c src/execute_token/execute_utils10.c
 HEADER		=	minishell.h
 LIBRARY 	=	libft/libft.a
 OBJECT		=	$(SOURCE:.c=.o)

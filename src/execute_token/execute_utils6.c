@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:11:34 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/16 22:05:08 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/17 17:58:25 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	heredoc_process(t_token *origin_list, t_token *token_list)
 		{
 			if (process(o_current, t_current) == 126)
 			{
-				ft_putstr_fd("\033[0;35mohmybash#:", 2);
-				ft_putstr_fd(" can't open heredoc file\033[0;0m\n", 2);
+				ft_putstr_fd("\033[0;35mohmybash#", 2);
+				ft_putstr_fd(" Can't open heredoc file\033[0;0m\n", 2);
 				g_exit_code = 126;
 				return ;
 			}

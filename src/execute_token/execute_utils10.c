@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   execute_utils10.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 22:47:43 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/17 17:58:22 by shikim           ###   ########.fr       */
+/*   Created: 2023/08/17 16:50:01 by shikim            #+#    #+#             */
+/*   Updated: 2023/08/17 18:48:33 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_pwd(t_token *bulilt_in_node, t_env_list *env_list)
+void	check_file_exist(char *file)
 {
-	char	*now_pwd;
-
-	if (bulilt_in_node->next != NULL && \
-			is_operator2(bulilt_in_node->next) == FALSE)
+	if (access(file, F_OK) == -1)
 	{
-		ft_putstr_fd("\033[0;31mohmybash# pwd: Too many arguments\033[0;0m\n", 2);
-		g_exit_code = 1;
-		return ;
+		ft_putstr_fd("\033[0;31mohmybash# ", 2);
+		ft_putstr_fd(file, 2);
+		ft_putstr_fd(": ", 2);
+		perror(NULL);
+		ft_putstr_fd("\033[0;", 2);
+		if (errno == ENOTDIR)
+			exit(126);
+		exit(127);
 	}
-	now_pwd = get_env(env_list, "NOWPWD");
-	printf("%s\n", now_pwd);
-	free(now_pwd);
-	g_exit_code = 0;
-	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 22:09:03 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/17 18:49:09 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,10 @@ char	**make_cmd_option(t_token *cmd_node)
 void	cmd_process(t_token *list, t_env_list *env_list, \
 					const char *cmd, char **cmd_option)
 {
-	if (cmd == NULL)
-	{
-		if (compare_str(list->token, "\n") == TRUE)
-			error_cmd_not_found(NULL);
-		else
-			error_cmd_not_found(list->token);
-		free(cmd_option);
-		exit(127);
-		return ;
-	}
 	execve(cmd, cmd_option, env_list->envp_copy);
-	if (compare_str(list->token, "\n") == TRUE)
-		error_cmd_not_found(NULL);
-	else
-		error_cmd_not_found(list->token);
-	free(cmd_option);
+	perror("\033[0;31mohmybash# ");
+	if (errno == 13)
+		exit(126);
 	exit(127);
 }
 
@@ -80,25 +68,24 @@ void	execute_word(t_token *list, t_execute *pack, t_env_list *env_list)
 	char	*cmd;
 	char	**cmd_option;
 
+	if (list == NULL)
+		exit (0);
 	cmd_option = make_cmd_option(list);
 	if (list->token[0] == '.' || list->token[0] == '/')
 	{
-		cmd = list->token;
-		cmd_process(list, env_list, cmd, cmd_option);
+		check_file_exist(list->token);
+		cmd_process(list, env_list, list->token, cmd_option);
 	}
 	else if (is_builtin(list) == TRUE)
 	{
 		execute_builtin(list, env_list);
 		exit (g_exit_code);
-		free(cmd_option);
-		return ;
 	}
-	else
+	cmd = make_cmd(list, pack);
+	if (cmd == NULL)
 	{
-		cmd = make_cmd(list, pack);
-		cmd_process(list, env_list, cmd, cmd_option);
-		free(cmd_option);
-		exit (g_exit_code);
+		error_cmd_not_found(list->token);
+		exit(127);
 	}
-	return ;
+	cmd_process(list, env_list, cmd, cmd_option);
 }

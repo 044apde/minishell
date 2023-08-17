@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 20:48:28 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 22:36:14 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/17 17:58:27 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	enroll_key_with_novalue(t_token *t_list, t_env_list *env_list)
 void	error_export(void)
 {
 	ft_putstr_fd("\033[0;31mohmybash: export ", 2);
-	ft_putstr_fd(":not a valid identifier\033[0;0m\n", 2);
+	ft_putstr_fd(": Not a valid identifier\033[0;0m\n", 2);
 	g_exit_code = 1;
 	return ;
 }

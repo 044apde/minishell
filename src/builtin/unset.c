@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 22:52:14 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/16 21:38:45 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/17 17:58:21 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_unset(t_env_list *env_list, t_token *token_list)
 	list = token_list;
 	if (list->next == NULL)
 	{
-		ft_putstr_fd("\033[0;31mohmybash# : not enough arguments\033[0;0m\n", 2);
+		ft_putstr_fd("\033[0;31mohmybash# Not enough arguments\033[0;0m\n", 2);
 		g_exit_code = 1;
 		return ;
 	}

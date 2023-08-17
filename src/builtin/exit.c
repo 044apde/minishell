@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:25:04 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/16 22:19:13 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/17 17:58:27 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_exit(t_token *token_list)
 			is_operator(token_list->next->next->token) == FALSE)
 	{
 		ft_putstr_fd("\033[0;31mohmybash# exit: ", 2);
-		ft_putstr_fd("too many arguments\033[0;0m\n", 2);
+		ft_putstr_fd("Too many arguments\033[0;0m\n", 2);
 		g_exit_code = 1;
 		return ;
 	}
@@ -47,7 +47,7 @@ void	ft_exit(t_token *token_list)
 	{
 		ft_putstr_fd("\033[0;31mohmybash# exit: ", 2);
 		ft_putstr_fd(token_list->next->token, 2);
-		ft_putstr_fd(": check argument\033[0;0m\n", 2);
+		ft_putstr_fd(": Check argument\033[0;0m\n", 2);
 		exit(255);
 	}
 	exit(ft_atoi(token_list->next->token));
