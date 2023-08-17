@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/17 23:02:24 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/17 23:17:48 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 t_token	*find_command(t_token *list)
 {
 	if (list->token == NULL)
-		list = list->next;
-	while (list != NULL)
+		return (NULL);
+	while (list != NULL && list->type != PIPE)
 	{
 		if (is_operator2(list) == TRUE)
 			list = list->next;
 		else if (list->prev->token != NULL && is_operator3(list->prev) == TRUE)
 			list = list->next;
 		else
-		{
 			return (list);
-		}
 	}
+	if (list->type == PIPE)
+		return (NULL);
 	return (list);
 }
 
