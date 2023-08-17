@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:54:44 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 17:48:43 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/17 23:43:39 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	execute_command(t_token *list, t_execute *pack, t_env_list *env_list)
 	if (list == NULL)
 		return ;
 	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	order = set_order(pack);
 	if (order == FIRST)
 		execute_first_command(list, pack, env_list);

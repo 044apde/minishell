@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:13:49 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 19:59:36 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/17 23:43:30 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	wait_child(t_linked_list *pid_list, t_execute *pack)
 	}
 	free_l_list(origin);
 	signal(SIGINT, int_handler);
+	signal(SIGQUIT, SIG_IGN);
 	free(pack);
 }
 
