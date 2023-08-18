@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 22:52:14 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/17 17:58:21 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/18 20:40:54 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,40 +36,43 @@ int	is_valid_key(char *str, t_env_list *env_list)
 	return (FALSE);
 }
 
-t_env_list	*delete_env_node(t_env_list *env_list, char *str)
+void	delete_env_node(t_env_list **env_list, char *str)
 {
 	t_env_list	*list;
 	t_env_list	*prev;
 
-	list = env_list;
+	list = *env_list;
 	prev = NULL;
 	while (list != NULL)
 	{
 		if (compare_str(list->key, str) == TRUE)
 		{
-			if (prev == NULL)
-				env_list = list->next;
+			if (prev == NULL && list->next != NULL)
+			{
+				list->next->envp_copy = list->envp_copy;
+				*env_list = list->next;
+			}
 			else
 				prev->next = list->next;
 			free(list->key);
 			free(list->value);
 			free(list);
-			return (env_list);
+			return ;
 		}
 		prev = list;
 		list = list->next;
 	}
-	return (env_list);
+	return ;
 }
 
-void	ft_unset(t_env_list *env_list, t_token *token_list)
+void	ft_unset(t_env_list **env_list, t_token *token_list)
 {
 	t_token	*list;
 
 	list = token_list;
 	if (list->next == NULL)
 	{
-		ft_putstr_fd("\033[0;31mohmybash# Not enough arguments\033[0;0m\n", 2);
+		ft_putstr_fd("ohmybash# Not enough arguments\n", 2);
 		g_exit_code = 1;
 		return ;
 	}
@@ -77,8 +80,8 @@ void	ft_unset(t_env_list *env_list, t_token *token_list)
 	{
 		while (list->next != NULL && list->next->type == WORD)
 		{
-			if (is_valid_key(list->next->token, env_list) == TRUE)
-				env_list = delete_env_node(env_list, list->next->token);
+			if (is_valid_key(list->next->token, *env_list) == TRUE)
+				delete_env_node(env_list, list->next->token);
 			else
 				return ;
 			list = list->next;

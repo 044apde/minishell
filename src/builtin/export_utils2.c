@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 20:34:53 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/16 14:42:08 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/08/18 20:03:44 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ void	add_update_env_list(t_env_list *env_list, char *key, char *value)
 		new->value = ft_strdup(value);
 	new->next = NULL;
 	if (prev != NULL)
+	{
 		prev->next = new;
+	}
 	else
 		env_list = new;
 	return ;

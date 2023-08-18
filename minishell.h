@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:56:32 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/17 17:22:28 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/18 21:09:19 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int				is_operator(char *s);
 int				is_operator2(t_token *list);
 int				is_operator3(t_token *list);
 int				compare_str(char *str1, char *str2);
+void			free_env_list(t_env_list *env_list);
 
 /*fixing parsing*/
 int				pre_check_quote(char *input);
@@ -171,7 +172,7 @@ void			free_envp(char **envp_copy);
 char			**env_list_to_envp(t_env_list *env_list, int count);
 
 /*exec*/
-void			execute(t_token *token_list, t_env_list *env_list, \
+void			execute(t_token *token_list, t_env_list **env_list, \
 						t_token *origin_list);
 void			execute_command(t_token *list, t_execute *pack, \
 									t_env_list *env_list);
@@ -209,7 +210,7 @@ t_execute		*init_and_process(t_token *token_list, t_env_list *env_list, \
 
 /*builtin*/
 int				is_builtin(t_token *token_list);
-int				execute_builtin(t_token *token_list, t_env_list *env_list);
+int				execute_builtin(t_token *token_list, t_env_list **env_list);
 void			ft_echo(t_token *token_list);
 void			ft_cd(t_env_list *env_list, t_token *token_list);
 void			ft_pwd(t_token *bulilt_in_node, t_env_list *env_list);
@@ -222,7 +223,7 @@ int				compare_keys(t_env_list *a, t_env_list *b);
 int				ft_strcmp(char *s1, char *s2);
 t_env_list		*create_new_node(t_env_list *list);
 t_env_list		*sort_env_list(t_env_list *env_list);
-void			ft_unset(t_env_list *env_list, t_token *token_list);
+void			ft_unset(t_env_list **env_list, t_token *token_list);
 void			ft_env(t_env_list *env_list);
 void			ft_exit(t_token *token_list);
 void			ctrl_after_equal(t_env_list *env_list, t_token *token_list);

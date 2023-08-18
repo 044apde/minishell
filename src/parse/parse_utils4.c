@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 20:52:44 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 22:00:32 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/18 21:28:07 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,30 @@ char	*make_substitute(char *token, t_env_list *env_list)
 	free(new_token);
 	new_token = make_sub(token, d_index, s_index, env_token);
 	return (new_token);
+}
+
+void	free_env_list(t_env_list *env_list)
+{
+	t_env_list	*temp_node;
+	char		**temp_envp;
+
+	while (env_list != NULL)
+	{
+		temp_node = env_list;
+		env_list = env_list->next;
+		if (temp_node->envp_copy != NULL)
+		{
+			temp_envp = temp_node->envp_copy;
+			while (*temp_envp != NULL)
+			{
+				free(*temp_envp);
+				temp_envp++;
+			}
+			free(temp_node->envp_copy);
+		}
+		free(temp_node->key);
+		free(temp_node->value);
+		free(temp_node);
+	}
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 20:41:59 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/16 21:36:58 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/18 19:58:57 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,13 @@ static char	*get_env_value(char *key, t_env_list *env_list)
 void	ft_cd(t_env_list *env_list, t_token *token_list)
 {
 	g_exit_code = 0;
-	if (token_list->next == NULL)
+	if (token_list->next == NULL || token_list->next->type == PIPE)
 	{
-		chdir(get_env_value("HOME", env_list));
+		if (chdir(get_env_value("HOME", env_list)) == -1)
+		{
+			perror("ohmybash# ");
+			g_exit_code = 1;
+		}
 		set_oldpwd(env_list);
 	}
 	else if (token_list->next->next == NULL)

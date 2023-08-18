@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:10:14 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/15 15:22:06 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/18 19:58:44 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	int_handler(int sig)
 void	term_handler(void)
 {
 	remove_heredoc_file();
-	write(1, "\033[0;35m", ft_strlen("\033[0;35m"));
 	write(1, "exit\n", 5);
 	exit(0);
 	return ;

@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 22:11:34 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/17 17:58:25 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/18 20:00:50 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	heredoc_process(t_token *origin_list, t_token *token_list)
 		{
 			if (process(o_current, t_current) == 126)
 			{
-				ft_putstr_fd("\033[0;35mohmybash#", 2);
-				ft_putstr_fd(" Can't open heredoc file\033[0;0m\n", 2);
+				ft_putstr_fd("ohmybash#", 2);
+				ft_putstr_fd(" Can't open heredoc file\n", 2);
 				g_exit_code = 126;
 				return ;
 			}
@@ -93,14 +93,14 @@ char	*find_last_heredoc_name(void)
 
 	heredoc_file_count = 0;
 	tmp = ft_itoa(++heredoc_file_count);
-	heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", tmp);
+	heredoc_file_name = ft_strjoin("/tmp/.heredoc", tmp);
 	free(tmp);
 	while (access(heredoc_file_name, F_OK) == 0)
 	{
 		free(heredoc_file_name);
 		heredoc_file_count++;
 		tmp = ft_itoa(heredoc_file_count);
-		heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", tmp);
+		heredoc_file_name = ft_strjoin("/tmp/.heredoc", tmp);
 		free(tmp);
 	}
 	return (heredoc_file_name);

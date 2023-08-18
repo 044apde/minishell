@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/17 23:17:48 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/18 21:00:47 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	cmd_process(t_env_list *env_list, \
 					const char *cmd, char **cmd_option)
 {
 	execve(cmd, cmd_option, env_list->envp_copy);
-	perror("\033[0;31mohmybash# ");
+	perror("ohmybash# ");
 	if (errno == 13)
 		exit(126);
 	exit(127);
@@ -78,7 +78,7 @@ void	execute_word(t_token *list, t_execute *pack, t_env_list *env_list)
 	}
 	else if (is_builtin(list) == TRUE)
 	{
-		execute_builtin(list, env_list);
+		execute_builtin(list, &env_list);
 		exit (g_exit_code);
 	}
 	cmd = make_cmd(list, pack);

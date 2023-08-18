@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:33:06 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/08/16 16:59:09 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/18 20:25:32 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	do_rdir(t_token *token_list)
 	return (TRUE);
 }
 
-int	execute_builtin(t_token *token_list, t_env_list *env_list)
+int	execute_builtin(t_token *token_list, t_env_list **env_list)
 {
 	int		stdin_backup;
 	int		stdout_backup;
@@ -68,15 +68,15 @@ int	execute_builtin(t_token *token_list, t_env_list *env_list)
 	if (compare_str(bulilt_in_node->token, "echo") == TRUE)
 		ft_echo(bulilt_in_node);
 	else if (compare_str(bulilt_in_node->token, "cd") == TRUE)
-		ft_cd(env_list, bulilt_in_node);
+		ft_cd(*env_list, bulilt_in_node);
 	else if (compare_str(bulilt_in_node->token, "pwd") == TRUE)
-		ft_pwd(bulilt_in_node, env_list);
+		ft_pwd(bulilt_in_node, *env_list);
 	else if (compare_str(bulilt_in_node->token, "export") == TRUE)
-		ft_export(env_list, bulilt_in_node);
+		ft_export(*env_list, bulilt_in_node);
 	else if (compare_str(bulilt_in_node->token, "unset") == TRUE)
 		ft_unset(env_list, bulilt_in_node);
 	else if (compare_str(bulilt_in_node->token, "env") == TRUE)
-		ft_env(env_list);
+		ft_env(*env_list);
 	else if (compare_str(bulilt_in_node->token, "exit") == TRUE)
 		ft_exit(bulilt_in_node);
 	restore_standard_fd(stdin_backup, stdout_backup);

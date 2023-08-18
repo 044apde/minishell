@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:18:37 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 21:39:04 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/18 18:36:30 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	count_heredoc_file(void)
 	while (1)
 	{
 		tmp_itoa = ft_itoa(i);
-		heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", \
+		heredoc_file_name = ft_strjoin("/tmp/.heredoc", \
 							tmp_itoa);
 		if (access(heredoc_file_name, F_OK) < 0)
 		{
@@ -52,8 +52,7 @@ void	remove_heredoc_file(void)
 	while (i < here_doc_file_count)
 	{
 		tmp_itoa = ft_itoa(i);
-		heredoc_file_name = ft_strjoin("src/execute_token/.heredoc", \
-							tmp_itoa);
+		heredoc_file_name = ft_strjoin("/tmp/.heredoc", tmp_itoa);
 		if (access(heredoc_file_name, F_OK) < 0)
 		{
 			free(tmp_itoa);

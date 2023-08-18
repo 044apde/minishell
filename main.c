@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:57:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/16 15:21:13 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/18 21:30:44 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ int	main(int argc, char **argv, char **envp)
 		input = read_input();
 		token_list = parse_input(input, env_list);
 		origin_list = parse_origin_input(input);
-		execute(token_list, env_list, origin_list);
+		execute(token_list, &env_list, origin_list);
 		free(input);
 		free_token_list(token_list);
 		free_token_list(origin_list);
 	}
+	free_env_list(env_list);
 	return (0);
 }

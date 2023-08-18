@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 22:14:03 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/17 17:58:21 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/18 20:00:30 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	do_redirin(t_token *list)
 	infile = open(list->next->token, O_RDONLY, 0777);
 	if (infile == ERROR)
 	{
-		ft_putstr_fd("\033[0;31mohmybash# ", 2);
+		ft_putstr_fd("ohmybash# ", 2);
 		ft_putstr_fd(list->next->token, 2);
-		ft_putstr_fd(": Can't open file\033[0;0m\n", 2);
+		ft_putstr_fd(": Can't open file\n", 2);
 		g_exit_code = 126 ;
 		exit(g_exit_code);
 		return (ERROR);
@@ -84,9 +84,9 @@ int	do_redirout(t_token *list)
 		outfile = open(list->next->token, O_CREAT | O_RDWR | O_TRUNC, 0777);
 	if (outfile == ERROR)
 	{
-		ft_putstr_fd("\033[0;31mohmybash# ", 2);
+		ft_putstr_fd("ohmybash# ", 2);
 		write(2, list->next->token, ft_strlen(list->next->token));
-		ft_putstr_fd(": Can't open file\033[0;0m\n", 2);
+		ft_putstr_fd(": Can't open file\n", 2);
 		exit(126);
 		return (ERROR);
 	}

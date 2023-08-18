@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:41:11 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/17 17:58:20 by shikim           ###   ########.fr       */
+/*   Updated: 2023/08/18 20:01:18 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_token	*parse_input(char *input, t_env_list *env_list)
 	if (check_syntax(head) == ERROR)
 	{
 		g_exit_code = 258;
-		ft_putstr_fd("\033[0;31mohmybash# Check syntax\033[0;0m\n", 2);
+		ft_putstr_fd("ohmybash# Check syntax\n", 2);
 		free_token_list(head);
 		return (NULL);
 	}
