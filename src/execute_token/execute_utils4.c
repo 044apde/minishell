@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:31:01 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/18 21:00:47 by shikim           ###   ########.fr       */
+/*   Updated: 2023/09/10 18:54:06 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_token	*find_command(t_token *list)
 		else
 			return (list);
 	}
-	if (list->type == PIPE)
+	if (list != NULL && list->type == PIPE)
 		return (NULL);
 	return (list);
 }
