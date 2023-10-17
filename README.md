@@ -2,7 +2,7 @@
 
 #### on MacOS Catanlina, intel chip
 
-<b>Built-in function  </b>
+<b>Built-in function</b>  
 -cd  
 -echo  
 -env  
