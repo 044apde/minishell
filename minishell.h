@@ -6,7 +6,7 @@
 /*   By: shikim <shikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:56:32 by shikim            #+#    #+#             */
-/*   Updated: 2023/08/18 21:09:19 by shikim           ###   ########.fr       */
+/*   Updated: 2023/10/30 21:44:46 by shikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,6 @@
 # include <fcntl.h>
 # include <errno.h>
 # include "libft/libft.h"
-
-typedef struct s_node
-{
-	int				type;
-	char			*token;
-	struct s_node	*next;
-	struct s_node	*left;
-	struct s_nope	*right;
-}	t_node;
 
 typedef struct s_token
 {
