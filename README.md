@@ -1,6 +1,6 @@
 ## mini-shell (bash like)
 
-#### on MacOS Catanlina, intel chip
+on MacOS Catanlina, intel chip  
 
 <b>Built-in function</b>  
 -cd  
