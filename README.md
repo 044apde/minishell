@@ -1,6 +1,6 @@
 ## mini-shell (bash like)
 
-on MacOS Catanlina, intel chip  
+✅ U CAN USE ON MAC OS
 
 <b>Built-in function</b>  
 -cd  
