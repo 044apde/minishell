@@ -2,6 +2,8 @@
 
 ✅ U CAN USE ON MAC OS
 
+⚠️ not tested on LINUX
+
 <b>Built-in function</b>  
 -cd  
 -echo  
