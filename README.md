@@ -22,5 +22,5 @@ make -> ./minishell
 - Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.  
 - Built-in function: cd, echo, env, exit, export, pwd, unset
 
-**[Image]  **
+**[Image]**  
 <img width="776" alt="Screen Shot 2023-10-17 at 5 44 29 PM" src="https://github.com/044apde/minishell/assets/59429612/e43beaee-82cf-482d-a61c-cae15718518c">
