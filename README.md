@@ -4,7 +4,7 @@
 
 ⚠️ not tested on LINUX
 
-[minishell LOG HERE!](https://maroon-face-0e4.notion.site/MiniShell-b7652a0e380240259411b837c9e862a0?pvs=4)
+📘 [minishell LOG HERE!](https://maroon-face-0e4.notion.site/MiniShell-b7652a0e380240259411b837c9e862a0?pvs=4)
 
 <b>Display a prompt when waiting for a new command.</b>  
 
