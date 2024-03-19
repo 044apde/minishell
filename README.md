@@ -4,6 +4,30 @@
 
 ⚠️ not tested on LINUX
 
+<b>Prompt</b>  
+
+<b>input history</b>  
+
+<b>Quoting rule</b>  
+
+<b>redirection</b>  
+- <  
+- >  
+- <<  
+- >>
+
+<b>pipe</b>  
+
+<b>env</b>  
+
+<b>exit status</b>  
+- $?
+
+<b>signal</b>  
+- ctrl-C displays a new prompt on a new line.  
+- ctrl-D exits the shell.  
+- ctrl-\ does nothing.  
+
 <b>Built-in function</b>  
 -cd  
 -echo  
