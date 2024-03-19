@@ -6,28 +6,28 @@
 
 📘 [minishell LOG HERE!](https://maroon-face-0e4.notion.site/MiniShell-shell-process-fd-dup-signal-9c2ce3f3014341dfba5a89d328ff06d3?pvs=4)
 
-<b>Display a prompt when waiting for a new command.</b>  
+Display a prompt when waiting for a new command.  
 
-<b>Have a working historyy</b>  
+Have a working history.  
 
-<b>Search and launch the right executable 
-(based on the PATH variable or using a relative or an absolute path).</b>  
+Search and launch the right executable 
+(based on the PATH variable or using a relative or an absolute path).  
 
-<b>Not interpret unclosed quotes or special characters which are not required by the\ subject such as \ (backslash) or ; (semicolon).</b>  
+Not interpret unclosed quotes or special characters which are not required by the\ subject such as \ (backslash) or ; (semicolon).  
 
-<b>Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence.</b>  
+Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence.  
 
-<b>Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign).</b>  
+Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign).  
 
-<b>Implement pipes (| character). The output of each command in the pipeline is connected to the input of the next command via a pipe.</b>  
+Implement pipes (| character). The output of each command in the pipeline is connected to the input of the next command via a pipe.  
 
-<b>Handle environment variables ($ followed by a sequence of characters) which should expand to their values.</b>  
+Handle environment variables ($ followed by a sequence of characters) which should expand to their values.  
 
-<b>Handle $? which should expand to the exit status of the most recently executed foreground pipeline.</b>  
+Handle $? which should expand to the exit status of the most recently executed foreground pipeline.  
 
-<b>Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.</b>  
+Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.  
 
-<b>Built-in function</b>  
+Built-in function  
 -cd  
 -echo  
 -env  
