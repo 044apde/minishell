@@ -8,7 +8,8 @@
 
 <b>Have a working historyy</b>  
 
-<b>Search and launch the right executable (based on the PATH variable or using a relative or an absolute path).</b>  
+<b>Search and launch the right executable 
+(based on the PATH variable or using a relative or an absolute path).</b>  
 
 <b>Not interpret unclosed quotes or special characters which are not required by the\ subject such as \ (backslash) or ; (semicolon).</b>  
 
