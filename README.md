@@ -11,10 +11,6 @@
 <b>Quoting rule</b>  
 
 <b>redirection</b>  
-- <  
-- >  
-- <<  
-- >>
 
 <b>pipe</b>  
 
