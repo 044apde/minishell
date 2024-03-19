@@ -9,6 +9,7 @@
 **[USAGE]**  
 make -> ./minishell  
 
+**[Feature]**  
 Display a prompt when waiting for a new command.  
 
 Have a working history.  
