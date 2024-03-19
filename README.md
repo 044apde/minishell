@@ -11,7 +11,7 @@ make -> ./minishell
 
 **[Features]**  
 1. Display a prompt when waiting for a new command.  
-.2 Have a working history.  
+2. Have a working history.  
 3. Search and launch the right executable  
 (based on the PATH variable or using a relative or an absolute path).  
 4. Not interpret unclosed quotes or special characters which are not required by the\ subject such as \ (backslash) or ; (semicolon).  
