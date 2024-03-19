@@ -6,6 +6,9 @@
 
 📘 **[minishell LOG HERE!](https://maroon-face-0e4.notion.site/MiniShell-shell-process-fd-dup-signal-9c2ce3f3014341dfba5a89d328ff06d3?pvs=4)**
 
+**[USAGE]** make -> ./minishell  
+
+
 Display a prompt when waiting for a new command.  
 
 Have a working history.  
