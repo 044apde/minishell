@@ -1,26 +1,61 @@
-## mini-shell (bash like)
+# MiniShell
 
-**[info]**  
-✅ **U CAN USE ON MAC OS**  
-⚠️ **not tested on LINUX**  
-📘 **[minishell LOG HERE!](https://maroon-face-0e4.notion.site/MiniShell-shell-process-fd-dup-signal-9c2ce3f3014341dfba5a89d328ff06d3?pvs=4)**  
+C로 구현한 경량 Bash 유사 셸입니다.  
+이 프로젝트는 유닉스 셸의 핵심 기능(명령어 파싱, 실행, 파이프라인, 환경 변수 처리 등)을 재현하는 것을 목표로 합니다.
 
-**[USAGE]**  
-make  
-./minishell  
+---
 
-**[Features]**  
-- Display a prompt when waiting for a new command.  
-- Have a working history.  
-- Search and launch the right executable (based on the PATH variable or using a relative or an absolute path).  
-- Not interpret unclosed quotes or special characters which are not required by the\ subject such as \ (backslash) or ; (semicolon).  
-- Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence.  
-- Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign).  
-- Implement pipes (| character). The output of each command in the pipeline is connected to the input of the next command via a pipe.  
-- Handle environment variables ($ followed by a sequence of characters) which should expand to their values.  
-- Handle $? which should expand to the exit status of the most recently executed foreground pipeline.  
-- Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.  
-- Built-in function: cd, echo, env, exit, export, pwd, unset
+## 개요
 
-**[Image]**  
-<img width="776" alt="Screen Shot 2023-10-17 at 5 44 29 PM" src="https://github.com/044apde/minishell/assets/59429612/e43beaee-82cf-482d-a61c-cae15718518c">
+**MiniShell**은 Bash의 주요 동작 방식을 모방한 사용자 정의 셸 프로그램입니다.  
+프로세스 제어, 명령어 파싱, 빌트인 명령 처리 등 시스템 프로그래밍 전반을 다룹니다.  
+현재 **macOS에서 정상 동작**하며, **Linux 환경은 부분적으로만 검증**되었습니다.
+
+---
+
+## 주요 기능
+
+- **프롬프트 & 명령어 입력**
+  - 대기 상태에서 프롬프트 표시
+  - 명령어 히스토리 관리
+
+- **명령어 실행**
+  - `$PATH` 기반, 상대 경로, 절대 경로 실행 지원
+  - 닫히지 않은 따옴표(`'`, `"`)가 있을 경우 실행하지 않음
+  - `\`(백슬래시) 또는 `;`(세미콜론) 같은 비지원 메타문자는 무시
+
+- **따옴표 처리 규칙**
+  - **작은따옴표 `'...'`**: 모든 메타문자 해석 차단
+  - **큰따옴표 `"..."`**: `$`(변수 치환)만 허용하고 나머지 메타문자 해석 차단
+
+- **파이프라인**
+  - **파이프(`|`)** 지원: 한 명령의 출력을 다음 명령의 입력으로 연결
+
+- **환경 변수**
+  - `$변수명` 형태의 환경 변수 값 확장
+  - `$?`로 마지막 명령의 종료 상태 코드 참조 가능
+
+- **시그널 처리**
+  - `Ctrl-C`: 현재 프로세스 중단(SIGINT)
+  - `Ctrl-D`: EOF로 셸 종료
+  - `Ctrl-\`: 현재 프로세스 종료(SIGQUIT), Bash와 동일한 동작
+
+- **빌트인 명령어**
+  - `cd` — 디렉토리 변경
+  - `echo` — 인자 출력
+  - `env` — 환경 변수 출력
+  - `exit` — 셸 종료
+  - `export` — 환경 변수 설정
+  - `pwd` — 현재 작업 디렉토리 출력
+  - `unset` — 환경 변수 제거
+
+---
+
+## 🛠 설치 및 실행
+
+```bash
+# 프로젝트 빌드
+make
+
+# 셸 실행
+./minishell
